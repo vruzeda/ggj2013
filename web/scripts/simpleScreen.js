@@ -7,6 +7,7 @@
   define(["kinetic", "framework/screen"], function(Kinetic, Screen) {
     var SimpleScreen;
     SimpleScreen = (function(_super) {
+      var NUMBER_OF_RECTS;
 
       __extends(SimpleScreen, _super);
 
@@ -15,17 +16,23 @@
         return SimpleScreen.__super__.constructor.apply(this, arguments);
       }
 
+      NUMBER_OF_RECTS = 10;
+
       SimpleScreen.prototype._constructLayout = function() {
-        var rect;
-        rect = new Kinetic.Rect({
-          width: 100,
-          height: 100,
-          fill: "green",
-          stroke: "black",
-          strokeWidth: 4
-        });
-        this.registerOnClickListener(rect, this.onRectClick);
-        return this._layer.add(rect);
+        var rect, rectIndex, _i, _results;
+        _results = [];
+        for (rectIndex = _i = 1; 1 <= NUMBER_OF_RECTS ? _i <= NUMBER_OF_RECTS : _i >= NUMBER_OF_RECTS; rectIndex = 1 <= NUMBER_OF_RECTS ? ++_i : --_i) {
+          rect = new Kinetic.Rect({
+            width: 100,
+            height: 100,
+            fill: "rgb(" + (Math.floor(Math.random() * 256)) + ", 0, 0)",
+            stroke: "black",
+            strokeWidth: 4
+          });
+          this.registerOnClickListener(rect, this.onRectClick);
+          _results.push(this._layer.add(rect));
+        }
+        return _results;
       };
 
       SimpleScreen.prototype.onRectClick = function(rect) {

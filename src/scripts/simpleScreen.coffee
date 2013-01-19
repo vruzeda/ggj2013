@@ -5,16 +5,19 @@ define [
 
     class SimpleScreen extends Screen
 
-        _constructLayout: ->
-            rect = new Kinetic.Rect
-                width: 100
-                height: 100
-                fill: "green"
-                stroke: "black"
-                strokeWidth: 4
-            @registerOnClickListener rect, @onRectClick
+        NUMBER_OF_RECTS = 10
 
-            @_layer.add rect
+        _constructLayout: ->
+            for rectIndex in [1..NUMBER_OF_RECTS]
+                rect = new Kinetic.Rect
+                    width: 100
+                    height: 100
+                    fill: "rgb(#{Math.floor Math.random() * 256}, 0, 0)"
+                    stroke: "black"
+                    strokeWidth: 4
+                @registerOnClickListener rect, @onRectClick
+
+                @_layer.add rect
 
         onRectClick: (rect) =>
             rect.setX Math.floor Math.random() * @getWidth()
