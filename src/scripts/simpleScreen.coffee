@@ -20,8 +20,8 @@ define [
                 @_layer.add rect
 
         onRectClick: (rect) =>
-            rect.setX Math.floor Math.random() * @getWidth()
-            rect.setY Math.floor Math.random() * @getHeight()
+            rect.setX Math.floor Math.random() * (@getWidth() - rect.getWidth())
+            rect.setY Math.floor Math.random() * (@getHeight() - rect.getHeight())
             @redraw()
 
 
