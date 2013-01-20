@@ -1,6 +1,7 @@
 require.config
     paths:
-        kinetic: "lib/kinetic-v4.3.0"
+        jquery: "lib/src/jquery-1.9.0"
+        kinetic: "lib/src/kinetic-v4.3.0"
 
 require [
     "simpleGame"

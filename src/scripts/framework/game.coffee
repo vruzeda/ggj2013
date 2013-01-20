@@ -1,12 +1,14 @@
 define [
+    "jquery"
     "kinetic"
-], (Kinetic) ->
+    "framework/inputController"
+], ($, Kinetic, InputController) ->
 
     class Game
 
-        constructor: (containerId, @_width = 800, @_height = 600) ->
+        constructor: (@_containerId, @_width = 800, @_height = 600) ->
             @_stage = new Kinetic.Stage
-                container: containerId
+                container: @_containerId
                 width: @_width
                 height: @_height
 
@@ -14,10 +16,14 @@ define [
 
         # Abstract
         _getInitialScreen: ->
-            throw new Error "Cannot invoke abstract method Game._getInitialScreen."
+            throw new Error "Cannot invoke abstract method Game._getInitialScreen()."
+
+        getInputController: ->
+            InputController.getInstance @_containerId
 
         showScreen: (screen) ->
             @_stage.add screen.getLayer()
+            screen.init()
 
         hideScreen: (screen) ->
             screen.remove()

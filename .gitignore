@@ -2,7 +2,7 @@
 # Generated files #
 ###################
 
-web/scripts
+web/scripts/*
 !web/scripts/lib
 
 ###########
