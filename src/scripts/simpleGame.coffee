@@ -1,12 +1,12 @@
 define [
     "framework/game"
-    "simpleScreen"
-], (Game, SimpleScreen) ->
+    "splashScreen"
+], (Game, SplashScreen) ->
 
     class SimpleGame extends Game
 
         _getInitialScreen: ->
-            new SimpleScreen @
+            new SplashScreen @
 
 
     return SimpleGame

@@ -1,24 +1,24 @@
 define [
     "kinetic"
     "framework/screen"
-], (Kinetic, Screen) ->
+    "framework/imageLoader"
+], (Kinetic, Screen, ImageLoader) ->
 
     class SimpleScreen extends Screen
 
-        NUMBER_OF_RECTS = 10
-
         _constructLayout: ->
-            for rectIndex in [1..NUMBER_OF_RECTS]
-                @_layer.add new Kinetic.Rect
+            @_layer.add new Kinetic.Rect
+                width: @getWidth()
+                height: @getHeight()
+                fill: "green"
+
+            for rectIndex, imageName of ["coffescript", "require", "kinetic", "jquery"]
+                @_layer.add new Kinetic.Image
                     id: "rect_#{rectIndex}"
-                    width: 100
-                    height: 100
-                    fill: "rgb(#{Math.floor Math.random() * 256}, 0, 0)"
-                    stroke: "black"
-                    strokeWidth: 4
+                    image: ImageLoader.getImage imageName
 
         _constructInputEvents: (inputController) ->
-            for rectIndex in [1..NUMBER_OF_RECTS]
+            for rectIndex of ["coffescript", "require", "kinetic", "jquery"]
                 rect = @_layer.get("#rect_#{rectIndex}")[0]
                 inputController.addClickListener rect, @onRectClick
 
