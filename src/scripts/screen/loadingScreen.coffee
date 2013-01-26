@@ -27,6 +27,7 @@ define [
                 MAIN_SCREEN:
                     startGameButton: "images/startGameButton.png"
                     optionsButton:   "images/optionsButton.png"
+                    background:      "images/background.png"
 
                 GAME_SCREEN:
                     coffescript:     "http://coffeescript.org/documentation/images/logo.png"

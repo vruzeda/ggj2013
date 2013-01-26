@@ -2,7 +2,8 @@ define [
     "jquery"
 ], ($) ->
 
-    ARROW_BUTTONS =
+    SPECIAL_BUTTONS =
+        13: "ENTER"
         37: "LEFT"
         38: "UP"
         39: "RIGHT"
@@ -19,7 +20,7 @@ define [
             $("##{containerId}").css "outline", "none"
             $("##{containerId}").keydown (event) =>
                 char = String.fromCharCode event.keyCode
-                char = ARROW_BUTTONS[event.keyCode] if ARROW_BUTTONS[event.keyCode]?
+                char = SPECIAL_BUTTONS[event.keyCode] if SPECIAL_BUTTONS[event.keyCode]?
 
                 if @_listeners[char]?
                     listener event for listener in @_listeners[char]

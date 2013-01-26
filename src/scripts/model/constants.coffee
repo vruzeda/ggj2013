@@ -1,6 +1,10 @@
 define [], ->
 
     CONSTANTS =
+        GAME_RESOLUTION:
+            width: 1280
+            height: 720
+
         CHARACTER:
             width: 0.05
             height: 0.05

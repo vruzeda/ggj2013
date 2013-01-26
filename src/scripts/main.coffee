@@ -11,7 +11,10 @@ require.config
 require [
     "jquery"
     "heartGame"
-], ($, HeartGame) ->
+    "model/constants"
+], ($, HeartGame, Constants) ->
+
+    {GAME_RESOLUTION} = Constants
 
     $("#container").focus()
-    new HeartGame "container", 1280, 720
+    new HeartGame "container", GAME_RESOLUTION.width, GAME_RESOLUTION.height

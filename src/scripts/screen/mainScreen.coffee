@@ -14,6 +14,12 @@ define [
                 height: @getHeight()
                 fill: "black"
 
+            # Background
+            backGroundImage = new Kinetic.Image
+                image: ImageLoader.getImage "background"
+
+            @_layer.add backGroundImage
+
             # Buttons
             startGameButtonImage = ImageLoader.getImage "startGameButton"
             startGameButton = @_createButton
@@ -52,6 +58,7 @@ define [
             inputController.addCharListener "DOWN",  @onDown
             inputController.addCharListener "LEFT",  @onLeft
             inputController.addCharListener "RIGHT", @onRight
+            inputController.addCharListener "ENTER", @onSelect
             inputController.addCharListener "H",     @onSelect
 
         _destroyInputEvents: (inputController) ->
@@ -59,6 +66,7 @@ define [
             inputController.removeCharListener "DOWN",  @onDown
             inputController.removeCharListener "LEFT",  @onLeft
             inputController.removeCharListener "RIGHT", @onRight
+            inputController.removeCharListener "ENTER", @onSelect
             inputController.removeCharListener "H",     @onSelect
 
         onUp: =>
