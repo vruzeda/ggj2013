@@ -5,8 +5,15 @@ define [
 
     class WalkingPumpedCharacterState extends CharacterState
 
+        constructor: (@_direction) ->
+            super()
+
         getImageName: ->
             "walkingPumpedCharacterState"
+
+        move: (character, direction) ->
+            if @_direction isnt direction
+                @_direction = direction
 
         crouch: (character) ->
             # Can't crouch!

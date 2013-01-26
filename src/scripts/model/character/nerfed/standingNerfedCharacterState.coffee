@@ -1,14 +1,18 @@
 define [
     "model/character/characterState"
     "model/character/nerfed/crouchingNerfedCharacterState"
+    "model/character/nerfed/walkingNerfedCharacterState"
     "model/character/nerfed/warmingLeftNerfedCharacterState"
     "model/character/nerfed/warmingRightNerfedCharacterState"
-], (CharacterState, CrouchingNerfedCharacterState, WarmingLeftNerfedCharacterState, WarmingRightNerfedCharacterState) ->
+], (CharacterState, CrouchingNerfedCharacterState, WalkingNerfedCharacterState, WarmingLeftNerfedCharacterState, WarmingRightNerfedCharacterState) ->
 
     class StandingNerfedCharacterState extends CharacterState
 
         getImageName: ->
             "standingNerfedCharacterState"
+
+        move: (character, direction) ->
+            character.setState new WalkingNerfedCharacterState direction
 
         crouch: (character) ->
             character.setState new CrouchingNerfedCharacterState

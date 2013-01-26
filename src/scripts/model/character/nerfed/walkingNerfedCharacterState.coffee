@@ -5,8 +5,15 @@ define [
 
     class WalkingNerfedCharacterState extends CharacterState
 
+        constructor: (@_direction) ->
+            super()
+
         getImageName: ->
             "walkingNerfedCharacterState"
+
+        move: (character, direction) ->
+            if @_direction isnt direction
+                @_direction = direction
 
         crouch: (character) ->
             character.setState new CrouchingNerfedCharacterState

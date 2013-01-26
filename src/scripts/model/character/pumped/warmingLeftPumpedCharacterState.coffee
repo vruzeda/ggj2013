@@ -9,6 +9,9 @@ define [
         getImageName: ->
             "warmingLeftPumpedCharacterState"
 
+        move: (character, direction) ->
+            @_goBackToStandingState character
+
         crouch: (character) ->
             @_goBackToStandingState character
 
