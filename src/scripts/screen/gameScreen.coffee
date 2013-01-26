@@ -22,28 +22,38 @@ define [
                     image: ImageLoader.getImage surface.getImageName()
 
         _constructInputEvents: (inputController) ->
-            inputController.addCharListener "UP",    @onMoveUp
-            inputController.addCharListener "DOWN",  @onMoveDown
             inputController.addCharListener "LEFT",  @onMoveLeft
             inputController.addCharListener "RIGHT", @onMoveRight
+            inputController.addCharListener "A",     @onCrouch
+            inputController.addCharListener "S",     @onJump
+            inputController.addCharListener "D",     @onWarmLeft
+            inputController.addCharListener "F",     @onWarmRight
 
         _destroyInputEvents: (inputController) ->
-            inputController.removeCharListener "UP",    @onMoveUp
-            inputController.removeCharListener "DOWN",  @onMoveDown
             inputController.removeCharListener "LEFT",  @onMoveLeft
             inputController.removeCharListener "RIGHT", @onMoveRight
-
-        onMoveUp: =>
-            @_character.jump()
+            inputController.removeCharListener "A",     @onCrouch
+            inputController.removeCharListener "S",     @onJump
+            inputController.removeCharListener "D",     @onWarmLeft
+            inputController.removeCharListener "F",     @onWarmRight
 
         onMoveLeft: =>
             @_character.move "left"
 
-        onMoveDown: =>
-            @_character.crouch()
-
         onMoveRight: =>
             @_character.move "right"
+
+        onCrouch: =>
+            @_character.crouch()
+
+        onJump: =>
+            @_character.jump()
+
+        onWarmLeft: =>
+            @_character.warmLeft()
+
+        onWarmRight: =>
+            @_character.warmRight()
 
 
     return SimpleScreen
