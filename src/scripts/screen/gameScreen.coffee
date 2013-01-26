@@ -18,6 +18,9 @@ define [
                 @_worldRenderer.render @_world
             @_updater.start()
 
+            @_onMovementRight = false
+            @_onMovementLeft = false
+
         _constructInputEvents: (inputController) ->
             inputController.addCharListener "LEFT",  @onMoveLeft
             inputController.addCharListener "RIGHT", @onMoveRight
@@ -36,14 +39,20 @@ define [
 
         onMoveLeft: (event) =>
             if event.type == 'keyup'
-                @_character.stop()
+                @_onMovementLeft = false
+                if not @_onMovementRight
+                    @_character.stop()
             else
+                @_onMovementLeft = true
                 @_character.move "left"
 
         onMoveRight: (event) =>
             if event.type == 'keyup'
-                @_character.stop()
+                @_onMovementRight = false
+                if not @_onMovementLeft
+                    @_character.stop()
             else
+                @_onMovementRight = true
                 @_character.move "right"
 
         onCrouch: (event) =>
