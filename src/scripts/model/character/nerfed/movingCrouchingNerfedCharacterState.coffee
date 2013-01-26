@@ -17,6 +17,10 @@ define [
             if @_direction isnt direction
                 @_direction = direction
 
+        stop: (character) ->
+            CrouchingNerfedCharacterState = require "model/character/nerfed/crouchingNerfedCharacterState"
+            character.setState new CrouchingNerfedCharacterState
+
         crouch: (character) ->
             # Can't crouch!
 

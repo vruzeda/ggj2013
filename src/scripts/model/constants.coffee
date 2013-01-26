@@ -12,6 +12,11 @@ define [], ->
         WORLD:
             gravity: 10.0
 
+        SPEEDS:
+            nerfed: 200
+            walking: 250
+            pumped: 300
+
         CHARACTER:
             width: 0.05
             height: 0.05

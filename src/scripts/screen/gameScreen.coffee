@@ -34,23 +34,41 @@ define [
             inputController.removeCharListener "D",     @onWarmLeft
             inputController.removeCharListener "F",     @onWarmRight
 
-        onMoveLeft: =>
-            @_character.move "left"
+        onMoveLeft: (event) =>
+            if event.type == 'keyup'
+                @_character.stop()
+            else
+                @_character.move "left"
 
-        onMoveRight: =>
-            @_character.move "right"
+        onMoveRight: (event) =>
+            if event.type == 'keyup'
+                @_character.stop()
+            else
+                @_character.move "right"
 
-        onCrouch: =>
-            @_character.crouch()
+        onCrouch: (event) =>
+            if event.type == 'keyup'
+                @_character.stop()
+            else
+                @_character.crouch()
 
-        onJump: =>
-            @_character.jump()
+        onJump: (event) =>
+            if event.type == 'keyup'
+                @_character.stop()
+            else
+                @_character.jump()
 
-        onWarmLeft: =>
-            @_character.warmLeft()
+        onWarmLeft: (event) =>
+            if event.type == 'keyup'
+                @_character.stop()
+            else
+                @_character.warmLeft()
 
-        onWarmRight: =>
-            @_character.warmRight()
+        onWarmRight: (event) =>
+            if event.type == 'keyup'
+                @_character.stop()
+            else
+                @_character.warmRight()
 
 
     return GameScreen

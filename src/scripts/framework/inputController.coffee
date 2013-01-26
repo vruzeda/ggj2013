@@ -26,6 +26,14 @@ define [
                     listener event for listener in @_listeners[char]
                     return false
 
+            $("##{containerId}").keyup (event) =>
+                char = String.fromCharCode event.keyCode
+                char = SPECIAL_BUTTONS[event.keyCode] if SPECIAL_BUTTONS[event.keyCode]?
+
+                if @_listeners[char]?
+                    listener event for listener in @_listeners[char]
+                    return false
+
         ################
         # Mouse events #
         ################

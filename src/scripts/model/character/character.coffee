@@ -46,6 +46,9 @@ define [
         move: (direction) ->
             @_state.move @, direction
 
+        stop: ->
+            @_state.stop @
+
         crouch: ->
             @_state.crouch @
 

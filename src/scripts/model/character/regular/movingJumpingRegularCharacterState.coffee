@@ -17,6 +17,10 @@ define [
             if @_direction isnt direction
                 @_direction = direction
 
+        stop: (character) ->
+            JumpingRegularCharacterState = require "model/character/regular/jumpingRegularCharacterState"
+            character.setState new JumpingRegularCharacterState
+
         crouch: (character) ->
             # Can't crouch!
 
