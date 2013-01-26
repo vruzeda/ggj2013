@@ -38,7 +38,7 @@ define [
         removeClickListener: (node, listener) ->
             for clickEvent in CLICK_EVENTS
                 if node.eventListeners[clickEvent]?
-                    listenerIndex = listener in node.eventListeners[clickEvent]
+                    listenerIndex = node.eventListeners[clickEvent].indexOf listener
                     if listenerIndex isnt -1
                         node.eventListeners[clickEvent].splice listenerIndex, 1
 
@@ -56,7 +56,7 @@ define [
 
         removeCharListener: (char, listener) ->
             if @_listeners[char]?
-                listenerIndex = listener in @_listeners[char]
+                listenerIndex = @_listeners[char].indexOf listener
                 if listenerIndex isnt -1
                     @_listeners[char].splice listenerIndex, 1
 
