@@ -28,5 +28,7 @@ define [
 
         _constructInputEvents: (inputController) ->
 
+        _destroyInputEvents: (inputController) ->
+
 
     return SplashScreen

@@ -2,6 +2,12 @@ define [
     "jquery"
 ], ($) ->
 
+    ARROW_BUTTONS =
+        37: "LEFT"
+        38: "UP"
+        39: "RIGHT"
+        40: "DOWN"
+
     # Private class
     class InputControllerInstance
 
@@ -13,8 +19,11 @@ define [
             $("##{containerId}").css "outline", "none"
             $("##{containerId}").keydown (event) =>
                 char = String.fromCharCode event.keyCode
+                char = ARROW_BUTTONS[event.keyCode] if ARROW_BUTTONS[event.keyCode]?
+
                 if @_listeners[char]?
                     listener event for listener in @_listeners[char]
+                    return false
 
         ################
         # Mouse events #

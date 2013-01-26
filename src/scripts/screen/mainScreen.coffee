@@ -42,20 +42,29 @@ define [
             optionsButton.click = @onOptions
 
         _constructInputEvents: (inputController) ->
-            inputController.addCharListener "W", =>
-                @_selectedButton.get(".highlight")[0].setVisible false
-                @_selectedButton = @_selectedButton.prevButton
-                @_selectedButton.get(".highlight")[0].setVisible true
-                @redraw()
+            inputController.addCharListener "DOWN", @onDown
+            inputController.addCharListener "UP",   @onUp
+            inputController.addCharListener "H",    @onSelect
 
-            inputController.addCharListener "S", =>
-                @_selectedButton.get(".highlight")[0].setVisible false
-                @_selectedButton = @_selectedButton.nextButton
-                @_selectedButton.get(".highlight")[0].setVisible true
-                @redraw()
+        _destroyInputEvents: (inputController) ->
+            inputController.removeCharListener "DOWN", @onDown
+            inputController.removeCharListener "UP",   @onUp
+            inputController.removeCharListener "H",    @onSelect
 
-            inputController.addCharListener "H", =>
-                @_selectedButton.click?()
+        onDown: =>
+            @_selectedButton.get(".highlight")[0].setVisible false
+            @_selectedButton = @_selectedButton.prevButton
+            @_selectedButton.get(".highlight")[0].setVisible true
+            @redraw()
+
+        onUp: =>
+            @_selectedButton.get(".highlight")[0].setVisible false
+            @_selectedButton = @_selectedButton.nextButton
+            @_selectedButton.get(".highlight")[0].setVisible true
+            @redraw()
+
+        onSelect: =>
+            @_selectedButton.click?()
 
         onStartGame: =>
             @_game.showScreen new GameScreen @_game

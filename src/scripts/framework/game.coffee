@@ -26,7 +26,7 @@ define [
             screen.init()
 
         hideScreen: (screen) ->
-            screen.getLayer().remove()
+            screen.destroy()
 
         getWidth: ->
             @_width

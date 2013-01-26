@@ -22,10 +22,16 @@ define [
                 rect = @_layer.get("#rect_#{rectIndex}")[0]
                 inputController.addClickListener rect, @onRectClick
 
-            inputController.addCharListener "W", @onMoveUp
-            inputController.addCharListener "A", @onMoveLeft
-            inputController.addCharListener "S", @onMoveDown
-            inputController.addCharListener "D", @onMoveRight
+            inputController.addCharListener "UP",    @onMoveUp
+            inputController.addCharListener "LEFT",  @onMoveLeft
+            inputController.addCharListener "DOWN",  @onMoveDown
+            inputController.addCharListener "RIGHT", @onMoveRight
+
+        _destroyInputEvents: (inputController) ->
+            inputController.removeCharListener "UP",    @onMoveUp
+            inputController.removeCharListener "LEFT",  @onMoveLeft
+            inputController.removeCharListener "DOWN",  @onMoveDown
+            inputController.removeCharListener "RIGHT", @onMoveRight
 
         onRectClick: (@_rect) =>
             @_rect.setX Math.floor Math.random() * (@getWidth() - @_rect.getWidth())
