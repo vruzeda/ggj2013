@@ -1,11 +1,15 @@
 define [
     "model/character/characterState"
-], (CharacterState) ->
+    "model/character/regular/movingJumpingRegularCharacterState"
+], (CharacterState, MovingJumpingRegularCharacterState) ->
 
     class JumpingRegularCharacterState extends CharacterState
 
         getImageName: ->
             "jumpingRegularCharacter"
+
+        move: (character, direction) ->
+            character.setState new MovingJumpingRegularCharacterState @_direction
 
         crouch: (character) ->
             # Can't crouch!

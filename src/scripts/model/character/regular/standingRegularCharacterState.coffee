@@ -1,14 +1,18 @@
 define [
     "model/character/characterState"
     "model/character/regular/jumpingRegularCharacterState"
+    "model/character/regular/walkingRegularCharacterState"
     "model/character/regular/warmingLeftRegularCharacterState"
     "model/character/regular/warmingRightRegularCharacterState"
-], (CharacterState, JumpingRegularCharacterState, WarmingLeftRegularCharacterState, WarmingRightRegularCharacterState) ->
+], (CharacterState, JumpingRegularCharacterState, WalkingRegularCharacterState, WarmingLeftRegularCharacterState, WarmingRightRegularCharacterState) ->
 
     class StandingRegularCharacterState extends CharacterState
 
         getImageName: ->
             "standingRegularCharacter"
+
+        move: (character, direction) ->
+            character.setState new WalkingRegularCharacterState direction
 
         crouch: (character) ->
             # Can't crouch!

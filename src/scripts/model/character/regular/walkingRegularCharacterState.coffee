@@ -5,14 +5,21 @@ define [
 
     class WalkingRegularCharacterState extends CharacterState
 
+        constructor: (@_direction) ->
+            super()
+
         getImageName: ->
             "walkingRegularCharacter"
+
+        move: (character, direction) ->
+            if @_direction isnt direction
+                @_direction = direction
 
         crouch: (character) ->
             # Can't crouch!
 
         jump: (character) ->
-            character.setState new JumpingRegularCharacterState
+            character.setState new MovingJumpingRegularCharacterState @_direction
 
         warmLeft: (character) ->
             # Can't warm!

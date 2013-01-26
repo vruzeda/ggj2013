@@ -10,6 +10,9 @@ define [
         getImageName: ->
             @_state.getImageName()
 
+        move: (direction) ->
+            @_state.move @, direction
+
         crouch: ->
             @_state.crouch @
 

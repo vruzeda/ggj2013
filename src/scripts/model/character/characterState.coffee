@@ -7,6 +7,10 @@ define [], () ->
             throw new Error "Cannot invoke abstract method CharacterState.getImageName()."
 
         # Abstract
+        move: (character, direction) ->
+            throw new Error "Cannot invoke abstract method CharacterState.move(character, direction)."
+
+        # Abstract
         crouch: (character) ->
             throw new Error "Cannot invoke abstract method CharacterState.crouch(character)."
 
