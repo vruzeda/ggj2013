@@ -10,19 +10,20 @@ define [
             "warmingLeftPumpedCharacterState"
 
         crouch: (character) ->
-            # Noob: Going back to the standing state
-            character.setState new StandingPumpedCharacterState
+            @_goBackToStandingState character
 
         jump: (character) ->
-            # Noob: Going back to the standing state
-            character.setState new StandingPumpedCharacterState
+            @_goBackToStandingState character
 
         warmLeft: (character) ->
-            # Noob: Going back to the standing state
-            character.setState new StandingPumpedCharacterState
+            @_goBackToStandingState character
 
         warmRight: (character) ->
             character.setState new WarmingRightPumpedCharacterState
+
+        # Noob
+        _goBackToStandingState: (character) ->
+            character.setState new StandingPumpedCharacterState
 
 
     return WarmingLeftPumpedCharacterState
