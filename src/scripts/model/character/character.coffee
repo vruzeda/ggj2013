@@ -13,7 +13,7 @@ define [
         constructor: (physicalWorld) ->
             super physicalWorld, Box2D.Dynamics.b2Body.b2_dynamicBody, CHARACTER.width, CHARACTER.height, CHARACTER.weight
 
-            @_state = new StandingRegularCharacterState
+            @setState new StandingRegularCharacterState
             @_heartRate = CHARACTER.regularHeartBeat
 
         increaseHeartBeat: ->
@@ -35,6 +35,7 @@ define [
                 @setState new StandingNerfedCharacterState
 
         setState: (@_state) ->
+            console.log ">>> State: " + @_state.getImageName() + " <<<"
 
         getImageName: ->
             @_state.getImageName()
