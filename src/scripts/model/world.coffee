@@ -2,10 +2,10 @@ define [
     "model/character/character"
 ], (Character) ->
 
-    class Laboratory
+    class World
 
         constructor: ->
             @_character = new Character
 
 
-    return Laboratory
+    return World
