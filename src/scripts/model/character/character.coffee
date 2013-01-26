@@ -1,5 +1,5 @@
 define [
-    "model/character/standingRegularCharacterState"
+    "model/character/regular/standingRegularCharacterState"
 ], (StandingRegularCharacterState) ->
 
     class Character

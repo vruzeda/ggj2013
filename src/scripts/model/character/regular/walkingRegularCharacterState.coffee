@@ -1,6 +1,6 @@
 define [
     "model/character/characterState"
-    "model/character/jumpingRegularCharacterState"
+    "model/character/regular/jumpingRegularCharacterState"
 ], (CharacterState, JumpingRegularCharacterState) ->
 
     class WalkingRegularCharacterState extends CharacterState
