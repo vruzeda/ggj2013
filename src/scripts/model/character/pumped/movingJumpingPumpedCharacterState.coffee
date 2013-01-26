@@ -10,6 +10,9 @@ define [
         getImageName: ->
             "jumpingPumpedCharacter"
 
+        update: (character, deltaTime) ->
+            # positions
+
         move: (character, direction) ->
             if @_direction isnt direction
                 @_direction = direction
