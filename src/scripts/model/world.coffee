@@ -2,7 +2,7 @@ define [
     "box2D"
     "model/constants"
     "model/character/character"
-    "model/surface/Table"
+    "model/surface/table"
 ], (Box2D, Constants, Character, Table) ->
 
     {WORLD, PHYSICS_PARAMETERS} = Constants

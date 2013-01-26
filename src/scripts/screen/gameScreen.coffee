@@ -1,25 +1,21 @@
 define [
     "kinetic"
     "framework/screen"
-    "framework/imageLoader"
     "model/world"
-], (Kinetic, Screen, ImageLoader, World) ->
+    "renderer/worldRenderer"
+], (Kinetic, Screen, World, WorldRenderer) ->
 
     class SimpleScreen extends Screen
 
         _constructLayout: ->
             @_world = new World
 
-            @_layer.add new Kinetic.Image
-                image: ImageLoader.getImage "background"
+            @_worldRenderer = new WorldRenderer @_layer
 
-            @_character = @_world.getCharacter()
-            @_layer.add new Kinetic.Image
-                image: ImageLoader.getImage @_character.getImageName()
-
-            for surface in @_world.getSurfaces()
-                @_layer.add new Kinetic.Image
-                    image: ImageLoader.getImage surface.getImageName()
+            @_updater = new Kinetic.Animation (parameters) =>
+                @_world.update parameters.timeDiff
+                @_worldRenderer.render @_world
+            @_updater.start()
 
         _constructInputEvents: (inputController) ->
             inputController.addCharListener "LEFT",  @onMoveLeft

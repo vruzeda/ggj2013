@@ -10,7 +10,7 @@ define [], ->
             positionIterations: 3
 
         WORLD:
-            gravity: -10.0
+            gravity: 10.0
 
         CHARACTER:
             width: 0.05
