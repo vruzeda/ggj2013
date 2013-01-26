@@ -1,8 +1,6 @@
 define [
     "model/character/characterState"
-    "model/character/pumped/standingPumpedCharacterState"
-    "model/character/pumped/warmingRightPumpedCharacterState"
-], (CharacterState, StandingPumpedCharacterState, WarmingRightPumpedCharacterState) ->
+], (CharacterState) ->
 
     class WarmingLeftPumpedCharacterState extends CharacterState
 
@@ -26,10 +24,12 @@ define [
 
         warmRight: (character) ->
             character.increaseHeartBeat()
+            WarmingRightPumpedCharacterState = require "model/character/pumped/warmingRightPumpedCharacterState"
             character.setState new WarmingRightPumpedCharacterState
 
         # Noob
         _goBackToStandingState: (character) ->
+            StandingPumpedCharacterState = require "model/character/pumped/standingPumpedCharacterState"
             character.setState new StandingPumpedCharacterState
 
 

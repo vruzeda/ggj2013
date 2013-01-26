@@ -1,8 +1,6 @@
 define [
     "model/character/characterState"
-    "model/character/nerfed/standingNerfedCharacterState"
-    "model/character/nerfed/warmingRightNerfedCharacterState"
-], (CharacterState, StandingNerfedCharacterState, WarmingRightNerfedCharacterState) ->
+], (CharacterState) ->
 
     class WarmingLeftNerfedCharacterState extends CharacterState
 
@@ -26,10 +24,12 @@ define [
 
         warmRight: (character) ->
             character.increaseHeartBeat()
+            WarmingRightNerfedCharacterState = require "model/character/nerfed/warmingRightNerfedCharacterState"
             character.setState new WarmingRightNerfedCharacterState
 
         # Noob
         _goBackToStandingState: (character) ->
+            StandingNerfedCharacterState = require "model/character/nerfed/standingNerfedCharacterState"
             character.setState new StandingNerfedCharacterState
 
 
