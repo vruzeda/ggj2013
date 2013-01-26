@@ -23,14 +23,14 @@ define [
                 inputController.addClickListener rect, @onRectClick
 
             inputController.addCharListener "UP",    @onMoveUp
-            inputController.addCharListener "LEFT",  @onMoveLeft
             inputController.addCharListener "DOWN",  @onMoveDown
+            inputController.addCharListener "LEFT",  @onMoveLeft
             inputController.addCharListener "RIGHT", @onMoveRight
 
         _destroyInputEvents: (inputController) ->
             inputController.removeCharListener "UP",    @onMoveUp
-            inputController.removeCharListener "LEFT",  @onMoveLeft
             inputController.removeCharListener "DOWN",  @onMoveDown
+            inputController.removeCharListener "LEFT",  @onMoveLeft
             inputController.removeCharListener "RIGHT", @onMoveRight
 
         onRectClick: (@_rect) =>

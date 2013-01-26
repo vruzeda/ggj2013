@@ -15,53 +15,79 @@ define [
                 fill: "black"
 
             # Buttons
+            startGameButtonImage = ImageLoader.getImage "startGameButton"
             startGameButton = @_createButton
                 id: "startGame"
                 x: 100
                 y: 100
-                image: ImageLoader.getImage "startGameButton"
+                image: startGameButtonImage
             @_layer.add startGameButton
 
+            optionsButtonImage = ImageLoader.getImage "optionsButton"
             optionsButton = @_createButton
                 id: "options"
-                x: 100
-                y: 200
-                image: ImageLoader.getImage "optionsButton"
+                x: @getWidth() - optionsButtonImage.width
+                y: 0
+                image: optionsButtonImage
             @_layer.add optionsButton
 
             @_selectedButton = startGameButton
             @_selectedButton.get(".highlight")[0].setVisible true
 
             # Further configurations
-            startGameButton.prevButton = optionsButton
-            startGameButton.nextButton = optionsButton
+            startGameButton.upButton = null
+            startGameButton.downButton = null
+            startGameButton.leftButton = null
+            startGameButton.rightButton = optionsButton
             startGameButton.click = @onStartGame
 
-            optionsButton.prevButton = startGameButton
-            optionsButton.nextButton = startGameButton
+            optionsButton.upButton = null
+            optionsButton.downButton = null
+            optionsButton.leftButton = startGameButton
+            optionsButton.rightButton = null
             optionsButton.click = @onOptions
 
         _constructInputEvents: (inputController) ->
-            inputController.addCharListener "DOWN", @onDown
-            inputController.addCharListener "UP",   @onUp
-            inputController.addCharListener "H",    @onSelect
+            inputController.addCharListener "UP",    @onUp
+            inputController.addCharListener "DOWN",  @onDown
+            inputController.addCharListener "LEFT",  @onLeft
+            inputController.addCharListener "RIGHT", @onRight
+            inputController.addCharListener "H",     @onSelect
 
         _destroyInputEvents: (inputController) ->
-            inputController.removeCharListener "DOWN", @onDown
-            inputController.removeCharListener "UP",   @onUp
-            inputController.removeCharListener "H",    @onSelect
-
-        onDown: =>
-            @_selectedButton.get(".highlight")[0].setVisible false
-            @_selectedButton = @_selectedButton.prevButton
-            @_selectedButton.get(".highlight")[0].setVisible true
-            @redraw()
+            inputController.removeCharListener "UP",    @onUp
+            inputController.removeCharListener "DOWN",  @onDown
+            inputController.removeCharListener "LEFT",  @onLeft
+            inputController.removeCharListener "RIGHT", @onRight
+            inputController.removeCharListener "H",     @onSelect
 
         onUp: =>
-            @_selectedButton.get(".highlight")[0].setVisible false
-            @_selectedButton = @_selectedButton.nextButton
-            @_selectedButton.get(".highlight")[0].setVisible true
-            @redraw()
+            if @_selectedButton.upButton?
+                @_selectedButton.get(".highlight")[0].setVisible false
+                @_selectedButton = @_selectedButton.upButton
+                @_selectedButton.get(".highlight")[0].setVisible true
+                @redraw()
+
+        onDown: =>
+            if @_selectedButton.downButton?
+                @_selectedButton.get(".highlight")[0].setVisible false
+                @_selectedButton = @_selectedButton.downButton
+                @_selectedButton.get(".highlight")[0].setVisible true
+                @redraw()
+
+        onLeft: =>
+            if @_selectedButton.leftButton?
+                @_selectedButton.get(".highlight")[0].setVisible false
+                @_selectedButton = @_selectedButton.leftButton
+                @_selectedButton.get(".highlight")[0].setVisible true
+                @redraw()
+
+        onRight: =>
+            if @_selectedButton.rightButton?
+                @_selectedButton.get(".highlight")[0].setVisible false
+                @_selectedButton = @_selectedButton.rightButton
+                @_selectedButton.get(".highlight")[0].setVisible true
+                @redraw()
 
         onSelect: =>
             @_selectedButton.click?()
