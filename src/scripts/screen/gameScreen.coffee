@@ -2,26 +2,26 @@ define [
     "kinetic"
     "framework/screen"
     "framework/imageLoader"
-], (Kinetic, Screen, ImageLoader) ->
+    "model/world"
+], (Kinetic, Screen, ImageLoader, World) ->
 
     class SimpleScreen extends Screen
 
         _constructLayout: ->
-            @_layer.add new Kinetic.Rect
-                width: @getWidth()
-                height: @getHeight()
-                fill: "green"
+            @_world = new World
 
-            for rectIndex, imageName of ["coffescript", "require", "kinetic", "jquery"]
+            @_layer.add new Kinetic.Image
+                image: ImageLoader.getImage "background"
+
+            @_character = @_world.getCharacter()
+            @_layer.add new Kinetic.Image
+                image: ImageLoader.getImage @_character.getImageName()
+
+            for surface in @_world.getSurfaces()
                 @_layer.add new Kinetic.Image
-                    id: "rect_#{rectIndex}"
-                    image: ImageLoader.getImage imageName
+                    image: ImageLoader.getImage surface.getImageName()
 
         _constructInputEvents: (inputController) ->
-            for rectIndex of ["coffescript", "require", "kinetic", "jquery"]
-                rect = @_layer.get("#rect_#{rectIndex}")[0]
-                inputController.addClickListener rect, @onRectClick
-
             inputController.addCharListener "UP",    @onMoveUp
             inputController.addCharListener "DOWN",  @onMoveDown
             inputController.addCharListener "LEFT",  @onMoveLeft
@@ -33,30 +33,17 @@ define [
             inputController.removeCharListener "LEFT",  @onMoveLeft
             inputController.removeCharListener "RIGHT", @onMoveRight
 
-        onRectClick: (@_rect) =>
-            @_rect.setX Math.floor Math.random() * (@getWidth() - @_rect.getWidth())
-            @_rect.setY Math.floor Math.random() * (@getHeight() - @_rect.getHeight())
-            @redraw()
-
         onMoveUp: =>
-            if @_rect?
-                @_rect.setY Math.max @_rect.getY() - @_rect.getHeight(), 0
-                @redraw()
+            @_character.jump()
 
         onMoveLeft: =>
-            if @_rect?
-                @_rect.setX Math.max @_rect.getX() - @_rect.getWidth(), 0
-                @redraw()
+            @_character.move "left"
 
         onMoveDown: =>
-            if @_rect?
-                @_rect.setY Math.min @_rect.getY() + @_rect.getHeight(), (@getHeight() - @_rect.getHeight())
-                @redraw()
+            @_character.crouch()
 
         onMoveRight: =>
-            if @_rect?
-                @_rect.setX Math.min @_rect.getX() + @_rect.getWidth(), (@getWidth() - @_rect.getWidth())
-                @redraw()
+            @_character.move "right"
 
 
     return SimpleScreen

@@ -2,7 +2,8 @@ define [
     "box2D"
     "model/constants"
     "model/character/character"
-], (Box2D, Constants, Character) ->
+    "model/surface/Table"
+], (Box2D, Constants, Character, Table) ->
 
     {WORLD, PHYSICS_PARAMETERS} = Constants
 
@@ -13,10 +14,20 @@ define [
             @_world = new Box2D.Dynamics.b2World gravity, true
 
             @_character = new Character @_world
+            @_surfaces  = []
+
+            # TODO Actually create a way to build the world
+            @_surfaces.push new Table @_world
 
         update: (deltaTime) ->
             @_world.Step deltaTime, PHYSICS_PARAMETERS.velocityIterations, PHYSICS_PARAMETERS.positionIterations
             @_character.update deltaTime
+
+        getCharacter: ->
+            @_character
+
+        getSurfaces: ->
+            @_surfaces
 
 
     return World

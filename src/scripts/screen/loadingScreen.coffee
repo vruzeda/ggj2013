@@ -26,14 +26,13 @@ define [
             ImageLoader.addToList
                 MAIN_SCREEN:
                     startGameButton: "images/startGameButton.png"
-                    optionsButton:   "images/optionsButton.png"
-                    background:      "images/background.png"
+                    optionsButton: "images/optionsButton.png"
+                    background: "images/background.png"
 
                 GAME_SCREEN:
-                    coffescript:     "http://coffeescript.org/documentation/images/logo.png"
-                    require:         "http://requirejs.org/i/logo.png"
-                    kinetic:         "http://kineticjs.com/img/logo.png"
-                    jquery:          "http://api.jquery.com/jquery-wp-content/themes/jquery/images/logo-jquery.png"
+                    background: "images/background.png"
+                    table: "images/table.png"
+                    standingRegularCharacter: "images/walkingRegularCharacter.png"
 
             setTimeout =>
                 ImageLoader.loadImages

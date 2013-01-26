@@ -5,6 +5,13 @@ define [], ->
             width: 1280
             height: 720
 
+        PHYSICS_PARAMETERS:
+            velocityIterations: 8
+            positionIterations: 3
+
+        WORLD:
+            gravity: -10.0
+
         CHARACTER:
             width: 0.05
             height: 0.05
@@ -20,11 +27,11 @@ define [], ->
             heartRaiseIncrement: 5
             heatRaiseDecerement: 0.02 # in miliseconds
 
-        WORLD:
-            gravity: -10.0
+        TABLE:
+            width: 1.20
+            height: 0.73
+            weight: 60
 
-        PHYSICS_PARAMETERS:
-            velocityIterations: 8
-            positionIterations: 3
+
 
     return CONSTANTS
