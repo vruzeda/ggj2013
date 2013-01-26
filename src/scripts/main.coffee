@@ -4,7 +4,9 @@ require.config
         kinetic: "lib/src/kinetic-v4.3.0"
 
 require [
-    "simpleGame"
-], (SimpleGame) ->
+    "jquery"
+    "heartGame"
+], ($, HeartGame) ->
 
-    new SimpleGame("container")
+    $("#container").focus()
+    new HeartGame "container", 1280, 720

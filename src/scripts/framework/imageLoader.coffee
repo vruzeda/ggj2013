@@ -404,6 +404,18 @@ define [
         #                 @param completeCallback Callback to call when we finished loading the required list
         #                 @param progressCallback Callback to call while we are loading the required list of images
         @loadImages: (required, background) ->
+            if not required?
+                required =
+                    list: []
+                    progressCallback: null
+                    completeCallback: null
+
+            if not background?
+                background =
+                    list: []
+                    progressCallback: null
+                    completeCallback: null
+
             @_instance.startLoading required, background
 
 
