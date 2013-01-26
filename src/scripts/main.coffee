@@ -11,8 +11,7 @@ require.config
 require [
     "jquery"
     "heartGame"
-    "box2D"
-], ($, HeartGame, Box2D) ->
+], ($, HeartGame) ->
 
     $("#container").focus()
     new HeartGame "container", 1280, 720

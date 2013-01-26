@@ -1,14 +1,18 @@
 define [
+    "box2D"
     "model/constants"
+    "model/physics/physicalEntity"
     "model/character/regular/standingRegularCharacterState"
     "model/character/dead/capturedCharacterState"
-], (Constants, StandingRegularCharacterState, CapturedCharacterState) ->
+], (Box2D, Constants, PhysicalEntity, StandingRegularCharacterState, CapturedCharacterState) ->
 
     {CHARACTER} = Constants
 
-    class Character
+    class Character extends PhysicalEntity
 
-        constructor: ->
+        constructor: (physicalWorld) ->
+            super physicalWorld, Box2D.Dynamics.b2BodyDef.b2_dynamicBody, CHARACTER.widht, CHARACTER.height, CHARACTER.weight
+
             @_state = new StandingRegularCharacterState
             @_heartRate = CHARACTER.regularHeartBeat  # externalize to constants
 
@@ -55,5 +59,6 @@ define [
 
         isDead: ->
             @_state.isDead()
+
 
     return Character
