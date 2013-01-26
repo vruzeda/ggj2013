@@ -11,6 +11,9 @@ define [
         getImageName: ->
             "standingNerfedCharacterState"
 
+        update: (character, deltaTime) ->
+            character.decreaseHeartBeat character, deltaTime
+
         move: (character, direction) ->
             character.setState new WalkingNerfedCharacterState direction
 

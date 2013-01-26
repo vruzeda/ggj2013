@@ -1,13 +1,19 @@
 define [
     "model/character/characterState"
-    "model/character/pumped/standingNerfedCharacterState"
-    "model/character/pumped/warmingLeftNerfedCharacterState"
+    "model/character/nerfed/standingNerfedCharacterState"
+    "model/character/nerfed/warmingLeftNerfedCharacterState"
 ], (CharacterState, StandingNerfedCharacterState, WarmingLeftNerfedCharacterState) ->
 
     class WarmingRightNerfedCharacterState extends CharacterState
 
         getImageName: ->
-            "warmingRightNerfedCharacterState"
+            "warmingRightNerfedCharacter"
+
+        update: (character, deltaTime) ->
+            # positions
+
+        move: (character, direction) ->
+            @_goBackToStandingState character
 
         crouch: (character) ->
             @_goBackToStandingState character
@@ -16,6 +22,7 @@ define [
             @_goBackToStandingState character
 
         warmLeft: (character) ->
+            character.increaseHeartBeat()
             character.setState new WarmingLeftNerfedCharacterState
 
         warmRight: (character) ->

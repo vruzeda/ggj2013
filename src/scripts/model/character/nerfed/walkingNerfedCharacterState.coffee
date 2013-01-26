@@ -1,12 +1,15 @@
 define [
     "model/character/characterState"
-    "model/character/pumped/crouchingNerfedCharacterState"
+    "model/character/nerfed/crouchingNerfedCharacterState"
 ], (CharacterState, crouchingNerfedCharacterState) ->
 
     class WalkingNerfedCharacterState extends CharacterState
 
         constructor: (@_direction) ->
             super()
+
+        update: (character, deltaTime) ->
+            # positions
 
         getImageName: ->
             "walkingNerfedCharacterState"

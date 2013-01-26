@@ -7,7 +7,10 @@ define [
     class WarmingLeftPumpedCharacterState extends CharacterState
 
         getImageName: ->
-            "warmingLeftPumpedCharacterState"
+            "warmingLeftPumpedCharacter"
+
+        update: (character, deltaTime) ->
+            # positions
 
         move: (character, direction) ->
             @_goBackToStandingState character
@@ -22,6 +25,7 @@ define [
             @_goBackToStandingState character
 
         warmRight: (character) ->
+            character.increaseHeartBeat()
             character.setState new WarmingRightPumpedCharacterState
 
         # Noob

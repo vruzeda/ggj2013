@@ -8,6 +8,9 @@ define [
         constructor: (@_direction) ->
             super()
 
+        update: (character, deltaTime) ->
+            # positions
+
         getImageName: ->
             "walkingPumpedCharacterState"
 

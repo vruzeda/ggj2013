@@ -1,12 +1,15 @@
 define [
     "model/character/characterState"
-    "model/character/regular/movingCrouchingNerfedCharacterState"
+    "model/character/nerfed/movingCrouchingNerfedCharacterState"
 ], (CharacterState) ->
 
     class CrouchingNerfedCharacterState extends CharacterState
 
         getImageName: ->
             "crouchingNerfedCharacter"
+
+        update: (character, deltaTime) ->
+            # positions
 
         move: (character, direction) ->
             character.setState new MovingCrouchingNerfedCharacterState @_direction

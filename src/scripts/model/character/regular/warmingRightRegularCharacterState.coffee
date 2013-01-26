@@ -9,6 +9,9 @@ define [
         getImageName: ->
             "warmingRightRegularCharacter"
 
+        update: (character, deltaTime) ->
+            # positions
+
         move: (character, direction) ->
             @_goBackToStandingState character
 
@@ -19,6 +22,7 @@ define [
             @_goBackToStandingState character
 
         warmLeft: (character) ->
+            character.increaseHeartBeat()
             character.setState new WarmingLeftRegularCharacterState
 
         warmRight: (character) ->

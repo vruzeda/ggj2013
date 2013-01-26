@@ -8,6 +8,9 @@ define [
         getImageName: ->
             "jumpingRegularCharacter"
 
+        update: (character, deltaTime) ->
+            # positions
+
         move: (character, direction) ->
             character.setState new MovingJumpingRegularCharacterState @_direction
 
