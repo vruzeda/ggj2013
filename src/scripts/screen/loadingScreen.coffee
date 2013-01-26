@@ -32,7 +32,10 @@ define [
                 GAME_SCREEN:
                     background: "images/background.png"
                     table: "images/table.png"
-                    standingRegularCharacter: "images/walkingRegularCharacter.png"
+                    standingRegularCharacter:  "images/standingRegularCharacter.png"
+                    walkingRegularCharacter:   "images/walkingRegularCharacter.png"
+                    crouchingRegularCharacter: "images/crouchingRegularCharacter.png"
+                    jumpingRegularCharacter:   "images/jumpingRegularCharacter.png"
 
             setTimeout =>
                 ImageLoader.loadImages

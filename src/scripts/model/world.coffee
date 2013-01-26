@@ -17,7 +17,10 @@ define [
             @_surfaces  = []
 
             # TODO Actually create a way to build the world
-            @_surfaces.push new Table @_world
+            table = new Table @_world
+            table.setPosition {x: 0, y: 628}
+
+            @_surfaces.push table
 
         update: (deltaTime) ->
             @_world.Step deltaTime, PHYSICS_PARAMETERS.velocityIterations, PHYSICS_PARAMETERS.positionIterations

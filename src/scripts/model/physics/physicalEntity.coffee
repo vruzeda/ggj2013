@@ -5,7 +5,6 @@ define [
     class PhysicalEntity
 
         constructor: (@_physicalWorld, bodyType, @_width, @_height, @_weight) ->
-            debugger
             @_bodyDef = new Box2D.Dynamics.b2BodyDef
             @_bodyDef.type = bodyType
             @_bodyDef.active = true
@@ -37,9 +36,9 @@ define [
 
         getPosition: ->
             centerOfMass = @getCenterOfMass()
-            centerOfMass.x -= @_width / 2
-            centerOfMass.y -= @_height / 2
-            centerOfMass
+            position =
+                x: centerOfMass.x - @_width / 2
+                y: centerOfMass.y - @_height / 2
 
         setPosition: (position) ->
             centerOfMass =
@@ -51,7 +50,7 @@ define [
             @_body.GetWorldCenter()
 
         setCenterOfMass: (centerOfMass) ->
-            @_body.SetTransform centerOfMass.x, centerOfMass.y, 0
+            @_body.SetPositionAndAngle centerOfMass, 0
 
         # Abstract
         getImageName: ->

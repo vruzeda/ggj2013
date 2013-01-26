@@ -5,10 +5,11 @@ define [
     "renderer/worldRenderer"
 ], (Kinetic, Screen, World, WorldRenderer) ->
 
-    class SimpleScreen extends Screen
+    class GameScreen extends Screen
 
         _constructLayout: ->
             @_world = new World
+            @_character = @_world.getCharacter()
 
             @_worldRenderer = new WorldRenderer @_layer
 
@@ -52,4 +53,4 @@ define [
             @_character.warmRight()
 
 
-    return SimpleScreen
+    return GameScreen
