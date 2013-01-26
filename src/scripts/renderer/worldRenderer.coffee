@@ -15,19 +15,19 @@ define [
 
             # TODO Parallax
 
-            character = world.getCharacter()
-            characterPosition = character.getPosition()
-            @_layer.add new Kinetic.Image
-                image: ImageLoader.getImage character.getImageName()
-                x: characterPosition.x
-                y: characterPosition.y
-
             for surface in world.getSurfaces()
                 surfacePosition = surface.getPosition()
                 @_layer.add new Kinetic.Image
                     image: ImageLoader.getImage surface.getImageName()
                     x: surfacePosition.x
                     y: surfacePosition.y
+
+            character = world.getCharacter()
+            characterPosition = character.getPosition()
+            @_layer.add new Kinetic.Image
+                image: ImageLoader.getImage character.getImageName()
+                x: characterPosition.x
+                y: characterPosition.y
 
             @_layer.draw()
 

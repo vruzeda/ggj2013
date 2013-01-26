@@ -35,7 +35,7 @@ define [
                 @setState new StandingNerfedCharacterState
 
         setState: (@_state) ->
-            console.log ">>> State: " + @_state.getImageName() + " <<<"
+            console.log ">>> State: " + @_state.constructor.name + " <<<"
 
         getImageName: ->
             @_state.getImageName()
