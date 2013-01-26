@@ -17,8 +17,6 @@ define [
 
             character = world.getCharacter()
             characterPosition = character.getPosition()
-            debugger
-
             @_layer.add new Kinetic.Image
                 image: ImageLoader.getImage character.getImageName()
                 x: characterPosition.x

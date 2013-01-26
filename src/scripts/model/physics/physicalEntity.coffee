@@ -5,29 +5,32 @@ define [
     class PhysicalEntity
 
         constructor: (@_physicalWorld, bodyType, @_width, @_height, @_weight) ->
+            debugger
             @_bodyDef = new Box2D.Dynamics.b2BodyDef
-            @_bodyDef.type = Box2D.Dynamics.b2BodyDef.b2_staticBody
+            @_bodyDef.type = bodyType
             @_bodyDef.active = true
             @_bodyDef.allowSleep = true
             @_bodyDef.fixedRotation = true
             @_bodyDef.gravityScale = 1
             @_bodyDef.linearDamping = 0.0
 
+            @_body = @_physicalWorld.CreateBody @_bodyDef
+            @_body.SetUserData @
+
+            if @_weight?
+                @_massData = new Box2D.Collision.Shapes.b2MassData
+                @_massData.mass = @_weight
+                @_body.SetMassData @_massData
+
             @_shape = new Box2D.Collision.Shapes.b2PolygonShape
             @_shape.SetAsBox @_width / 2, @_height / 2
-
-            @_massData = new Box2D.Collision.Shapes.b2MassData
-            @_massData.mass = @_weight
 
             @_fixtureDef = new Box2D.Dynamics.b2FixtureDef
             @_fixtureDef.friction = 0
             @_fixtureDef.restitution = 0
             @_fixtureDef.shape = @_shape
 
-            @_body = @_physicalWorld.CreateBody @_bodyDef
             @_fixture = @_body.CreateFixture @_fixtureDef
-            @_body.SetMassData @_massData
-            @_body.SetUserData @
 
         destructor: ->
             @_physicalWorld.DestroyBody @_body

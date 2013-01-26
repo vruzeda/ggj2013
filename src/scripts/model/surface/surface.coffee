@@ -5,8 +5,8 @@ define [
 
     class Surface extends PhysicalEntity
 
-        constructor: (physicalWorld, width, height, weight) ->
-            super physicalWorld, Box2D.Dynamics.b2BodyDef.b2_kinematicBody, width, height, weight
+        constructor: (physicalWorld, width, height) ->
+            super physicalWorld, Box2D.Dynamics.b2Body.b2_staticBody, width, height
 
 
     return Surface

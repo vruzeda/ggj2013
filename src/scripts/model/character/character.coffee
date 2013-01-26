@@ -11,7 +11,7 @@ define [
     class Character extends PhysicalEntity
 
         constructor: (physicalWorld) ->
-            super physicalWorld, Box2D.Dynamics.b2BodyDef.b2_dynamicBody, CHARACTER.width, CHARACTER.height, CHARACTER.weight
+            super physicalWorld, Box2D.Dynamics.b2Body.b2_dynamicBody, CHARACTER.width, CHARACTER.height, CHARACTER.weight
 
             @_state = new StandingRegularCharacterState
             @_heartRate = CHARACTER.regularHeartBeat
