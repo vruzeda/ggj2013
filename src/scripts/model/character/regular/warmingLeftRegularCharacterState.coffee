@@ -26,10 +26,12 @@ define [
 
         warmRight: (character) ->
             character.increaseHeartBeat()
+            WarmingRightRegularCharacterState = require("model/character/regular/warmingRightRegularCharacterState")
             character.setState new WarmingRightRegularCharacterState
 
         # Noob
         _goBackToStandingState: (character) ->
+            StandingRegularCharacterState = require("model/character/regular/standingRegularCharacterState")
             character.setState new StandingRegularCharacterState
 
 
