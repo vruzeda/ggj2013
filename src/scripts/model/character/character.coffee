@@ -3,7 +3,7 @@ define [
     "model/character/regular/standingRegularCharacterState"
 ], (Constants, StandingRegularCharacterState) ->
 
-    CHARACTER = Constants.CHARACTER
+    {CHARACTER} = Constants
 
     class Character
 
