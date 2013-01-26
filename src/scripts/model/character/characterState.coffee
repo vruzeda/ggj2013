@@ -30,5 +30,8 @@ define [], () ->
         warmRight: (character) ->
             throw new Error "Cannot invoke abstract method CharacterState.warmRight(character)."
 
+        isCaptured: ->
+            false
+
 
     return CharacterState

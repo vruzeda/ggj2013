@@ -1,7 +1,8 @@
 define [
     "model/constants"
     "model/character/regular/standingRegularCharacterState"
-], (Constants, StandingRegularCharacterState) ->
+    "model/character/dead/capturedCharacterState"
+], (Constants, StandingRegularCharacterState, CapturedCharacterState) ->
 
     {CHARACTER} = Constants
 
@@ -15,7 +16,7 @@ define [
             @_heartRate += CHARACTER.heartRaiseDelta
 
             if @_heartRate >= CHARACTER.heartAttack
-                # dead
+                @setState new CapturedCharacterState "heartAttack"
 
             else if @_heartRate >= CHARACTER.pumpedHeartBeat
                 @setState new StandingPumpedCharacterState
@@ -24,7 +25,7 @@ define [
             @_heartRate -= CHARACTER.heartRaiseDelta * deltaTime
 
             if @_heartRate <= CHARACTER.cardiacArrest
-                # dead
+                @setState new CapturedCharacterState "cardiacArrest"
 
             else if @_heartRate <= CHARACTER.nerfedHeartBeat
                 @setState new StandingNerfedCharacterState
@@ -51,5 +52,8 @@ define [
 
         warmRight: ->
             @_state.warmRight @
+
+        isDead: ->
+            @_state.isDead()
 
     return Character
