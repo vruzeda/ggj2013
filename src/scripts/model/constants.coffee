@@ -6,7 +6,7 @@ define [], ->
             height: 720
 
         WORLD:
-            gravity: 500
+            gravity: 1000
 
         CHARACTER:
             width:  153
@@ -20,12 +20,13 @@ define [], ->
             pumpedHeartBeat:  110
 
             nerfedMoveSpeed:  200
-            regularMoveSpeed: 250
+            regularMoveSpeed: 350
             pumpedMoveSpeed:  300
 
             nerfedJumpSpeed:  200
-            regularJumpSpeed: 500
-            pumpedJumpSpeed:  650
+            regularJumpSpeed: 650
+            pumpedJumpSpeed:  900
+
 
             heartAttack:   140
             cardiacArrest: 20
