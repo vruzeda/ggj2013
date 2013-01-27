@@ -4,7 +4,7 @@ define [
     "model/constants"
 ], (Kinetic, ImageLoader, Constants) ->
 
-    {GAME_RESOLUTION, WORLD} = Constants
+    {GAME_RESOLUTION, WORLD, CHARACTER} = Constants
 
     class WorldRenderer
 
@@ -58,13 +58,32 @@ define [
                     width: frontDecoration.getWidth()
                     height: frontDecoration.getHeight()
 
+            hudDisplay = new Kinetic.Image
+                image: ImageLoader.getImage "hudDisplay"
+            hudOpacity = Math.random()
+            hudOpacity = 0 if character.isHeartStoped()
 
-            characterHeartBeat = character.getHeartBeat()
-            @_layer.add new Kinetic.Text
-                text: Math.round characterHeartBeat
-                fontSize: 36
-                fontStyle: "bold"
+            hud = new Kinetic.Group
+            hud.add new Kinetic.Image
+                image: ImageLoader.getImage "cardiogram1"
+                x: 120
+                y: 22
+                opacity: hudOpacity
+            hud.add new Kinetic.Image
+                image: ImageLoader.getImage "cardiogram2"
+                x: 120
+                y: 22
+                opacity: 1 - hudOpacity
+            hud.add hudDisplay
+            hud.add new Kinetic.Text
+                text: Math.round character.getHeartBeat()
+                x: -7
+                y: 30
+                width: hudDisplay.getWidth()
+                fontSize: 72
                 fill: "white"
+                align: "center"
+            @_layer.add hud
 
             @_layer.draw()
 

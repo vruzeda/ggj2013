@@ -60,6 +60,8 @@ define [
             "#{@_state}_#{@_pulse}"
 
         update: (deltaTime) ->
+            if @isHeartStoped() then return
+
             if @isStanding()
                 @decreaseHeartBeat deltaTime
 
@@ -71,6 +73,8 @@ define [
             else if @isFalling() and speed.y == 0 then @fall()
 
         move: (direction) ->
+            if @isHeartStoped() then return
+
             switch @_state
                 when "standing"  then @setState "moving"
                 when "jumping"   then @setState "movingJumping"
@@ -86,6 +90,8 @@ define [
             @setSpeed x: speedX, y: speed.y
 
         stop: ->
+            if @isHeartStoped() then return
+
             switch @_state
                 when "moving"          then @setState "standing"
                 when "movingJumping"   then @setState "jumping"
@@ -97,6 +103,8 @@ define [
             @setSpeed x: 0, y: speed.y
 
         crouch: ->
+            if @isHeartStoped() then return
+
             if @isHeartNerfed() and not @isInMidAir() and not @isCrouching()
                 @setHeight @getHeight() / 2
 
@@ -106,6 +114,8 @@ define [
                     @setState "crouching"
 
         raise: ->
+            if @isHeartStoped() then return
+
             if @isCrouching()
                 @setHeight @getHeight() * 2
 
@@ -115,6 +125,8 @@ define [
                     @setState "standing"
 
         jump: ->
+            if @isHeartStoped() then return
+
             if not @isInMidAir() and not @isCrouching()
                 if @isMoving()
                     @setState "movingJumping"
@@ -125,6 +137,8 @@ define [
                 @setSpeed x: speed.x, y: -CHARACTER["#{@_pulse}JumpSpeed"]
 
         falling: ->
+            if @isHeartStoped() then return
+
             if not @isFalling()
                 if @isMoving()
                     @setState "movingFalling"
@@ -132,6 +146,8 @@ define [
                     @setState "falling"
 
         fall: ->
+            if @isHeartStoped() then return
+
             switch @_state
                 when "falling"       then @setState "standing"
                 when "movingFalling" then @setState "moving"
@@ -141,28 +157,34 @@ define [
             @setSpeed x: speed.x, y: 0
 
         warmLeft: ->
+            if @isHeartStoped() then return
+
             if @isStanding()
                 @setState "warmingLeft"
 
             else if @_state is "warmingRight"
-                @increaseHeartBeat()
                 @setState "warmingLeft"
+                @increaseHeartBeat()
 
             else
                 @unwarm()
 
         warmRight: ->
+            if @isHeartStoped() then return
+
             if @isStanding()
                 @setState "warmingRight"
 
             else if @_state is "warmingLeft"
-                @increaseHeartBeat()
                 @setState "warmingRight"
+                @increaseHeartBeat()
 
             else
                 @unwarm()
 
         unwarm: ->
+            if @isHeartStoped() then return
+
             @resetHeartBeat()
             @setState "standing" if @isWarming()
 
@@ -206,6 +228,9 @@ define [
 
         isHeartPumped: ->
             @_pulse is "pumped"
+
+        isHeartStoped: ->
+            @_pulse is "cardiacArrest" or @_pulse is "heartAttack"
 
 
     return Character
