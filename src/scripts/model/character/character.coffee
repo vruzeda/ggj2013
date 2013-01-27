@@ -15,7 +15,7 @@ define [
             @setPulse "regular"
 
         resetHeartBeat: ->
-            @_heartRate = CHARACTER["#{@_state}Beat"]
+            @_heartRate = CHARACTER["#{@_pulse}HeartBeat"]
 
         increaseHeartBeat: ->
             @_heartRate += CHARACTER.heartRaiseIncrement
