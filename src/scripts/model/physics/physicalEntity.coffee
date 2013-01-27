@@ -31,26 +31,73 @@ define [], ->
         getImageName: ->
             throw new Error "Cannot invoke abstract method PhysicalEntity.getImageName()."
 
-        collidesWith: (that, delta) ->
-            thisTL = @_topLeft()
+        collidesRightWith: (that, deltaX) ->
             thisTR = @_topRight()
-            thisBL = @_bottomLeft()
             thisBR = @_bottomRight()
 
             thatTL = that._topLeft()
             thatTR = that._topRight()
             thatBL = that._bottomLeft()
+
+            thisTR.x += deltaX
+            thisBR.x += deltaX
+
+            if thatTL.x <= thisTR.x <= thatTR.x
+                if thatTL.y <= thisTR.y <= thatBL.y or thatTL.y <= thisBR.y <= thatBL.y
+                    deltaX = thatTL.x - thisTR.x
+
+            return deltaX
+
+        collidesLeftWith: (that, deltaX) ->
+            thisTL = @_topLeft()
+            thisBL = @_bottomLeft()
+
+            thatTR = that._topRight()
+            thatTL = that._topLeft()
             thatBR = that._bottomRight()
 
-            clonedDelta = x: delta.x, y: delta.y
+            thisTL.x += deltaX
+            thisBL.x += deltaX
 
-            unless thisTL.x + clonedDelta.x > thatTR.x or thisTR.x + clonedDelta.x < thatTL.x or thisTL.y + clonedDelta.y > thatBL.y or thisBL.y + clonedDelta.y < thatTL.y
-                if clonedDelta.x > 0 and thisTR.x + clonedDelta.x > thatTL.x then clonedDelta.x = thatTL.x - thisTR.x
-                if clonedDelta.x < 0 and thisTL.x + clonedDelta.x < thatTR.x then clonedDelta.x = thatTR.x - thisTL.x
-                if clonedDelta.y > 0 and thisBL.y + clonedDelta.y > thatTL.y then clonedDelta.y = thatTL.y - thisBL.y
-                if clonedDelta.y < 0 and thisTL.y + clonedDelta.y < thatBL.y then clonedDelta.y = thatBL.y - thisTL.y
+            if thatTL.x <= thisTL.x <= thatTR.x
+                if thatTR.y <= thisTL.y <= thatBR.y or thatTR.y <= thisBL.y <= thatBR.y
+                    deltaX = thatTR.x - thisTL.x
 
-            return clonedDelta
+            return deltaX
+
+        collidesTopWith: (that, deltaY) ->
+            thisTL = @_topLeft()
+            thisTR = @_topRight()
+
+            thatTR = that._topRight()
+            thatTL = that._topLeft()
+            thatBR = that._bottomRight()
+
+            thisTL.y += deltaY
+            thisTR.y += deltaY
+
+            if thatTR.y <= thisTL.y <= thatBR.y
+                if thatTL.x <= thisTL.x <= thatBR.x or thatTL.x <= thisTR.x <= thatBR.x
+                    deltaY = thatBR.y - thisTL.y
+
+            return deltaY
+
+        collidesBottomWith: (that, deltaY) ->
+            thisBL = @_bottomLeft()
+            thisBR = @_bottomRight()
+
+            thatTR = that._topRight()
+            thatTL = that._topLeft()
+            thatBR = that._bottomRight()
+
+            thisBL.y += deltaY
+            thisBR.y += deltaY
+
+            if thatTR.y <= thisBL.y <= thatBR.y
+                if thatTL.x <= thisBL.x <= thatBR.x or thatTL.x <= thisBR.x <= thatBR.x
+                    deltaY = thatTR.y - thisBR.y
+
+            return deltaY
 
         _topLeft:     -> x: @_position.x,           y: @_position.y
         _topRight:    -> x: @_position.x + @_width, y: @_position.y

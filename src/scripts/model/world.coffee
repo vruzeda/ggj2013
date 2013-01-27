@@ -2,7 +2,8 @@ define [
     "model/constants"
     "model/character/character"
     "model/surface/table"
-], (Constants, Character, Table) ->
+    "model/surface/mediumObstacle"
+], (Constants, Character, Table, MediumObstacle) ->
 
     {CHARACTER, TABLE} = Constants
 
@@ -16,11 +17,23 @@ define [
             table = new Table
             table.setPosition x: TABLE.x, y: TABLE.y
 
+            book = new MediumObstacle
+            book.setPosition x: 300, y: TABLE.y - 200
+
+            book2 = new MediumObstacle
+            book2.setPosition x: 500, y: TABLE.y - 200
+
+            book3 = new MediumObstacle
+            book3.setPosition x: 500, y: TABLE.y - 400
+
             @_surfaces = []
             @_surfaces.push table
+            @_surfaces.push book
+            @_surfaces.push book2
+            @_surfaces.push book3
 
         update: (deltaTime) ->
-            deltaTimeInSeconds = deltaTime / 1000
+            deltaTimeInSeconds = 0.01#deltaTime / 1000
 
             speed = @_character.getSpeed()
             speed.y += @_gravity * deltaTimeInSeconds
@@ -29,19 +42,41 @@ define [
                 x: speed.x * deltaTimeInSeconds
                 y: speed.y * deltaTimeInSeconds
 
-            for surface in @_surfaces
-                collidedDelta = @_character.collidesWith surface, delta
+            newDelta =
+                x: delta.x
+                y: delta.y
 
-                if collidedDelta.y isnt delta.y
-                    speed.y = 0
-                    delta.y = collidedDelta.y
-                    continue if not @_character.isInMidAir()
+            if @_character.direction is "left"
+                for surface in @_surfaces
+                    newDelta.x = @_character.collidesLeftWith surface, delta.x
+                    if newDelta.x != delta.x
+                        @_character.stop()
+                        break
 
-                if collidedDelta.x isnt delta.x
-                    speed.x = 0
-                    delta.x = collidedDelta.x
+            else if @_character.direction is "right"
+                for surface in @_surfaces
+                    newDelta.x = @_character.collidesRightWith surface, delta.x
+                    if newDelta.x != delta.x
+                        @_character.stop()
+                        break
 
-            @_character.moveBy delta
+            # Jumping
+            if @_character.isJumping()
+                for surface in @_surfaces
+                    newDelta.y = @_character.collidesTopWith surface, delta.y
+                    if newDelta.y != delta.y
+                        @_character.falling()
+                        break
+
+            # Falling
+            else
+                for surface in @_surfaces
+                    newDelta.y = @_character.collidesBottomWith surface, delta.y
+                    if newDelta.y != delta.y
+                        speed.y = 0
+                        break
+
+            @_character.moveBy newDelta
             @_character.setSpeed speed
             @_character.update deltaTime
 

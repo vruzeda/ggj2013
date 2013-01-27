@@ -24,7 +24,7 @@ define [], ->
             pumpedMoveSpeed:  300
 
             nerfedJumpSpeed:  200
-            regularJumpSpeed: 250
+            regularJumpSpeed: 500
             pumpedJumpSpeed:  300
 
             heartAttack:   140

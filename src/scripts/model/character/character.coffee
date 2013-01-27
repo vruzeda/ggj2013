@@ -71,6 +71,7 @@ define [
                 when "crouching" then @setState "movingCrouching"
                 else return
 
+            @direction = direction
             speedX = CHARACTER["#{@_pulse}MoveSpeed"]
             speedX = -CHARACTER["#{@_pulse}MoveSpeed"] if direction is "left"
 
@@ -100,7 +101,7 @@ define [
                 @setSpeed x: speed.x, y: -CHARACTER["#{@_pulse}JumpSpeed"]
 
         falling: ->
-            @setState "falling"
+            @setState "falling" if not @_state is "falling"
 
         fall: ->
             if @isInMidAir()
@@ -134,7 +135,10 @@ define [
             #     @setState "standing"
 
         isInMidAir: ->
-            @_state is "jumping" or @_state is "movingJumping" or @_state is "falling"
+            @_state is "jumping" or @_state is "movingJumping" or @_state is "falling" or @_state is "movingFalling"
+
+        isJumping: ->
+            @_state is "jumping" or @_state is "movingJumping"
 
         isCaptured: ->
             @_state is "captured"
