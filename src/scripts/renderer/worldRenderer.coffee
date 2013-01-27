@@ -1,7 +1,10 @@
 define [
     "kinetic"
     "framework/imageLoader"
-], (Kinetic, ImageLoader) ->
+    "model/constants"
+], (Kinetic, ImageLoader, Constants) ->
+
+    {GAME_RESOLUTION} = Constants
 
     class WorldRenderer
 
@@ -14,21 +17,22 @@ define [
                 image: ImageLoader.getImage "background"
 
             # TODO Parallax
+            character = world.getCharacter()
+            characterPosition = character.getPosition()
+            deltaX = ((GAME_RESOLUTION.width - character.getWidth()) / 2) - characterPosition.x
 
             for surface in world.getSurfaces()
                 surfacePosition = surface.getPosition()
                 @_layer.add new Kinetic.Image
                     image: ImageLoader.getImage surface.getImageName()
-                    x: surfacePosition.x
+                    x: surfacePosition.x + deltaX
                     y: surfacePosition.y
                     width: surface.getWidth()
                     height: surface.getHeight()
 
-            character = world.getCharacter()
-            characterPosition = character.getPosition()
             @_layer.add new Kinetic.Image
                 image: ImageLoader.getImage character.getImageName()
-                x: characterPosition.x
+                x: characterPosition.x + deltaX
                 y: characterPosition.y
                 width: character.getWidth()
                 height: character.getHeight()

@@ -17,17 +17,21 @@ define [
             table = new Table
             table.setPosition x: TABLE.x, y: TABLE.y
 
+            table2 = new Table
+            table2.setPosition x: TABLE.x + TABLE.width, y: TABLE.y
+
             book = new MediumObstacle
-            book.setPosition x: 300, y: TABLE.y - 200
+            book.setPosition x: 600, y: TABLE.y - 200
 
             book2 = new MediumObstacle
-            book2.setPosition x: 500, y: TABLE.y - 200
+            book2.setPosition x: 800, y: TABLE.y - 200
 
             book3 = new MediumObstacle
-            book3.setPosition x: 500, y: TABLE.y - 400
+            book3.setPosition x: 800, y: TABLE.y - 400
 
             @_surfaces = []
             @_surfaces.push table
+            @_surfaces.push table2
             @_surfaces.push book
             @_surfaces.push book2
             @_surfaces.push book3
