@@ -55,16 +55,18 @@ define [
                     warmingRight_pumped:   "images/character/pumped/warmingRight.png"
 
                 OBJECTS:
-                    becker:     "images/objects/becker.png"
-                    bookPile:   "images/objects/bookPile.png"
-                    books:      "images/objects/books.png"
-                    bureta:     "images/objects/bureta.png"
-                    conico:     "images/objects/conico.png"
-                    redondo:    "images/objects/roundOne.png"
-                    support:    "images/objects/support.png"
-                    microscope: "images/objects/microscope.png"
-                    tripe:      "images/objects/tripe.png"
-                    tubes:      "images/objects/tubes.png"
+                    becker:             "images/objects/becker.png"
+                    bookPile:           "images/objects/bookPile.png"
+                    books:              "images/objects/books.png"
+                    bureta:             "images/objects/bureta.png"
+                    conico:             "images/objects/conico.png"
+                    redondo:            "images/objects/roundOne.png"
+                    support:            "images/objects/support.png"
+                    microscope:         "images/objects/microscope.png"
+                    tripe:              "images/objects/tripe.png"
+                    frascoTripe:        "images/objects/frascoTripe.png"
+                    tubes:              "images/objects/tubes.png"
+                    tubesStructure:     "images/objects/tubesStructure.png"
 
                 SCIENTIST:
                     scientist:  "images/enemy/scientist.png"

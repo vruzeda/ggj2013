@@ -39,6 +39,15 @@ define [
                     width: surface.getWidth()
                     height: surface.getHeight()
 
+            for frontDecoration in world.getFrontDecorations()
+                frontDecorationPosition = frontDecoration.getPosition()
+                @_layer.add new Kinetic.Image
+                    image: ImageLoader.getImage frontDecoration.getImageName()
+                    x: frontDecorationPosition.x + deltaX
+                    y: frontDecorationPosition.y
+                    width: frontDecoration.getWidth()
+                    height: frontDecoration.getHeight()
+
             @_layer.add new Kinetic.Image
                 image: ImageLoader.getImage character.getImageName()
                 x: characterPosition.x + deltaX

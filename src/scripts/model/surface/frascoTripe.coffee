@@ -3,14 +3,14 @@ define [
     "model/surface/surface"
 ], (Constants, Surface) ->
 
-    class Tubes extends Surface
+    class FrascoTripe extends Surface
 
         constructor: ->
-            super 400, 350
+            super 400, 520
 
         getImageName: ->
-            "tubes"
+            "frascoTripe"
 
 
 
-    return Tubes
+    return FrascoTripe

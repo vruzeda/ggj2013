@@ -17,8 +17,7 @@ define [
         update: (deltaTime) ->
             position = @getPosition()
             @setPosition x: position.x + @_speed*deltaTime, y: position.y
-            if @_speed < SCIENTIST.maxSpeed
-                @_speed += SCIENTIST.aceleration
+            @_speed = Math.max (SCIENTIST.maxSpeed, @_speed + SCIENTIST.aceleration*deltaTime)
 
 
 

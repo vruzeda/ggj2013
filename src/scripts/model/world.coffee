@@ -9,9 +9,12 @@ define [
     "model/surface/bookPile"
     "model/surface/bureta"
     "model/surface/tubes"
+    "model/surface/frascoTripe"
     "model/decoration/microscope"
     "model/decoration/scientist"
-], (Constants, Character, Table, Ceil, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes, Microscope, Scientist) ->
+    "model/decoration/tubesStructure"
+    "model/decoration/tripe"
+], (Constants, Character, Table, Ceil, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes, FrascoTripe, Microscope, Scientist, TubesStructure, Tripe) ->
 
     {CHARACTER, TABLE, CEIL, SCIENTIST} = Constants
 
@@ -23,6 +26,7 @@ define [
 
             @_surfaces = []
             @_decorations = []
+            @_frontDecorations = []
 
             # create tables
             for i in [0..6]
@@ -53,9 +57,15 @@ define [
             @_surfaces.push books3
             lastPosition += 1230
 
-            books4 = new Books # placeholder for tripé
-            books4.setPosition x: lastPosition + 1200, y: TABLE.y - 180
-            @_surfaces.push books4
+            @_character.setPosition x: CHARACTER.x + lastPosition, y: CHARACTER.y
+
+            tripe = new Tripe
+            tripe.setPosition x: lastPosition + 1180, y: TABLE.y - 180
+            @_frontDecorations.push tripe
+
+            frascoTripe = new FrascoTripe
+            frascoTripe.setPosition x: lastPosition + 1200, y: TABLE.y - 620
+            @_surfaces.push frascoTripe
             lastPosition += 1200
 
             bureta = new Bureta
@@ -82,6 +92,10 @@ define [
             @_surfaces.push books6
             lastPosition += 600
 
+            tubeStructure = new TubesStructure
+            tubeStructure.setPosition x: lastPosition + 900, y: TABLE.y - 360
+            @_decorations.push tubeStructure
+
             tubes = new Tubes
             tubes.setPosition x: lastPosition + 900, y: TABLE.y - 360
             @_surfaces.push tubes
@@ -101,11 +115,6 @@ define [
             becker6.setPosition x: lastPosition, y: TABLE.y - 540
             @_surfaces.push becker6
 
-            books7 = new Books # placeholder for microscope
-            books7.setPosition x: lastPosition + 500, y: TABLE.y - 180
-            @_surfaces.push books7
-            lastPosition += 500
-
             bookPile2 = new BookPile
             bookPile2.setPosition x: lastPosition + 1150, y: TABLE.y - 360
             @_surfaces.push bookPile2
@@ -116,10 +125,18 @@ define [
             @_surfaces.push bureta3
             lastPosition += 700
 
-            books8 = new Books # placeholder for tripé
-            books8.setPosition x: lastPosition + 600, y: TABLE.y - 180
-            @_surfaces.push books8
+            tripe2 = new Tripe
+            tripe2.setPosition x: lastPosition + 580, y: TABLE.y - 180
+            @_frontDecorations.push tripe2
+
+            frascoTripe2 = new FrascoTripe
+            frascoTripe2.setPosition x: lastPosition + 600, y: TABLE.y - 620
+            @_surfaces.push frascoTripe2
             lastPosition += 600
+
+            tubeStructure2 = new TubesStructure
+            tubeStructure2.setPosition x: lastPosition + 900, y: TABLE.y - 360
+            @_decorations.push tubeStructure2
 
             tubes2 = new Tubes
             tubes2.setPosition x: lastPosition + 900, y: TABLE.y - 360
@@ -182,7 +199,7 @@ define [
             @_character.moveBy newDelta
             @_character.setSpeed speed
             @_character.update deltaTime
-            @_scientist.update deltaTime
+            @_scientist.update deltaTimeInSeconds
 
             charPos = @_character.getPosition()
             scientistPos = @_scientist.getPosition()
@@ -198,6 +215,9 @@ define [
 
         getDecorations: ->
             @_decorations
+
+        getFrontDecorations: ->
+            @_frontDecorations
 
 
     return World

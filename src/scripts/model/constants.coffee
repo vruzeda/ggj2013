@@ -49,13 +49,13 @@ define [], ->
             y: -90
 
         SCIENTIST:
-            width: 869
-            height: 1107
+            width: 1304
+            height: 1909
             x: -600
             y: -300
-            speed: 0.1
-            aceleration: 0.0001
-            maxSpeed: 3
+            speed: 100
+            aceleration: 10
+            maxSpeed: 200
 
 
 
