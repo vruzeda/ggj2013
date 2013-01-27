@@ -112,7 +112,6 @@ define [
             becker4.setPosition x: lastPosition + 800, y: TABLE.y - 180
             @_surfaces.push becker4
             lastPosition += 800
-            @_character.setPosition x: CHARACTER.x + lastPosition, y: CHARACTER.y
 
             support2 = new Support
             support2.setPosition x: lastPosition + 600, y: TABLE.y - 550
