@@ -12,7 +12,7 @@ define [], ->
             width:  153
             height: 144
 
-            x: 10
+            x: 210
             y: 10
 
             nerfedHeartBeat:  50

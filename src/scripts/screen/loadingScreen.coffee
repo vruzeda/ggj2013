@@ -39,12 +39,25 @@ define [
                     falling_regular_image:        "images/fallingRegularCharacter.png"
                     movingFalling_regular_image:  "images/fallingRegularCharacter.png"
 
+                OBJECTS:
+                    becker:     "images/objects/becker.png"
+                    bookPile:   "images/objects/bookPile.png"
+                    books:      "images/objects/books.png"
+                    bureta:     "images/objects/bureta.png"
+                    conico:     "images/objects/conico.png"
+                    redondo:    "images/objects/roundOne.png"
+                    support:    "images/objects/support.png"
+                    telescopio: "images/objects/telescopio.png"
+                    tripe:      "images/objects/tripe.png"
+                    tubes:      "images/objects/tubes.png"
+
+
                     # warmingLeftRegularCharacter:  "images/warmingLeftRegularCharacter.png"
                     # warmingRightRegularCharacter: "images/warmingRightRegularCharacter.png"
 
             setTimeout =>
                 ImageLoader.loadImages
-                    list: ["MAIN_SCREEN", "GAME_SCREEN"]
+                    list: ["MAIN_SCREEN", "GAME_SCREEN", "OBJECTS"]
 
                     progressCallback: (total, complete, success) =>
                         text.setText "Loading (#{Math.round complete / total * 100}%)"

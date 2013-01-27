@@ -3,14 +3,14 @@ define [
     "model/surface/surface"
 ], (Constants, Surface) ->
 
-    class MediumObstacle extends Surface
+    class Books extends Surface
 
         constructor: ->
-            super 205, 180
+            super 590, 180
 
         getImageName: ->
             "books"
 
 
 
-    return MediumObstacle
+    return Books
