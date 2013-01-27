@@ -93,7 +93,7 @@ define [], ->
 
             if thatTR.y <= thisBL.y <= thatBR.y
                 if thatTL.x <= thisBL.x <= thatBR.x or thatTL.x <= thisBR.x <= thatBR.x
-                    deltaY = thatTR.y - thisBR.y
+                    deltaY = (thatTR.y - 0.1) - thisBR.y
 
             return deltaY
 
