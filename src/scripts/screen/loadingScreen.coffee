@@ -32,6 +32,7 @@ define [
                 GAME_SCREEN:
                     background:                   "images/background.png"
                     table:                        "images/table.png"
+                    ceil:                         "images/ceil.png"
 
                 CHARACTER_REGULAR:
                     standing_regular:      "images/character/regular/standing.png"
@@ -61,9 +62,13 @@ define [
                     conico:     "images/objects/conico.png"
                     redondo:    "images/objects/roundOne.png"
                     support:    "images/objects/support.png"
-                    telescopio: "images/objects/telescopio.png"
+                    microscope: "images/objects/microscope.png"
                     tripe:      "images/objects/tripe.png"
                     tubes:      "images/objects/tubes.png"
+
+                SCIENTIST:
+                    scientist:  "images/enemy/scientist.png"
+                    arm:        "images/enemy/arm.png"
 
 
             setTimeout =>

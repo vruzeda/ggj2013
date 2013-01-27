@@ -21,6 +21,15 @@ define [
             characterPosition = character.getPosition()
             deltaX = ((GAME_RESOLUTION.width - character.getWidth()) / 2) - characterPosition.x
 
+            for decoration in world.getDecorations()
+                decorationPosition = decoration.getPosition()
+                @_layer.add new Kinetic.Image
+                    image: ImageLoader.getImage decoration.getImageName()
+                    x: decorationPosition.x + deltaX
+                    y: decorationPosition.y
+                    width: decoration.getWidth()
+                    height: decoration.getHeight()
+
             for surface in world.getSurfaces()
                 surfacePosition = surface.getPosition()
                 @_layer.add new Kinetic.Image

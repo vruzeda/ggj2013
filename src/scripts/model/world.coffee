@@ -2,15 +2,18 @@ define [
     "model/constants"
     "model/character/character"
     "model/surface/table"
+    "model/surface/ceil"
     "model/surface/mediumObstacle"
     "model/surface/becker"
     "model/surface/books"
     "model/surface/bookPile"
     "model/surface/bureta"
     "model/surface/tubes"
-], (Constants, Character, Table, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes) ->
+    "model/decoration/microscope"
+    "model/decoration/scientist"
+], (Constants, Character, Table, Ceil, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes, Microscope, Scientist) ->
 
-    {CHARACTER, TABLE} = Constants
+    {CHARACTER, TABLE, CEIL, SCIENTIST} = Constants
 
     class World
 
@@ -19,12 +22,16 @@ define [
             @_character.setPosition x: CHARACTER.x, y: CHARACTER.y
 
             @_surfaces = []
+            @_decorations = []
 
             # create tables
-            for i in [0..11]
+            for i in [0..6]
                 table = new Table
                 table.setPosition x: TABLE.x + i*TABLE.width, y: TABLE.y
                 @_surfaces.push table
+                ceil = new Ceil
+                ceil.setPosition x: TABLE.x + i*CEIL.width, y: CEIL.y
+                @_surfaces.push ceil
 
             becker = new Becker
             becker.setPosition x: 600, y: TABLE.y - 180
@@ -36,15 +43,10 @@ define [
             @_surfaces.push books
             lastPosition += 600
 
-            books2 = new Books # just for the jump
-            books2.setPosition x: lastPosition + 600, y: TABLE.y - 180
-            @_surfaces.push books2
-            lastPosition += 600
-
             bookPile = new BookPile
-            bookPile.setPosition x: lastPosition + 550, y: TABLE.y - 360
+            bookPile.setPosition x: lastPosition + 1150, y: TABLE.y - 360
             @_surfaces.push bookPile
-            lastPosition += 550
+            lastPosition += 1150
 
             books3 = new Books
             books3.setPosition x: lastPosition + 1230, y: TABLE.y - 180
@@ -61,15 +63,10 @@ define [
             @_surfaces.push bureta
             lastPosition += 1000
 
-            books5 = new Books # just for the jump
-            books5.setPosition x: lastPosition + 500, y: TABLE.y - 180
-            @_surfaces.push books5
-            lastPosition += 500
-
             bureta2 = new Bureta
-            bureta2.setPosition x: lastPosition + 500, y: TABLE.y - 360
+            bureta2.setPosition x: lastPosition + 1000, y: TABLE.y - 360
             @_surfaces.push bureta2
-            lastPosition += 500
+            lastPosition += 1000
 
             becker2 = new Becker # falta colocar o support aqui
             becker2.setPosition x: lastPosition + 600, y: TABLE.y - 360
@@ -129,6 +126,15 @@ define [
             @_surfaces.push tubes2
             lastPosition += 900
 
+            @_scientist = new Scientist
+            @_scientist.setPosition x: SCIENTIST.x, y: SCIENTIST.y
+            @_decorations.push @_scientist
+
+            microscope = new Microscope
+            microscope.setPosition x: 100, y: TABLE.y - 540
+            @_decorations.push microscope
+
+
         update: (deltaTime) ->
             deltaTimeInSeconds = deltaTime / 1000
 
@@ -176,12 +182,22 @@ define [
             @_character.moveBy newDelta
             @_character.setSpeed speed
             @_character.update deltaTime
+            @_scientist.update deltaTime
+
+            charPos = @_character.getPosition()
+            scientistPos = @_scientist.getPosition()
+
+            if charPos.x <= scientistPos.x + (SCIENTIST.width/3)
+                console.log "dead"
 
         getCharacter: ->
             @_character
 
         getSurfaces: ->
             @_surfaces
+
+        getDecorations: ->
+            @_decorations
 
 
     return World

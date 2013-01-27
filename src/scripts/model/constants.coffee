@@ -13,7 +13,7 @@ define [], ->
             height: 144
 
             x: 210
-            y: 10
+            y: 200
 
             nerfedHeartBeat:  50
             regularHeartBeat: 80
@@ -35,11 +35,28 @@ define [], ->
             heatRaiseDecerementByTime: 0.02
 
         TABLE:
-            width:  1280
+            width:  2646
             height: 90
 
             x: 0
             y: 630
+
+        CEIL:
+            width:  2000
+            height: 90
+
+            x: 0
+            y: -90
+
+        SCIENTIST:
+            width: 869
+            height: 1107
+            x: -600
+            y: -300
+            speed: 0.1
+            aceleration: 0.0001
+            maxSpeed: 3
+
 
 
 
