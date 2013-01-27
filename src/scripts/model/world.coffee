@@ -14,7 +14,8 @@ define [
     "model/decoration/scientist"
     "model/decoration/tubesStructure"
     "model/decoration/tripe"
-], (Constants, Character, Table, Ceil, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes, FrascoTripe, Microscope, Scientist, TubesStructure, Tripe) ->
+    "model/decoration/support"
+], (Constants, Character, Table, Ceil, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes, FrascoTripe, Microscope, Scientist, TubesStructure, Tripe, Support) ->
 
     {CHARACTER, TABLE, CEIL, SCIENTIST} = Constants
 
@@ -37,6 +38,10 @@ define [
                 ceil.setPosition x: TABLE.x + i*CEIL.width, y: CEIL.y
                 @_surfaces.push ceil
 
+            @_scientist = new Scientist
+            @_scientist.setPosition x: SCIENTIST.x, y: SCIENTIST.y
+            @_decorations.push @_scientist
+
             becker = new Becker
             becker.setPosition x: 600, y: TABLE.y - 180
             @_surfaces.push becker
@@ -57,8 +62,6 @@ define [
             @_surfaces.push books3
             lastPosition += 1230
 
-            @_character.setPosition x: CHARACTER.x + lastPosition, y: CHARACTER.y
-
             tripe = new Tripe
             tripe.setPosition x: lastPosition + 1180, y: TABLE.y - 180
             @_frontDecorations.push tripe
@@ -78,13 +81,17 @@ define [
             @_surfaces.push bureta2
             lastPosition += 1000
 
-            becker2 = new Becker # falta colocar o support aqui
-            becker2.setPosition x: lastPosition + 600, y: TABLE.y - 360
+            support = new Support
+            support.setPosition x: lastPosition + 600, y: TABLE.y - 550
+            @_decorations.push support
+
+            becker2 = new Becker
+            becker2.setPosition x: lastPosition + 600, y: TABLE.y - 310
             @_surfaces.push becker2
             lastPosition += 600
 
-            becker3 = new Becker # falta colocar o support aqui
-            becker3.setPosition x: lastPosition, y: TABLE.y - 540
+            becker3 = new Becker
+            becker3.setPosition x: lastPosition, y: TABLE.y - 485
             @_surfaces.push becker3
 
             books6 = new Books # placeholder for microscope
@@ -97,7 +104,7 @@ define [
             @_decorations.push tubeStructure
 
             tubes = new Tubes
-            tubes.setPosition x: lastPosition + 900, y: TABLE.y - 360
+            tubes.setPosition x: lastPosition + 900, y: TABLE.y - 370
             @_surfaces.push tubes
             lastPosition += 900
 
@@ -105,14 +112,19 @@ define [
             becker4.setPosition x: lastPosition + 800, y: TABLE.y - 180
             @_surfaces.push becker4
             lastPosition += 800
+            @_character.setPosition x: CHARACTER.x + lastPosition, y: CHARACTER.y
+
+            support2 = new Support
+            support2.setPosition x: lastPosition + 600, y: TABLE.y - 550
+            @_decorations.push support2
 
             becker5 = new Becker # falta colocar o support aqui
-            becker5.setPosition x: lastPosition + 600, y: TABLE.y - 360
+            becker5.setPosition x: lastPosition + 600, y: TABLE.y - 310
             @_surfaces.push becker5
             lastPosition += 600
 
             becker6 = new Becker # falta colocar o support aqui
-            becker6.setPosition x: lastPosition, y: TABLE.y - 540
+            becker6.setPosition x: lastPosition, y: TABLE.y - 485
             @_surfaces.push becker6
 
             bookPile2 = new BookPile
@@ -142,10 +154,6 @@ define [
             tubes2.setPosition x: lastPosition + 900, y: TABLE.y - 360
             @_surfaces.push tubes2
             lastPosition += 900
-
-            @_scientist = new Scientist
-            @_scientist.setPosition x: SCIENTIST.x, y: SCIENTIST.y
-            @_decorations.push @_scientist
 
             microscope = new Microscope
             microscope.setPosition x: 100, y: TABLE.y - 540
