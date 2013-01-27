@@ -26,8 +26,7 @@ define [
             ImageLoader.addToList
                 MAIN_SCREEN:
                     startGameButton: "images/startGameButton.png"
-                    optionsButton:   "images/optionsButton.png"
-                    background:      "images/background.png"
+                    mainBackground:  "images/startBackground.png"
 
                 GAME_SCREEN:
                     background: "images/background.png"
@@ -83,6 +82,10 @@ define [
                     frascoTripe:        "images/objects/frascoTripe.png"
                     tubes:              "images/objects/tubes.png"
                     tubesStructure:     "images/objects/tubesStructure.png"
+                    locker:             "images/objects/locker.png"
+                    endingWindow:       "images/objects/endingWindow.png"
+                    windowBase:         "images/objects/windowBase.png"
+                    light:              "images/objects/light.png"
 
                 SCIENTIST:
                     scientist:  "images/enemy/scientist.png"
@@ -98,8 +101,7 @@ define [
                         @redraw()
 
                     completeCallback: =>
-                        @_game.showScreen new MainScreen @_game
-                        @_game.hideScreen @
+                        @_game.switchScreen @, new MainScreen @_game
             , 500
 
         _constructInputEvents: (inputController) ->

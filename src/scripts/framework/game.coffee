@@ -21,6 +21,10 @@ define [
         getInputController: ->
             InputController.getInstance @_containerId
 
+        switchScreen: (oldScreen, newScreen) ->
+            @showScreen newScreen
+            @hideScreen oldScreen
+
         showScreen: (screen) ->
             @_stage.add screen.getLayer()
             screen.init()

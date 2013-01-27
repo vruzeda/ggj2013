@@ -7,12 +7,14 @@ define [], ->
 
         WORLD:
             gravity: 1000
+            endOfGame: 13500
+            gameWin: 14600
 
         CHARACTER:
             width:  153
             height: 144
 
-            x: 210
+            x: 230
             y: 200
 
             cardiacArrestHeartBeat: 20
@@ -40,7 +42,7 @@ define [], ->
             y: 630
 
         CEIL:
-            width:  2000
+            width:  2646
             height: 90
 
             x: 0

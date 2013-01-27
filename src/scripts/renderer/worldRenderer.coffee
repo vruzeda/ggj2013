@@ -4,7 +4,7 @@ define [
     "model/constants"
 ], (Kinetic, ImageLoader, Constants) ->
 
-    {GAME_RESOLUTION} = Constants
+    {GAME_RESOLUTION, WORLD} = Constants
 
     class WorldRenderer
 
@@ -19,7 +19,10 @@ define [
 
             character = world.getCharacter()
             characterPosition = character.getPosition()
+
             deltaX = ((GAME_RESOLUTION.width - character.getWidth()) / 2) - characterPosition.x
+            if deltaX > 300 then deltaX = 300
+            if deltaX < -WORLD.endOfGame then deltaX = -WORLD.endOfGame
 
             for decoration in world.getDecorations()
                 decorationPosition = decoration.getPosition()
@@ -39,6 +42,13 @@ define [
                     width: surface.getWidth()
                     height: surface.getHeight()
 
+            @_layer.add new Kinetic.Image
+                image: ImageLoader.getImage character.getImageName()
+                x: characterPosition.x + deltaX
+                y: characterPosition.y
+                width: character.getWidth()
+                height: character.getHeight()
+
             for frontDecoration in world.getFrontDecorations()
                 frontDecorationPosition = frontDecoration.getPosition()
                 @_layer.add new Kinetic.Image
@@ -48,12 +58,6 @@ define [
                     width: frontDecoration.getWidth()
                     height: frontDecoration.getHeight()
 
-            @_layer.add new Kinetic.Image
-                image: ImageLoader.getImage character.getImageName()
-                x: characterPosition.x + deltaX
-                y: characterPosition.y
-                width: character.getWidth()
-                height: character.getHeight()
 
             characterHeartBeat = character.getHeartBeat()
             @_layer.add new Kinetic.Text

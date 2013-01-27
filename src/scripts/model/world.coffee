@@ -10,14 +10,18 @@ define [
     "model/surface/bureta"
     "model/surface/tubes"
     "model/surface/frascoTripe"
+    "model/surface/windowBase"
     "model/decoration/microscope"
     "model/decoration/scientist"
     "model/decoration/tubesStructure"
     "model/decoration/tripe"
     "model/decoration/support"
-], (Constants, Character, Table, Ceil, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes, FrascoTripe, Microscope, Scientist, TubesStructure, Tripe, Support) ->
+    "model/decoration/locker"
+    "model/decoration/endingWindow"
+    "model/decoration/light"
+], (Constants, Character, Table, Ceil, MediumObstacle, Becker, Books, BookPile, Bureta, Tubes, FrascoTripe, WindowBase, Microscope, Scientist, TubesStructure, Tripe, Support, Locker, EndingWindow, Light) ->
 
-    {CHARACTER, TABLE, CEIL, SCIENTIST} = Constants
+    {CHARACTER, TABLE, CEIL, SCIENTIST, GAME, WORLD, GAME_RESOLUTION} = Constants
 
     class World
 
@@ -41,6 +45,22 @@ define [
             @_scientist = new Scientist
             @_scientist.setPosition x: SCIENTIST.x, y: SCIENTIST.y
             @_decorations.push @_scientist
+
+            locker = new Locker
+            locker.setPosition x: -330, y: 0
+            @_surfaces.push locker
+
+            endingWindow = new EndingWindow
+            endingWindow.setPosition x: WORLD.endOfGame + 880, y: 0
+            @_decorations.push endingWindow
+
+            windowBase = new WindowBase # placeholder for microscopio
+            windowBase.setPosition x: WORLD.endOfGame + 1210, y: 330
+            @_surfaces.push windowBase
+
+            light = new Light
+            light.setPosition x: WORLD.endOfGame + 625, y: 40
+            @_frontDecorations.push light
 
             becker = new Becker
             becker.setPosition x: 600, y: TABLE.y - 180
@@ -158,6 +178,7 @@ define [
             microscope.setPosition x: 100, y: TABLE.y - 540
             @_decorations.push microscope
 
+            @_character.setPosition x: CHARACTER.x + lastPosition, y: CHARACTER.y
 
         update: (deltaTime) ->
             deltaTimeInSeconds = deltaTime / 1000
@@ -211,6 +232,8 @@ define [
             charPos = @_character.getPosition()
             scientistPos = @_scientist.getPosition()
 
+            if charPos.x >= WORLD.gameWin
+                console.log "win!"
             if charPos.x <= scientistPos.x + (SCIENTIST.width/3)
                 console.log "dead"
 
