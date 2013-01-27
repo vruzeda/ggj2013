@@ -9,18 +9,20 @@ define [
 
         constructor: ->
             super CHARACTER.width, CHARACTER.height
-            @_heartRate = CHARACTER.regularHeartBeat
 
             @setState "standing"
             @setPulse "regular"
+
+        getHeartBeat: ->
+            @_heartRate
 
         resetHeartBeat: ->
             @_heartRate = CHARACTER["#{@_pulse}HeartBeat"]
 
         increaseHeartBeat: ->
-            @_heartRate += CHARACTER.heartRaiseIncrement
+            @_heartRate += CHARACTER.heartBeatIncrement
 
-            if @_heartRate >= CHARACTER.heartAttack
+            if @_heartRate >= CHARACTER.heartAttackHeartBeat
                 @setState "captured"
                 @setPulse "heartAttack"
 
@@ -30,10 +32,10 @@ define [
             else if @_heartRate >= CHARACTER.regularHeartBeat
                 @setPulse "regular"
 
-        decreaseHeartBeat: (deltaTime)->
-            @_heartRate -= CHARACTER.heartRaiseDecrementByTime * deltaTime
+        decreaseHeartBeat: (deltaTime) ->
+            @_heartRate -= CHARACTER.heatBeatDecerementByTime * deltaTime
 
-            if @_heartRate <= CHARACTER.cardiacArrest
+            if @_heartRate <= CHARACTER.cardiacArrestHeartBeat
                 @setState "captured"
                 @setPulse "cardiacArrest"
 
@@ -43,26 +45,30 @@ define [
             else if @_heartRate <= CHARACTER.regularHeartBeat
                 @setPulse "regular"
 
-        setPulse: (@_pulse) ->
-            console.debug "Pulse: #{@_pulse}"
+        setPulse: (pulse) ->
+            if @_pulse isnt pulse
+                @_pulse = pulse
+                console.debug "Pulse: #{@_pulse}"
+                @resetHeartBeat()
 
-        setState: (@_state) ->
-            console.debug "State: #{@_state}"
+        setState: (state) ->
+            if @_state isnt state
+                @_state = state
+                console.debug "State: #{@_state}"
 
         getImageName: ->
             "#{@_state}_#{@_pulse}"
 
         update: (deltaTime) ->
+            if @isStanding()
+                @decreaseHeartBeat deltaTime
+
             speed = @getSpeed()
 
-            if speed.x == 0
-                @stop()
+            if @isMoving() and speed.x == 0 then @stop()
 
-            if speed.y == 0
-                @fall()
-
-            else if speed.y > 0
-                @falling()
+            if @isJumping() and speed.y >= 0 then @falling()
+            else if @isFalling() and speed.y == 0 then @fall()
 
         move: (direction) ->
             switch @_state
@@ -91,29 +97,51 @@ define [
             @setSpeed x: 0, y: speed.y
 
         crouch: ->
-            if @_pulse is "nerfed"
-                @setState "crouching"
+            if @isHeartNerfed() and not @isInMidAir() and not @isCrouching()
+                @setHeight @getHeight() / 2
+
+                if @isMoving()
+                    @setState "movingCrouching"
+                else
+                    @setState "crouching"
+
+        raise: ->
+            if @isCrouching()
+                @setHeight @getHeight() * 2
+
+                if @isMoving()
+                    @setState "moving"
+                else
+                    @setState "standing"
 
         jump: ->
-            if @_pulse isnt "nerfed" and not @isInMidAir()
-                @setState "jumping"
+            if not @isInMidAir() and not @isCrouching()
+                if @isMoving()
+                    @setState "movingJumping"
+                else
+                    @setState "jumping"
 
                 speed = @getSpeed()
                 @setSpeed x: speed.x, y: -CHARACTER["#{@_pulse}JumpSpeed"]
 
         falling: ->
-            if @_state isnt "falling"
-                @setState "falling"
+            if not @isFalling()
+                if @isMoving()
+                    @setState "movingFalling"
+                else
+                    @setState "falling"
 
         fall: ->
-            if @isInMidAir()
-                @setState "standing"
+            switch @_state
+                when "falling"       then @setState "standing"
+                when "movingFalling" then @setState "moving"
+                else return
 
-                speed = @getSpeed()
-                @setSpeed x: speed.x, y: 0
+            speed = @getSpeed()
+            @setSpeed x: speed.x, y: 0
 
         warmLeft: ->
-            if @_state is "standing"
+            if @isStanding()
                 @setState "warmingLeft"
 
             else if @_state is "warmingRight"
@@ -124,7 +152,7 @@ define [
                 @unwarm()
 
         warmRight: ->
-            if @_state is "standing"
+            if @isStanding()
                 @setState "warmingRight"
 
             else if @_state is "warmingLeft"
@@ -136,16 +164,48 @@ define [
 
         unwarm: ->
             @resetHeartBeat()
-            @setState "standing"
+            @setState "standing" if @isWarming()
 
         isInMidAir: ->
-            @_state is "jumping" or @_state is "movingJumping" or @_state is "falling" or @_state is "movingFalling"
+            @isJumping() or @isFalling()
+
+        ##################
+        # State checkers #
+        ##################
+
+        isStanding: ->
+            @_state is "standing"
+
+        isMoving: ->
+            @_state in ["moving", "movingJumping", "movingFalling", "movingCrouching"]
 
         isJumping: ->
-            @_state is "jumping" or @_state is "movingJumping"
+            @_state in ["jumping", "movingJumping"]
+
+        isFalling: ->
+            @_state in ["falling", "movingFalling"]
+
+        isCrouching: ->
+            @_state in ["crouching", "movingCrouching"]
+
+        isWarming: ->
+            @_state in ["warmingLeft", "warmingRight"]
 
         isCaptured: ->
             @_state is "captured"
+
+        ##################
+        # Pulse checkers #
+        ##################
+
+        isHeartNerfed: ->
+            @_pulse is "nerfed"
+
+        isHeartRegular: ->
+            @_pulse is "regular"
+
+        isHeartPumped: ->
+            @_pulse is "pumped"
 
 
     return Character

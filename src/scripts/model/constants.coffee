@@ -15,9 +15,11 @@ define [], ->
             x: 210
             y: 200
 
-            nerfedHeartBeat:  50
-            regularHeartBeat: 80
-            pumpedHeartBeat:  110
+            cardiacArrestHeartBeat: 20
+            nerfedHeartBeat:        50
+            regularHeartBeat:       80
+            pumpedHeartBeat:        110
+            heartAttackHeartBeat:   140
 
             nerfedMoveSpeed:  200
             regularMoveSpeed: 350
@@ -27,12 +29,8 @@ define [], ->
             regularJumpSpeed: 650
             pumpedJumpSpeed:  900
 
-
-            heartAttack:   140
-            cardiacArrest: 20
-
-            heartRaiseIncrement: 5
-            heatRaiseDecerementByTime: 0.02
+            heartBeatIncrement: 5
+            heatBeatDecerementByTime: 0.006
 
         TABLE:
             width:  2646
@@ -56,8 +54,6 @@ define [], ->
             speed: 100
             aceleration: 10
             maxSpeed: 200
-
-
 
 
     return CONSTANTS

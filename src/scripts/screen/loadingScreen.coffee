@@ -30,29 +30,45 @@ define [
                     background:      "images/background.png"
 
                 GAME_SCREEN:
-                    background:                   "images/background.png"
-                    table:                        "images/table.png"
-                    ceil:                         "images/ceil.png"
+                    background: "images/background.png"
+                    table:      "images/table.png"
+                    ceil:       "images/ceil.png"
+
+                CHARACTER_NERFED:
+                    crouching_nerfed:       "images/character/nerfed/crouching.png"
+                    movingCrouching_nerfed: "images/character/nerfed/crouching.png"
+                    standing_nerfed:        "images/character/nerfed/standing.png"
+                    moving_nerfed:          "images/character/nerfed/walking.png"
+                    jumping_nerfed:         "images/character/nerfed/jumping.png"
+                    movingJumping_nerfed:   "images/character/nerfed/jumping.png"
+                    falling_nerfed:         "images/character/nerfed/falling.png"
+                    movingFalling_nerfed:   "images/character/nerfed/falling.png"
+                    warmingLeft_nerfed:     "images/character/nerfed/warmingLeft.png"
+                    warmingRight_nerfed:    "images/character/nerfed/warmingRight.png"
 
                 CHARACTER_REGULAR:
-                    standing_regular:      "images/character/regular/standing.png"
-                    moving_regular:        "images/character/regular/walking.png"
-                    jumping_regular:       "images/character/regular/jumping.png"
-                    movingJumping_regular: "images/character/regular/jumping.png"
-                    falling_regular:       "images/character/regular/falling.png"
-                    movingFalling_regular: "images/character/regular/falling.png"
-                    warmingLeft_regular:   "images/character/regular/warmingLeft.png"
-                    warmingRight_regular:  "images/character/regular/warmingRight.png"
+                    crouching_regular:       "images/character/regular/crouching.png"
+                    movingCrouching_regular: "images/character/regular/crouching.png"
+                    standing_regular:        "images/character/regular/standing.png"
+                    moving_regular:          "images/character/regular/walking.png"
+                    jumping_regular:         "images/character/regular/jumping.png"
+                    movingJumping_regular:   "images/character/regular/jumping.png"
+                    falling_regular:         "images/character/regular/falling.png"
+                    movingFalling_regular:   "images/character/regular/falling.png"
+                    warmingLeft_regular:     "images/character/regular/warmingLeft.png"
+                    warmingRight_regular:    "images/character/regular/warmingRight.png"
 
                 CHARACTER_PUMPED:
-                    standing_pumped:       "images/character/pumped/standing.png"
-                    moving_pumped:         "images/character/pumped/walking.png"
-                    jumping_pumped:        "images/character/pumped/jumping.png"
-                    movingJumping_pumped:  "images/character/pumped/jumping.png"
-                    falling_pumped:        "images/character/pumped/falling.png"
-                    movingFalling_pumped:  "images/character/pumped/falling.png"
-                    warmingLeft_pumped:    "images/character/pumped/warmingLeft.png"
-                    warmingRight_pumped:   "images/character/pumped/warmingRight.png"
+                    crouching_pumped:       "images/character/pumped/crouching.png"
+                    movingCrouching_pumped: "images/character/pumped/crouching.png"
+                    standing_pumped:        "images/character/pumped/standing.png"
+                    moving_pumped:          "images/character/pumped/walking.png"
+                    jumping_pumped:         "images/character/pumped/jumping.png"
+                    movingJumping_pumped:   "images/character/pumped/jumping.png"
+                    falling_pumped:         "images/character/pumped/falling.png"
+                    movingFalling_pumped:   "images/character/pumped/falling.png"
+                    warmingLeft_pumped:     "images/character/pumped/warmingLeft.png"
+                    warmingRight_pumped:    "images/character/pumped/warmingRight.png"
 
                 OBJECTS:
                     becker:             "images/objects/becker.png"
@@ -75,7 +91,7 @@ define [
 
             setTimeout =>
                 ImageLoader.loadImages
-                    list: ["MAIN_SCREEN", "GAME_SCREEN", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "OBJECTS"]
+                    list: ["MAIN_SCREEN", "GAME_SCREEN", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "OBJECTS", "SCIENTIST"]
 
                     progressCallback: (total, complete, success) =>
                         text.setText "Loading (#{Math.round complete / total * 100}%)"

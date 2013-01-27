@@ -72,9 +72,9 @@ define [
 
         onCrouch: (event) =>
             if event.type == 'keyup'
-                @_character.stop()
+                @_world.raiseCharacter()
             else
-                @_character.crouch()
+                @_world.crouchCharacter()
 
         onJump: (event) =>
             if event.type == 'keyup'

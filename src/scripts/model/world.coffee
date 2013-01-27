@@ -207,6 +207,20 @@ define [
             if charPos.x <= scientistPos.x + (SCIENTIST.width/3)
                 console.log "dead"
 
+        crouchCharacter: ->
+            @_character.crouch()
+
+        raiseCharacter: ->
+            @_character.raise()
+
+            for surface in @_surfaces
+                collided = @_character.collidesTopWith(surface, 0) != 0
+                if collided
+                    @_character.crouch()
+                    setTimeout =>
+                        @raiseCharacter()
+                    , 1
+
         getCharacter: ->
             @_character
 

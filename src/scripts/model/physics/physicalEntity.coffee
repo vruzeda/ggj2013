@@ -9,8 +9,16 @@ define [], ->
         getWidth: ->
             @_width
 
+        setWidth: (width) ->
+            @_position.x += (@_width - width) / 2
+            @_width = width
+
         getHeight: ->
             @_height
+
+        setHeight: (height) ->
+            @_position.y += @_height - height
+            @_height = height
 
         getPosition: ->
             x: @_position.x, y: @_position.y
@@ -101,8 +109,6 @@ define [], ->
         _topRight:    -> x: @_position.x + @_width, y: @_position.y
         _bottomLeft:  -> x: @_position.x,           y: @_position.y + @_height
         _bottomRight: -> x: @_position.x + @_width, y: @_position.y + @_height
-
-
 
 
     return PhysicalEntity

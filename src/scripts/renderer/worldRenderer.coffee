@@ -13,10 +13,10 @@ define [
         render: (world) ->
             @_layer.removeChildren()
 
+            # TODO Parallax
             @_layer.add new Kinetic.Image
                 image: ImageLoader.getImage "background"
 
-            # TODO Parallax
             character = world.getCharacter()
             characterPosition = character.getPosition()
             deltaX = ((GAME_RESOLUTION.width - character.getWidth()) / 2) - characterPosition.x
@@ -55,6 +55,14 @@ define [
                 width: character.getWidth()
                 height: character.getHeight()
 
+            characterHeartBeat = character.getHeartBeat()
+            @_layer.add new Kinetic.Text
+                text: Math.round characterHeartBeat
+                fontSize: 36
+                fontStyle: "bold"
+                fill: "white"
+
             @_layer.draw()
+
 
     return WorldRenderer
