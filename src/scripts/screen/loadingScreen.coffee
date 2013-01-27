@@ -26,16 +26,21 @@ define [
             ImageLoader.addToList
                 MAIN_SCREEN:
                     startGameButton: "images/startGameButton.png"
-                    optionsButton: "images/optionsButton.png"
-                    background: "images/background.png"
+                    optionsButton:   "images/optionsButton.png"
+                    background:      "images/background.png"
 
                 GAME_SCREEN:
-                    background: "images/background.png"
-                    table: "images/table.png"
-                    standingRegularCharacter:  "images/standingRegularCharacter.png"
-                    walkingRegularCharacter:   "images/walkingRegularCharacter.png"
-                    crouchingRegularCharacter: "images/crouchingRegularCharacter.png"
-                    jumpingRegularCharacter:   "images/jumpingRegularCharacter.png"
+                    background:                   "images/background.png"
+                    table:                        "images/table.png"
+                    standing_regular_image:       "images/standingRegularCharacter.png"
+                    moving_regular_image:         "images/walkingRegularCharacter.png"
+                    jumping_regular_image:        "images/jumpingRegularCharacter.png"
+                    movingJumping_regular_image:  "images/jumpingRegularCharacter.png"
+                    falling_regular_image:        "images/fallingRegularCharacter.png"
+                    movingFalling_regular_image:  "images/fallingRegularCharacter.png"
+
+                    # warmingLeftRegularCharacter:  "images/warmingLeftRegularCharacter.png"
+                    # warmingRightRegularCharacter: "images/warmingRightRegularCharacter.png"
 
             setTimeout =>
                 ImageLoader.loadImages

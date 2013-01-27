@@ -5,14 +5,27 @@ define [
 
     class JumpingRegularCharacterState extends CharacterState
 
+        constructor: ->
+            @_falling = false
+
         getImageName: ->
             "jumpingRegularCharacter"
 
         update: (character, deltaTime) ->
-            # positions
+            speed = character.getSpeed()
+
+            if not @_falling
+                @_falling = speed.y >= 0
+            else if speed.y == 0
+                StandingRegularCharacterState = require "model/character/regular/standingRegularCharacterState"
+                character.setState new StandingRegularCharacterState
 
         move: (character, direction) ->
-            character.setState new MovingJumpingRegularCharacterState @_direction
+            deltaSpeedX = if direction is "left" then -SPEEDS.regular else SPEEDS.regular
+
+            speed = character.getSpeed()
+            character.setSpeed x: speed.x + deltaSpeedX, y: speed.y
+            character.setState new MovingJumpingRegularCharacterState direction
 
         crouch: (character) ->
             # Can't crouch!

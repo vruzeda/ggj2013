@@ -1,29 +1,48 @@
 define [
-    "box2D"
     "model/constants"
     "model/character/character"
     "model/surface/table"
-], (Box2D, Constants, Character, Table) ->
+], (Constants, Character, Table) ->
 
-    {WORLD, PHYSICS_PARAMETERS} = Constants
+    {CHARACTER, TABLE} = Constants
 
     class World
 
-        constructor: ->
-            gravity = new Box2D.Common.Math.b2Vec2 0, WORLD.gravity
-            @_world = new Box2D.Dynamics.b2World gravity, true
-
-            @_character = new Character @_world
-            @_surfaces  = []
+        constructor: (@_gravity, @_width, @_height) ->
+            @_character = new Character
+            @_character.setPosition x: CHARACTER.x, y: CHARACTER.y
 
             # TODO Actually create a way to build the world
-            table = new Table @_world
-            table.setPosition {x: 0, y: 628}
+            table = new Table
+            table.setPosition x: TABLE.x, y: TABLE.y
 
+            @_surfaces = []
             @_surfaces.push table
 
         update: (deltaTime) ->
-            @_world.Step deltaTime, PHYSICS_PARAMETERS.velocityIterations, PHYSICS_PARAMETERS.positionIterations
+            deltaTimeInSeconds = deltaTime / 1000
+
+            speed = @_character.getSpeed()
+            speed.y += @_gravity * deltaTimeInSeconds
+
+            delta =
+                x: speed.x * deltaTimeInSeconds
+                y: speed.y * deltaTimeInSeconds
+
+            for surface in @_surfaces
+                collidedDelta = @_character.collidesWith surface, delta
+
+                if collidedDelta.y isnt delta.y
+                    speed.y = 0
+                    delta.y = collidedDelta.y
+                    continue if not @_character.isInMidAir()
+
+                if collidedDelta.x isnt delta.x
+                    speed.x = 0
+                    delta.x = collidedDelta.x
+
+            @_character.moveBy delta
+            @_character.setSpeed speed
             @_character.update deltaTime
 
         getCharacter: ->

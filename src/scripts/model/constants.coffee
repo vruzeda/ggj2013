@@ -5,37 +5,40 @@ define [], ->
             width: 1280
             height: 720
 
-        PHYSICS_PARAMETERS:
-            velocityIterations: 8
-            positionIterations: 3
-
         WORLD:
-            gravity: 10.0
-
-        SPEEDS:
-            nerfed: 200
-            walking: 250
-            pumped: 300
+            gravity: 500
 
         CHARACTER:
-            width: 0.05
-            height: 0.05
-            weight: 0.2
+            width:  153
+            height: 144
 
+            x: 10
+            y: 10
+
+            nerfedHeartBeat:  50
             regularHeartBeat: 80
-            pumpedHeartBeat: 110
-            nerfedHeartBeat: 50
+            pumpedHeartBeat:  110
 
-            heartAttack: 140
+            nerfedMoveSpeed:  200
+            regularMoveSpeed: 250
+            pumpedMoveSpeed:  300
+
+            nerfedJumpSpeed:  200
+            regularJumpSpeed: 250
+            pumpedJumpSpeed:  300
+
+            heartAttack:   140
             cardiacArrest: 20
 
             heartRaiseIncrement: 5
             heatRaiseDecerement: 0.02 # in miliseconds
 
         TABLE:
-            width: 1.20
-            height: 0.73
-            weight: 60
+            width:  1280
+            height: 90
+
+            x: 0
+            y: 630
 
 
 

@@ -7,8 +7,8 @@ define [
 
     class Table extends Surface
 
-        constructor: (physicalWorld) ->
-            super physicalWorld, TABLE.width, TABLE.height, TABLE.weight
+        constructor: ->
+            super TABLE.width, TABLE.height
 
         getImageName: ->
             "table"

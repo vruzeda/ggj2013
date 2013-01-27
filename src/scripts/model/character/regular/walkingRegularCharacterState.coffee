@@ -4,7 +4,7 @@ define [
     "model/character/regular/movingJumpingRegularCharacterState"
 ], (Constants, CharacterState, MovingJumpingRegularCharacterState) ->
 
-    {SPEEDS} = Constants
+    {SPEEDS, JUMP_SPEEDS} = Constants
 
     class WalkingRegularCharacterState extends CharacterState
 
@@ -12,11 +12,11 @@ define [
             super()
 
         update: (character, deltaTime) ->
-            position = character.getPosition()
-            if @_direction == "right"
-                character.setPosition(x: position.x + SPEEDS.walking * deltaTime / 1000, y: position.y)
-            else
-                character.setPosition(x: position.x - SPEEDS.walking * deltaTime / 1000, y: position.y)
+            speed = character.getSpeed()
+
+            if speed.x == 0
+                StandingRegularCharacterState = require "model/character/regular/standingRegularCharacterState"
+                character.setState new StandingRegularCharacterState
 
         getImageName: ->
             "walkingRegularCharacter"
@@ -33,6 +33,8 @@ define [
             # Can't crouch!
 
         jump: (character) ->
+            speed = character.getSpeed()
+            character.setSpeed x: speed.x, y: speed.y - JUMP_SPEEDS.regular
             character.setState new MovingJumpingRegularCharacterState @_direction
 
         warmLeft: (character) ->

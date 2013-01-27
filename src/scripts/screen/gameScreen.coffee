@@ -1,14 +1,17 @@
 define [
     "kinetic"
     "framework/screen"
+    "model/constants"
     "model/world"
     "renderer/worldRenderer"
-], (Kinetic, Screen, World, WorldRenderer) ->
+], (Kinetic, Screen, Constants, World, WorldRenderer) ->
+
+    {WORLD} = Constants
 
     class GameScreen extends Screen
 
         _constructLayout: ->
-            @_world = new World
+            @_world = new World WORLD.gravity, WORLD.width, WORLD.height
             @_character = @_world.getCharacter()
 
             @_worldRenderer = new WorldRenderer @_layer

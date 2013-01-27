@@ -1,68 +1,143 @@
 define [
-    "box2D"
     "model/constants"
     "model/physics/physicalEntity"
-    "model/character/regular/standingRegularCharacterState"
-    "model/character/captured/capturedCharacterState"
-], (Box2D, Constants, PhysicalEntity, StandingRegularCharacterState, CapturedCharacterState) ->
+], (Constants, PhysicalEntity) ->
 
     {CHARACTER} = Constants
 
     class Character extends PhysicalEntity
 
-        constructor: (physicalWorld) ->
-            super physicalWorld, Box2D.Dynamics.b2Body.b2_dynamicBody, CHARACTER.width, CHARACTER.height, CHARACTER.weight
-
-            @setState new StandingRegularCharacterState
+        constructor: ->
+            super CHARACTER.width, CHARACTER.height
             @_heartRate = CHARACTER.regularHeartBeat
+
+            @setState "standing"
+            @setPulse "regular"
+
+        resetHeartBeat: ->
+            @_heartRate = CHARACTER["#{@_state}Beat"]
 
         increaseHeartBeat: ->
             @_heartRate += CHARACTER.heartRaiseDelta
 
             if @_heartRate >= CHARACTER.heartAttack
-                @setState new CapturedCharacterState "heartAttack"
+                @setState "captured"
+                @setPulse "heartAttack"
 
             else if @_heartRate >= CHARACTER.pumpedHeartBeat
-                @setState new StandingPumpedCharacterState
+                @setPulse "pumped"
+
+            else if @_heartRate >= CHARACTER.regularHeartBeat
+                @setPulse "regular"
 
         decreaseHeartBeat: (deltaTime)->
             @_heartRate -= CHARACTER.heartRaiseDelta * deltaTime
 
             if @_heartRate <= CHARACTER.cardiacArrest
-                @setState new CapturedCharacterState "cardiacArrest"
+                @setState "captured"
+                @setPulse "cardiacArrest"
 
             else if @_heartRate <= CHARACTER.nerfedHeartBeat
-                @setState new StandingNerfedCharacterState
+                @setPulse "nerfed"
+
+            else if @_heartRate <= CHARACTER.regularHeartBeat
+                @setPulse "regular"
+
+        setPulse: (@_pulse) ->
+            console.debug "Pulse: #{@_pulse}"
 
         setState: (@_state) ->
-            console.log ">>> State: " + @_state.constructor.name + " <<<"
+            console.debug "State: #{@_state}"
 
         getImageName: ->
-            @_state.getImageName()
+            "#{@_state}_#{@_pulse}_image"
 
         update: (deltaTime) ->
-            @_state.update @, deltaTime
+            speed = @getSpeed()
+
+            if speed.x == 0
+                @stop()
+
+            if speed.y == 0
+                @fall()
+            else if speed.y > 0
+                @falling()
 
         move: (direction) ->
-            @_state.move @, direction
+            switch @_state
+                when "standing"  then @setState "moving"
+                when "jumping"   then @setState "movingJumping"
+                when "falling"   then @setState "movingFalling"
+                when "crouching" then @setState "movingCrouching"
+                else return
+
+            speedX = CHARACTER["#{@_pulse}MoveSpeed"]
+            speedX = -CHARACTER["#{@_pulse}MoveSpeed"] if direction is "left"
+
+            speed = @getSpeed()
+            @setSpeed x: speedX, y: speed.y
 
         stop: ->
-            @_state.stop @
+            switch @_state
+                when "moving"          then @setState "standing"
+                when "movingJumping"   then @setState "jumping"
+                when "movingFalling"   then @setState "falling"
+                when "movingCrouching" then @setState "crouching"
+                else return
+
+            speed = @getSpeed()
+            @setSpeed x: 0, y: speed.y
 
         crouch: ->
-            @_state.crouch @
+            if @_pulse is "nerfed"
+                @setState "crouching"
 
         jump: ->
-            @_state.jump @
+            if @_pulse isnt "nerfed" and not @isInMidAir()
+                @setState "jumping"
+
+                speed = @getSpeed()
+                @setSpeed x: speed.x, y: -CHARACTER["#{@_pulse}JumpSpeed"]
+
+        falling: ->
+            @setState "falling"
+
+        fall: ->
+            if @isInMidAir()
+                @setState "standing"
+
+                speed = @getSpeed()
+                @setSpeed x: speed.x, y: 0
 
         warmLeft: ->
-            @_state.warmLeft @
+            # if @_state is "standing"
+            #     @setState "warmingLeft"
+
+            # else if @_state is "warmingRight"
+            #     @increaseHeartBeat()
+            #     @setState "warmingLeft"
+
+            # else
+            #     @resetHeartBeat()
+            #     @setState "standing"
 
         warmRight: ->
-            @_state.warmRight @
+            # if @_state is "standing"
+            #     @setState "warmingRight"
 
-        isDead: ->
-            @_state.isDead()
+            # else if @_state is "warmingLeft"
+            #     @increaseHeartBeat()
+            #     @setState "warmingRight"
+
+            # else
+            #     @resetHeartBeat()
+            #     @setState "standing"
+
+        isInMidAir: ->
+            @_state is "jumping" or @_state is "movingJumping" or @_state is "falling"
+
+        isCaptured: ->
+            @_state is "captured"
 
 
     return Character

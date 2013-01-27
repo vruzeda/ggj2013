@@ -1,60 +1,61 @@
-define [
-    "box2D"
-], (Box2D) ->
+define [], ->
 
     class PhysicalEntity
 
-        constructor: (@_physicalWorld, bodyType, @_width, @_height, @_weight) ->
-            @_bodyDef = new Box2D.Dynamics.b2BodyDef
-            @_bodyDef.type = bodyType
-            @_bodyDef.active = true
-            @_bodyDef.allowSleep = true
-            @_bodyDef.fixedRotation = true
-            @_bodyDef.gravityScale = 1
-            @_bodyDef.linearDamping = 0.0
+        constructor: (@_width, @_height) ->
+            @_position = x: 0, y: 0
+            @_speed = x: 0, y: 0
 
-            @_body = @_physicalWorld.CreateBody @_bodyDef
-            @_body.SetUserData @
+        getWidth: ->
+            @_width
 
-            if @_weight?
-                @_massData = new Box2D.Collision.Shapes.b2MassData
-                @_massData.mass = @_weight
-                @_body.SetMassData @_massData
-
-            @_shape = new Box2D.Collision.Shapes.b2PolygonShape
-            @_shape.SetAsBox @_width / 2, @_height / 2
-
-            @_fixtureDef = new Box2D.Dynamics.b2FixtureDef
-            @_fixtureDef.friction = 0
-            @_fixtureDef.restitution = 0
-            @_fixtureDef.shape = @_shape
-
-            @_fixture = @_body.CreateFixture @_fixtureDef
-
-        destructor: ->
-            @_physicalWorld.DestroyBody @_body
+        getHeight: ->
+            @_height
 
         getPosition: ->
-            centerOfMass = @getCenterOfMass()
-            position =
-                x: centerOfMass.x - @_width / 2
-                y: centerOfMass.y - @_height / 2
+            x: @_position.x, y: @_position.y
 
         setPosition: (position) ->
-            centerOfMass =
-                x: position.x + @_width / 2
-                y: position.y + @_height / 2
-            this.setCenterOfMass centerOfMass
+            @_position = x: position.x, y: position.y
 
-        getCenterOfMass: ->
-            @_body.GetWorldCenter()
+        moveBy: (delta) ->
+            @setPosition x: @_position.x + delta.x, y: @_position.y + delta.y
 
-        setCenterOfMass: (centerOfMass) ->
-            @_body.SetPositionAndAngle centerOfMass, 0
+        getSpeed: ->
+            x: @_speed.x, y: @_speed.y
+
+        setSpeed: (speed) ->
+            @_speed = x: speed.x, y: speed.y
 
         # Abstract
         getImageName: ->
             throw new Error "Cannot invoke abstract method PhysicalEntity.getImageName()."
+
+        collidesWith: (that, delta) ->
+            thisTL = @_topLeft()
+            thisTR = @_topRight()
+            thisBL = @_bottomLeft()
+            thisBR = @_bottomRight()
+
+            thatTL = that._topLeft()
+            thatTR = that._topRight()
+            thatBL = that._bottomLeft()
+            thatBR = that._bottomRight()
+
+            clonedDelta = x: delta.x, y: delta.y
+
+            unless thisTL.x + clonedDelta.x > thatTR.x or thisTR.x + clonedDelta.x < thatTL.x or thisTL.y + clonedDelta.y > thatBL.y or thisBL.y + clonedDelta.y < thatTL.y
+                if clonedDelta.x > 0 and thisTR.x + clonedDelta.x > thatTL.x then clonedDelta.x = thatTL.x - thisTR.x
+                if clonedDelta.x < 0 and thisTL.x + clonedDelta.x < thatTR.x then clonedDelta.x = thatTR.x - thisTL.x
+                if clonedDelta.y > 0 and thisBL.y + clonedDelta.y > thatTL.y then clonedDelta.y = thatTL.y - thisBL.y
+                if clonedDelta.y < 0 and thisTL.y + clonedDelta.y < thatBL.y then clonedDelta.y = thatBL.y - thisTL.y
+
+            return clonedDelta
+
+        _topLeft:     -> x: @_position.x,           y: @_position.y
+        _topRight:    -> x: @_position.x + @_width, y: @_position.y
+        _bottomLeft:  -> x: @_position.x,           y: @_position.y + @_height
+        _bottomRight: -> x: @_position.x + @_width, y: @_position.y + @_height
 
 
     return PhysicalEntity

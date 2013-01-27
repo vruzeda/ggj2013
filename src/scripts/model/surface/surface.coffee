@@ -1,12 +1,11 @@
 define [
-    "box2D"
     "model/physics/physicalEntity"
-], (Box2D, PhysicalEntity) ->
+], (PhysicalEntity) ->
 
     class Surface extends PhysicalEntity
 
-        constructor: (physicalWorld, width, height) ->
-            super physicalWorld, Box2D.Dynamics.b2Body.b2_staticBody, width, height
+        constructor: (width, height) ->
+            super width, height
 
 
     return Surface
