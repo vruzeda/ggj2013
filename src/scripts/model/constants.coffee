@@ -31,7 +31,7 @@ define [], ->
             cardiacArrest: 20
 
             heartRaiseIncrement: 5
-            heatRaiseDecerement: 0.02 # in miliseconds
+            heatRaiseDecerementByTime: 0.02
 
         TABLE:
             width:  1280

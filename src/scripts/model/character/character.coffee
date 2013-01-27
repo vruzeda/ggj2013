@@ -18,7 +18,7 @@ define [
             @_heartRate = CHARACTER["#{@_state}Beat"]
 
         increaseHeartBeat: ->
-            @_heartRate += CHARACTER.heartRaiseDelta
+            @_heartRate += CHARACTER.heartRaiseIncrement
 
             if @_heartRate >= CHARACTER.heartAttack
                 @setState "captured"
@@ -31,7 +31,7 @@ define [
                 @setPulse "regular"
 
         decreaseHeartBeat: (deltaTime)->
-            @_heartRate -= CHARACTER.heartRaiseDelta * deltaTime
+            @_heartRate -= CHARACTER.heartRaiseDecrementByTime * deltaTime
 
             if @_heartRate <= CHARACTER.cardiacArrest
                 @setState "captured"
@@ -50,7 +50,7 @@ define [
             console.debug "State: #{@_state}"
 
         getImageName: ->
-            "#{@_state}_#{@_pulse}_image"
+            "#{@_state}_#{@_pulse}"
 
         update: (deltaTime) ->
             speed = @getSpeed()
@@ -102,7 +102,8 @@ define [
                 @setSpeed x: speed.x, y: -CHARACTER["#{@_pulse}JumpSpeed"]
 
         falling: ->
-            @setState "falling" if @_state isnt "falling"
+            if @_state isnt "falling"
+                @setState "falling"
 
         fall: ->
             if @isInMidAir()
@@ -112,28 +113,30 @@ define [
                 @setSpeed x: speed.x, y: 0
 
         warmLeft: ->
-            # if @_state is "standing"
-            #     @setState "warmingLeft"
+            if @_state is "standing"
+                @setState "warmingLeft"
 
-            # else if @_state is "warmingRight"
-            #     @increaseHeartBeat()
-            #     @setState "warmingLeft"
+            else if @_state is "warmingRight"
+                @increaseHeartBeat()
+                @setState "warmingLeft"
 
-            # else
-            #     @resetHeartBeat()
-            #     @setState "standing"
+            else
+                @unwarm()
 
         warmRight: ->
-            # if @_state is "standing"
-            #     @setState "warmingRight"
+            if @_state is "standing"
+                @setState "warmingRight"
 
-            # else if @_state is "warmingLeft"
-            #     @increaseHeartBeat()
-            #     @setState "warmingRight"
+            else if @_state is "warmingLeft"
+                @increaseHeartBeat()
+                @setState "warmingRight"
 
-            # else
-            #     @resetHeartBeat()
-            #     @setState "standing"
+            else
+                @unwarm()
+
+        unwarm: ->
+            @resetHeartBeat()
+            @setState "standing"
 
         isInMidAir: ->
             @_state is "jumping" or @_state is "movingJumping" or @_state is "falling" or @_state is "movingFalling"

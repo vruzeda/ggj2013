@@ -32,12 +32,26 @@ define [
                 GAME_SCREEN:
                     background:                   "images/background.png"
                     table:                        "images/table.png"
-                    standing_regular_image:       "images/standingRegularCharacter.png"
-                    moving_regular_image:         "images/walkingRegularCharacter.png"
-                    jumping_regular_image:        "images/jumpingRegularCharacter.png"
-                    movingJumping_regular_image:  "images/jumpingRegularCharacter.png"
-                    falling_regular_image:        "images/fallingRegularCharacter.png"
-                    movingFalling_regular_image:  "images/fallingRegularCharacter.png"
+
+                CHARACTER_REGULAR:
+                    standing_regular:      "images/character/regular/standing.png"
+                    moving_regular:        "images/character/regular/walking.png"
+                    jumping_regular:       "images/character/regular/jumping.png"
+                    movingJumping_regular: "images/character/regular/jumping.png"
+                    falling_regular:       "images/character/regular/falling.png"
+                    movingFalling_regular: "images/character/regular/falling.png"
+                    warmingLeft_regular:   "images/character/regular/warmingLeft.png"
+                    warmingRight_regular:  "images/character/regular/warmingRight.png"
+
+                CHARACTER_PUMPED:
+                    standing_pumped:       "images/character/pumped/standing.png"
+                    moving_pumped:         "images/character/pumped/walking.png"
+                    jumping_pumped:        "images/character/pumped/jumping.png"
+                    movingJumping_pumped:  "images/character/pumped/jumping.png"
+                    falling_pumped:        "images/character/pumped/falling.png"
+                    movingFalling_pumped:  "images/character/pumped/falling.png"
+                    warmingLeft_pumped:    "images/character/pumped/warmingLeft.png"
+                    warmingRight_pumped:   "images/character/pumped/warmingRight.png"
 
                 OBJECTS:
                     becker:     "images/objects/becker.png"
@@ -52,12 +66,9 @@ define [
                     tubes:      "images/objects/tubes.png"
 
 
-                    # warmingLeftRegularCharacter:  "images/warmingLeftRegularCharacter.png"
-                    # warmingRightRegularCharacter: "images/warmingRightRegularCharacter.png"
-
             setTimeout =>
                 ImageLoader.loadImages
-                    list: ["MAIN_SCREEN", "GAME_SCREEN", "OBJECTS"]
+                    list: ["MAIN_SCREEN", "GAME_SCREEN", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "OBJECTS"]
 
                     progressCallback: (total, complete, success) =>
                         text.setText "Loading (#{Math.round complete / total * 100}%)"

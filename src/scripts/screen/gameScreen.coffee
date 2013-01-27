@@ -29,7 +29,12 @@ define [
             @_onMovementRight = false
             @_onMovementLeft = false
 
+            @_onWarmRight = false
+            @_onWarmLeft = false
+
         _constructInputEvents: (inputController) ->
+            inputController.addCharListener "UP",    @onJump
+            inputController.addCharListener "DOWN",  @onCrouch
             inputController.addCharListener "LEFT",  @onMoveLeft
             inputController.addCharListener "RIGHT", @onMoveRight
             inputController.addCharListener "A",     @onCrouch
@@ -38,6 +43,8 @@ define [
             inputController.addCharListener "F",     @onWarmRight
 
         _destroyInputEvents: (inputController) ->
+            inputController.removeCharListener "UP",    @onJump
+            inputController.removeCharListener "DOWN",  @onCrouch
             inputController.removeCharListener "LEFT",  @onMoveLeft
             inputController.removeCharListener "RIGHT", @onMoveRight
             inputController.removeCharListener "A",     @onCrouch
@@ -77,14 +84,22 @@ define [
 
         onWarmLeft: (event) =>
             if event.type == 'keyup'
-                @_character.stop()
-            else
+                @_onWarmLeft = false
+                if not @_onWarmRight
+                    @_character.unwarm()
+
+            else if not @_onWarmLeft
+                @_onWarmLeft = true
                 @_character.warmLeft()
 
         onWarmRight: (event) =>
             if event.type == 'keyup'
-                @_character.stop()
-            else
+                @_onWarmRight = false
+                if not @_onWarmLeft
+                    @_character.unwarm()
+
+            else if not @_onWarmRight
+                @_onWarmRight = true
                 @_character.warmRight()
 
 
