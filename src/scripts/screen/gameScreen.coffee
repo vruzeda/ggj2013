@@ -16,9 +16,14 @@ define [
 
             @_worldRenderer = new WorldRenderer @_layer
 
+            @_acumulatedTime = 0
+
             @_updater = new Kinetic.Animation (parameters) =>
-                @_world.update parameters.timeDiff
-                @_worldRenderer.render @_world
+                @_acumulatedTime += parameters.timeDiff
+                if @_acumulatedTime > 30
+                    @_world.update 30
+                    @_worldRenderer.render @_world
+                    @_acumulatedTime -= 30
             @_updater.start()
 
             @_onMovementRight = false

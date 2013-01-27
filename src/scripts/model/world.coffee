@@ -33,7 +33,7 @@ define [
             @_surfaces.push book3
 
         update: (deltaTime) ->
-            deltaTimeInSeconds = 0.01#deltaTime / 1000
+            deltaTimeInSeconds = deltaTime / 1000
 
             speed = @_character.getSpeed()
             speed.y += @_gravity * deltaTimeInSeconds
@@ -68,7 +68,7 @@ define [
                         @_character.falling()
                         break
 
-            # Falling
+            # Falling or standing
             else
                 for surface in @_surfaces
                     newDelta.y = @_character.collidesBottomWith surface, delta.y

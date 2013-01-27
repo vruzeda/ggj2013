@@ -74,11 +74,10 @@ define [], ->
             thatBR = that._bottomRight()
 
             thisTL.y += deltaY
-            thisTR.y += deltaY
 
             if thatTR.y <= thisTL.y <= thatBR.y
                 if thatTL.x <= thisTL.x <= thatBR.x or thatTL.x <= thisTR.x <= thatBR.x
-                    deltaY = thatBR.y - thisTL.y
+                    deltaY = thatBR.y - thisTR.y
 
             return deltaY
 
@@ -91,7 +90,6 @@ define [], ->
             thatBR = that._bottomRight()
 
             thisBL.y += deltaY
-            thisBR.y += deltaY
 
             if thatTR.y <= thisBL.y <= thatBR.y
                 if thatTL.x <= thisBL.x <= thatBR.x or thatTL.x <= thisBR.x <= thatBR.x
@@ -103,6 +101,8 @@ define [], ->
         _topRight:    -> x: @_position.x + @_width, y: @_position.y
         _bottomLeft:  -> x: @_position.x,           y: @_position.y + @_height
         _bottomRight: -> x: @_position.x + @_width, y: @_position.y + @_height
+
+
 
 
     return PhysicalEntity

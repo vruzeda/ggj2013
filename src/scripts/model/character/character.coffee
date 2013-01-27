@@ -60,6 +60,7 @@ define [
 
             if speed.y == 0
                 @fall()
+
             else if speed.y > 0
                 @falling()
 
@@ -101,7 +102,7 @@ define [
                 @setSpeed x: speed.x, y: -CHARACTER["#{@_pulse}JumpSpeed"]
 
         falling: ->
-            @setState "falling" if not @_state is "falling"
+            @setState "falling" if @_state isnt "falling"
 
         fall: ->
             if @isInMidAir()
