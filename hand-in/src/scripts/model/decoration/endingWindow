@@ -1,0 +1,14 @@
+define [
+    "model/constants"
+    "model/decoration/decoration"
+], (Constants, Decoration) ->
+
+    class EndingWindow extends Decoration
+
+        constructor: ->
+            super 369, 180
+
+        getImageName: ->
+            "endingWindow"
+
+    return EndingWindow
