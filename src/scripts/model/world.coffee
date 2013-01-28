@@ -178,8 +178,6 @@ define [
             microscope.setPosition x: 100, y: TABLE.y - 540
             @_decorations.push microscope
 
-            @_character.setPosition x: CHARACTER.x + lastPosition, y: CHARACTER.y
-
         update: (deltaTime) ->
             deltaTimeInSeconds = deltaTime / 1000
 
