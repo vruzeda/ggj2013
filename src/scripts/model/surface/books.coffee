@@ -6,10 +6,7 @@ define [
     class Books extends Surface
 
         constructor: ->
-            super 590, 180
-
-        getImageName: ->
-            "books"
+            super 590, 180, "books"
 
 
 

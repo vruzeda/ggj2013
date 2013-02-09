@@ -6,10 +6,7 @@ define [
     class Bureta extends Surface
 
         constructor: ->
-            super 200, 360
-
-        getImageName: ->
-            "bureta"
+            super 200, 360, "bureta"
 
 
 

@@ -4,8 +4,8 @@ define [
 
     class Decoration extends PhysicalEntity
 
-        constructor: (width, height) ->
-            super width, height
+        constructor: (width, height, imageName) ->
+            super width, height, imageName
 
 
     return Decoration

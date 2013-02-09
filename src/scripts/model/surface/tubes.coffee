@@ -6,10 +6,7 @@ define [
     class Tubes extends Surface
 
         constructor: ->
-            super 400, 260
-
-        getImageName: ->
-            "tubes"
+            super 400, 260, "tubes"
 
 
 

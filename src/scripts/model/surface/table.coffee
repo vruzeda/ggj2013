@@ -8,10 +8,7 @@ define [
     class Table extends Surface
 
         constructor: ->
-            super TABLE.width, TABLE.height
-
-        getImageName: ->
-            "table"
+            super TABLE.width, TABLE.height, "table"
 
 
     return Table

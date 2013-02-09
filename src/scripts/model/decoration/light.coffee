@@ -6,9 +6,8 @@ define [
     class Light extends Decoration
 
         constructor: ->
-            super 695, 430
+            super 695, 430, "light"
 
-        getImageName: ->
-            "light"
+
 
     return Light

@@ -6,10 +6,7 @@ define [
     class Microscope extends Decoration
 
         constructor: ->
-            super 400, 540
-
-        getImageName: ->
-            "microscope"
+            super 400, 540, "microscope"
 
 
 

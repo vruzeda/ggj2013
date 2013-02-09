@@ -6,9 +6,8 @@ define [
     class EndingWindow extends Decoration
 
         constructor: ->
-            super 400, 580
+            super 400, 580, "endingWindow"
 
-        getImageName: ->
-            "endingWindow"
+
 
     return EndingWindow

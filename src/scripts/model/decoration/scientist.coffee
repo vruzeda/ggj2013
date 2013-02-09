@@ -8,13 +8,10 @@ define [
     class Scientist extends Decoration
 
         constructor: ->
-            super SCIENTIST.width, SCIENTIST.height
+            super SCIENTIST.width, SCIENTIST.height, "scientist"
 
             @_speed = SCIENTIST.speed
             @_accumulatedTime = 0
-
-        getImageName: ->
-            "scientist"
 
         update: (deltaTime) ->
             @_accumulatedTime += deltaTime
@@ -25,6 +22,7 @@ define [
 
             @setPosition x: newPositionX, y: newPositionY
             @_speed = Math.max SCIENTIST.maxSpeed, @_speed + SCIENTIST.aceleration * deltaTime
+
 
 
     return Scientist

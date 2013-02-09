@@ -6,10 +6,7 @@ define [
     class WindowBase extends Surface
 
         constructor: ->
-            super 210, 454
-
-        getImageName: ->
-            "windowBase"
+            super 210, 454, "windowBase"
 
 
 

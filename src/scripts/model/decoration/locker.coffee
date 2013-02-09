@@ -6,10 +6,7 @@ define [
     class Locker extends Decoration
 
         constructor: ->
-            super 330, 720
-
-        getImageName: ->
-            "locker"
+            super 330, 720, "locker"
 
 
 

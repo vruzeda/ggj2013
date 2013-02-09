@@ -3,14 +3,11 @@ define [
     "model/surface/surface"
 ], (Constants, Surface) ->
 
-    class supportConico extends Surface
+    class SupportConico extends Surface
 
         constructor: ->
-            super 200, 360
-
-        getImageName: ->
-            "bureta"
+            super 200, 360, "bureta"
 
 
 
-    return supportConico
+    return SupportConico

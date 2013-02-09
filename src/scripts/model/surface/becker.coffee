@@ -6,10 +6,7 @@ define [
     class Becker extends Surface
 
         constructor: ->
-            super 205, 180
-
-        getImageName: ->
-            "becker"
+            super 205, 180, "becker"
 
 
 

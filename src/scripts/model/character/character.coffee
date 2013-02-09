@@ -1,7 +1,8 @@
 define [
+    "framework/imageLoader"
     "model/constants"
     "model/physics/physicalEntity"
-], (Constants, PhysicalEntity) ->
+], (ImageLoader, Constants, PhysicalEntity) ->
 
     {CHARACTER} = Constants
 
@@ -51,13 +52,17 @@ define [
                 console.debug "Pulse: #{@_pulse}"
                 @resetHeartBeat()
 
+                @_image = ImageLoader.getImage "#{@_state}_#{@_pulse}" if @_state? and @_pulse?
+
         setState: (state) ->
             if @_state isnt state
                 @_state = state
                 console.debug "State: #{@_state}"
 
-        getImageName: ->
-            "#{@_state}_#{@_pulse}"
+                @_image = ImageLoader.getImage "#{@_state}_#{@_pulse}" if @_state? and @_pulse?
+
+        getImage: ->
+            @_image
 
         update: (deltaTime) ->
             if @isHeartStoped() then return

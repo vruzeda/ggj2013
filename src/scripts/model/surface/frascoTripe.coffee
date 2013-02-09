@@ -6,10 +6,7 @@ define [
     class FrascoTripe extends Surface
 
         constructor: ->
-            super 400, 520
-
-        getImageName: ->
-            "frascoTripe"
+            super 400, 520, "frascoTripe"
 
 
 

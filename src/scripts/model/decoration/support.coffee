@@ -6,10 +6,7 @@ define [
     class Support extends Decoration
 
         constructor: ->
-            super 300, 550
-
-        getImageName: ->
-            "support"
+            super 300, 550, "support"
 
 
 

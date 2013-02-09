@@ -6,10 +6,7 @@ define [
     class Tripe extends Decoration
 
         constructor: ->
-            super 369, 180
-
-        getImageName: ->
-            "tripe"
+            super 369, 180, "tripe"
 
 
 

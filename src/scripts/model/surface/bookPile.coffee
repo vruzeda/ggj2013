@@ -6,10 +6,7 @@ define [
     class BookPile extends Surface
 
         constructor: ->
-            super 590, 360
-
-        getImageName: ->
-            "bookPile"
+            super 590, 360, "bookPile"
 
 
 

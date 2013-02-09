@@ -8,10 +8,8 @@ define [
     class Ceil extends Surface
 
         constructor: ->
-            super CEIL.width, CEIL.height
+            super CEIL.width, CEIL.height, "table"
 
-        getImageName: ->
-            "table"
 
 
     return Ceil

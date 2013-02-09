@@ -1,8 +1,8 @@
 define [
-    "kinetic"
     "framework/imageLoader"
+    "kinetic"
     "model/constants"
-], (Kinetic, ImageLoader, Constants) ->
+], (ImageLoader, Kinetic, Constants) ->
 
     {GAME_RESOLUTION, WORLD, CHARACTER} = Constants
 
@@ -27,7 +27,7 @@ define [
             for decoration in world.getDecorations()
                 decorationPosition = decoration.getPosition()
                 @_layer.add new Kinetic.Image
-                    image: ImageLoader.getImage decoration.getImageName()
+                    image: decoration.getImage()
                     x: decorationPosition.x + deltaX
                     y: decorationPosition.y
                     width: decoration.getWidth()
@@ -36,14 +36,14 @@ define [
             for surface in world.getSurfaces()
                 surfacePosition = surface.getPosition()
                 @_layer.add new Kinetic.Image
-                    image: ImageLoader.getImage surface.getImageName()
+                    image: surface.getImage()
                     x: surfacePosition.x + deltaX
                     y: surfacePosition.y
                     width: surface.getWidth()
                     height: surface.getHeight()
 
             @_layer.add new Kinetic.Image
-                image: ImageLoader.getImage character.getImageName()
+                image: character.getImage()
                 x: characterPosition.x + deltaX
                 y: characterPosition.y
                 width: character.getWidth()
@@ -52,7 +52,7 @@ define [
             for frontDecoration in world.getFrontDecorations()
                 frontDecorationPosition = frontDecoration.getPosition()
                 @_layer.add new Kinetic.Image
-                    image: ImageLoader.getImage frontDecoration.getImageName()
+                    image: frontDecoration.getImage()
                     x: frontDecorationPosition.x + deltaX
                     y: frontDecorationPosition.y
                     width: frontDecoration.getWidth()

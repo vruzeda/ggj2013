@@ -6,10 +6,7 @@ define [
     class MediumObstacle extends Surface
 
         constructor: ->
-            super 205, 180
-
-        getImageName: ->
-            "books"
+            super 205, 180, "books"
 
 
 

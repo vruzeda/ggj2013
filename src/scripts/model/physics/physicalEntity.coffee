@@ -1,10 +1,13 @@
-define [], ->
+define [
+    "framework/imageLoader"
+], (ImageLoader) ->
 
     class PhysicalEntity
 
-        constructor: (@_width, @_height) ->
+        constructor: (@_width, @_height, imageName) ->
             @_position = x: 0, y: 0
             @_speed = x: 0, y: 0
+            @_image = ImageLoader.getImage imageName if imageName?
 
         getWidth: ->
             @_width
@@ -35,9 +38,8 @@ define [], ->
         setSpeed: (speed) ->
             @_speed = x: speed.x, y: speed.y
 
-        # Abstract
-        getImageName: ->
-            throw new Error "Cannot invoke abstract method PhysicalEntity.getImageName()."
+        getImage: ->
+            @_image
 
         collidesRightWith: (that, deltaX) ->
             thisTR = @_topRight()
