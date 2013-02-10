@@ -82,8 +82,8 @@ define [
 
             if @isMoving() and speed.x == 0 then @stop()
 
-            if @isJumping() and speed.y >= 0 then @falling()
-            else if @isFalling() and speed.y == 0 then @fall()
+            if speed.y > 0 then @falling()
+            else if speed.y == 0 then @fall()
 
         move: (direction) ->
             if @isHeartStopped() then return
@@ -161,13 +161,14 @@ define [
         fall: ->
             if @isHeartStopped() then return
 
-            switch @_state
-                when "falling"       then @_updateCharacterState state: "standing"
-                when "movingFalling" then @_updateCharacterState state: "moving"
-                else return
+            if @isFalling()
+                switch @_state
+                    when "falling"       then @_updateCharacterState state: "standing"
+                    when "movingFalling" then @_updateCharacterState state: "moving"
+                    else return
 
-            speed = @getSpeed()
-            @setSpeed x: speed.x, y: 0
+                speed = @getSpeed()
+                @setSpeed x: speed.x, y: 0
 
         warmLeft: ->
             if @isHeartStopped() then return
