@@ -2,38 +2,56 @@ define [], () ->
 
     class CharacterState
 
-        # Abstract
-        getImageName: ->
-            throw new Error "Cannot invoke abstract method CharacterState.getImageName()."
+        constructor: (@_sprite) ->
 
-        # Abstract
-        update: (character, deltaTime) ->
-            throw new Error "Cannot invoke abstract method CharacterState.update(character, deltaTime)."
-
-        # Abstract
-        move: (character, direction) ->
-            throw new Error "Cannot invoke abstract method CharacterState.move(character, direction)."
+        start: ->
+            @_sprite.start()
 
         stop: ->
-            # Do nothing
+            @_sprite.stop()
 
-        # Abstract
-        crouch: (character) ->
-            throw new Error "Cannot invoke abstract method CharacterState.crouch(character)."
+        getNode: ->
+            @_sprite
 
-        # Abstract
-        jump: (character) ->
-            throw new Error "Cannot invoke abstract method CharacterState.jump(character)."
+        ##################
+        # State checkers #
+        ##################
 
-        # Abstract
-        warmLeft: (character) ->
-            throw new Error "Cannot invoke abstract method CharacterState.warmLeft(character)."
+        isStanding: ->
+            false
 
-        # Abstract
-        warmRight: (character) ->
-            throw new Error "Cannot invoke abstract method CharacterState.warmRight(character)."
+        isMoving: ->
+            false
+
+        isJumping: ->
+            false
+
+        isFalling: ->
+            false
+
+        isCrouching: ->
+            false
+
+        isWarming: ->
+            false
 
         isCaptured: ->
+            false
+
+        ##################
+        # Pulse checkers #
+        ##################
+
+        isHeartNerfed: ->
+            false
+
+        isHeartRegular: ->
+            false
+
+        isHeartPumped: ->
+            false
+
+        isHeartStoped: ->
             false
 
 
