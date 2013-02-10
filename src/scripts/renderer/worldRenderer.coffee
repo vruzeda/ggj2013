@@ -42,12 +42,10 @@ define [
                     width: surface.getWidth()
                     height: surface.getHeight()
 
-            @_layer.add new Kinetic.Image
-                image: character.getImage()
-                x: characterPosition.x + deltaX
-                y: characterPosition.y
-                width: character.getWidth()
-                height: character.getHeight()
+            characterSprite = character.getSprite()
+            characterSprite.setPosition x: characterPosition.x + deltaX, y: characterPosition.y
+            @_layer.add characterSprite
+            character.start()
 
             for frontDecoration in world.getFrontDecorations()
                 frontDecorationPosition = frontDecoration.getPosition()
@@ -61,7 +59,7 @@ define [
             hudDisplay = new Kinetic.Image
                 image: ImageLoader.getImage "hudDisplay"
             hudOpacity = Math.random()
-            hudOpacity = 0 if character.isHeartStoped()
+            hudOpacity = 0 if character.isHeartStopped()
 
             hud = new Kinetic.Group
             hud.add new Kinetic.Image
