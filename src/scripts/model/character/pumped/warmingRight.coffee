@@ -1,11 +1,11 @@
 define [
-    "model/character/regular/basePulse"
+    "model/character/pumped/basePulse"
 ], (BasePulse) ->
 
-    class WarmingLeft extends BasePulse
+    class WarmingRight extends BasePulse
 
         _getState: ->
-            "warmingLeft"
+            "warmingRight"
 
         _getSpriteWidth: ->
             686
@@ -23,4 +23,4 @@ define [
             true
 
 
-    return WarmingLeft
+    return WarmingRight

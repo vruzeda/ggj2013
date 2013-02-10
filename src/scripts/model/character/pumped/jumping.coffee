@@ -1,26 +1,26 @@
 define [
-    "model/character/regular/basePulse"
+    "model/character/pumped/basePulse"
 ], (BasePulse) ->
 
-    class WarmingLeft extends BasePulse
+    class Jumping extends BasePulse
 
         _getState: ->
-            "warmingLeft"
+            "jumping"
 
         _getSpriteWidth: ->
-            686
+            384
 
         _getSpriteHeight: ->
-            643
+            384
 
         _getNumberOfSpritesheetFrames: ->
-            1
+            8
 
         _getSpritesheetFrameRate: ->
-            1
+            10
 
-        isWarming: ->
+        isJumping: ->
             true
 
 
-    return WarmingLeft
+    return Jumping

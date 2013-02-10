@@ -1,5 +1,5 @@
 define [
-    "model/character/regular/jumping"
+    "model/character/pumped/jumping"
 ], (Jumping) ->
 
     class MovingJumping extends Jumping

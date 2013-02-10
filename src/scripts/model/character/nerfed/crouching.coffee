@@ -1,17 +1,17 @@
 define [
-    "model/character/regular/basePulse"
+    "model/character/nerfed/basePulse"
 ], (BasePulse) ->
 
-    class WarmingLeft extends BasePulse
+    class Crouching extends BasePulse
 
         _getState: ->
-            "warmingLeft"
+            "crouching"
 
         _getSpriteWidth: ->
-            686
+            343
 
         _getSpriteHeight: ->
-            643
+            195
 
         _getNumberOfSpritesheetFrames: ->
             1
@@ -19,8 +19,8 @@ define [
         _getSpritesheetFrameRate: ->
             1
 
-        isWarming: ->
+        isCrouching: ->
             true
 
 
-    return WarmingLeft
+    return Crouching

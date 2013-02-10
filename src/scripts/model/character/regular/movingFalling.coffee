@@ -1,11 +1,11 @@
 define [
-    "model/character/regular/basePulse"
-], (BasePulse) ->
+    "model/character/regular/falling"
+], (Falling) ->
 
-    class WarmingLeft extends BasePulse
+    class MovingFalling extends Falling
 
         _getState: ->
-            "warmingLeft"
+            "movingFalling"
 
         _getSpriteWidth: ->
             686
@@ -17,10 +17,10 @@ define [
             1
 
         _getSpritesheetFrameRate: ->
-            1
+            10
 
-        isWarming: ->
+        isMoving: ->
             true
 
 
-    return WarmingLeft
+    return MovingFalling

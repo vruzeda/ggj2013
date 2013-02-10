@@ -1,12 +1,23 @@
 define [
-    "model/character/regular/regularPulse"
-], (RegularPulse) ->
+    "model/character/regular/basePulse"
+], (BasePulse) ->
 
-    class Jumping extends RegularPulse
+    class Jumping extends BasePulse
 
-        constructor: ->
-            # TODO Create sprite
-            # TODO super sprite
+        _getState: ->
+            "jumping"
+
+        _getSpriteWidth: ->
+            384
+
+        _getSpriteHeight: ->
+            384
+
+        _getNumberOfSpritesheetFrames: ->
+            8
+
+        _getSpritesheetFrameRate: ->
+            10
 
         isJumping: ->
             true

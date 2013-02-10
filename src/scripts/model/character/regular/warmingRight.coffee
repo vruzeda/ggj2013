@@ -1,12 +1,23 @@
 define [
-    "model/character/regular/regularPulse"
-], (RegularPulse) ->
+    "model/character/regular/basePulse"
+], (BasePulse) ->
 
-    class WarmingRight extends RegularPulse
+    class WarmingRight extends BasePulse
 
-        constructor: ->
-            # TODO Create sprite
-            # TODO super sprite
+        _getState: ->
+            "warmingRight"
+
+        _getSpriteWidth: ->
+            686
+
+        _getSpriteHeight: ->
+            643
+
+        _getNumberOfSpritesheetFrames: ->
+            1
+
+        _getSpritesheetFrameRate: ->
+            1
 
         isWarming: ->
             true

@@ -2,10 +2,13 @@ define [
     "model/character/characterState"
 ], (CharacterState) ->
 
-    class RegularPulse extends CharacterState
+    class BasePulse extends CharacterState
+
+        _getPulse: ->
+            "regular"
 
         isHeartRegular: ->
             true
 
 
-    return RegularPulse
+    return BasePulse

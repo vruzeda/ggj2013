@@ -2787,7 +2787,7 @@ var Kinetic = {};
                                 scale: node.getScale(),
                                 rotation: node.getRotation()
                             });
-                            
+
                             lastContainer.add(group);
                             lastContainer = group;
                         }
@@ -3338,8 +3338,8 @@ var Kinetic = {};
      * @augments Kinetic.Container
      * @param {Object} config
      * @param {String|DomElement} config.container Container id or DOM element
-     * 
-     * 
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -3538,7 +3538,7 @@ var Kinetic = {};
             drawLayer(0);
         },
         /**
-         * converts stage into an image. 
+         * converts stage into an image.
          * @name toImage
          * @methodOf Kinetic.Stage.prototype
          * @param {Object} config
@@ -3982,9 +3982,9 @@ var Kinetic = {};
      * @param {Object} config
      * @param {Boolean} [config.clearBeforeDraw] set this property to true if you'd like to disable
      *  canvas clearing before each new layer draw
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -4239,8 +4239,8 @@ var Kinetic = {};
      * Group constructor.  Groups are used to contain shapes or other groups.
      * @constructor
      * @augments Kinetic.Container
-     * 
-     * 
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -4318,9 +4318,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -4840,7 +4840,7 @@ var Kinetic = {};
      * @augments Kinetic.Shape
      * @param {Object} config
      * @param {Number} [config.cornerRadius]
-     * 
+     *
 
      * @param {String} [config.fill] fill color
      * @param {Image} [config.fillPatternImage] fill pattern image
@@ -4872,9 +4872,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -4898,7 +4898,7 @@ var Kinetic = {};
     Kinetic.Rect = function(config) {
         this._initRect(config);
     };
-    
+
     Kinetic.Rect.prototype = {
         _initRect: function(config) {
             this.setDefaultAttrs({
@@ -4992,9 +4992,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -5080,7 +5080,7 @@ var Kinetic = {};
      * @param {Number} config.angle
      * @param {Number} config.radius
      * @param {Boolean} [config.clockwise]
-     * 
+     *
      * -------------------------------------------------
      * @param {String} [config.fill] fill color
      * -------------------------------------------------
@@ -5116,9 +5116,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -5235,7 +5235,7 @@ var Kinetic = {};
      * @augments Kinetic.Shape
      * @param {Object} config
      * @param {Number|Array|Object} config.radius defines x and y radius
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -5271,9 +5271,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -5376,7 +5376,7 @@ var Kinetic = {};
      * @param {Object} config
      * @param {ImageObject} config.image
      * @param {Object} [config.crop]
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -5412,9 +5412,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -5648,7 +5648,7 @@ var Kinetic = {};
      * @param {Object} config
      * @param {Array} config.points can be a flattened array of points, or an array of point objects.
      *  e.g. [0,1,2,3] and [{x:1,y:2},{x:3,y:4}] are equivalent
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -5684,9 +5684,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -5770,7 +5770,7 @@ var Kinetic = {};
      * @param {Number} [config.width] default is auto
      * @param {Number} [config.height] default is auto
      * @param {Number} [config.lineHeight] default is 1
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -5806,9 +5806,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -5849,7 +5849,7 @@ var Kinetic = {};
             });
 
             this.dummyCanvas = document.createElement('canvas');
-            
+
             // call super constructor
             Kinetic.Shape.call(this, config);
             this.shapeType = 'Text';
@@ -5873,7 +5873,7 @@ var Kinetic = {};
             context.save();
             context.translate(p, 0);
             context.translate(0, p + this.getTextHeight() / 2);
-            
+
             // draw text lines
             for(var n = 0; n < textArr.length; n++) {
                 var text = textArr[n];
@@ -5895,7 +5895,7 @@ var Kinetic = {};
         },
         drawHitFunc: function(canvas) {
         	var context = canvas.getContext(), width = this.getWidth(), height = this.getHeight();
-        	
+
             context.beginPath();
         	context.rect(0, 0, width, height);
         	context.closePath();
@@ -6071,7 +6071,7 @@ var Kinetic = {};
     Kinetic.SceneCanvas.prototype.fillText = fillText;
     Kinetic.SceneCanvas.prototype.strokeText = strokeText;
     Kinetic.SceneCanvas.prototype.fillStrokeText = fillStrokeText;
-    
+
     // hit canvases
     Kinetic.HitCanvas.prototype.fillText = fillText;
     Kinetic.HitCanvas.prototype.strokeText = strokeText;
@@ -6173,7 +6173,7 @@ var Kinetic = {};
      * @param {Object} config
      * @param {Array} config.points can be a flattened array of points, or an array of point objects.
      *  e.g. [0,1,2,3] and [{x:1,y:2},{x:3,y:4}] are equivalent
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -6209,9 +6209,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -6293,7 +6293,7 @@ var Kinetic = {};
      * @param {Array} config.points can be a flattened array of points, or an array of point objects.
      *  e.g. [0,1,2,3] and [{x:1,y:2},{x:3,y:4}] are equivalent
      * @param {Number} [config.tension] default value is 1.  Higher values will result in a more curvy line.  A value of 0 will result in no interpolation.
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -6329,9 +6329,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -6537,7 +6537,7 @@ var Kinetic = {};
                 var n = 0;
                 while(n < len-1) {
                     context.bezierCurveTo(ap[n].x, ap[n++].y, ap[n].x, ap[n++].y, ap[n].x, ap[n++].y);
-                } 
+                }
             }
             // no tension
             else {
@@ -6579,7 +6579,7 @@ var Kinetic = {};
      * @param {String} config.animation animation key
      * @param {Object} config.animations animation map
      * @param {Integer} [config.index] animation index
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -6615,9 +6615,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -6648,7 +6648,7 @@ var Kinetic = {};
                 index: 0,
                 frameRate: 17
             });
-            
+
             // call super constructor
             Kinetic.Shape.call(this, config);
             this.shapeType = 'Sprite';
@@ -6790,7 +6790,7 @@ var Kinetic = {};
      * @param {Integer} config.numPoints
      * @param {Number} config.innerRadius
      * @param {Number} config.outerRadius
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -6826,9 +6826,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -6936,7 +6936,7 @@ var Kinetic = {};
      * @param {Object} config
      * @param {Number} config.sides
      * @param {Number} config.radius
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -6972,9 +6972,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -7043,7 +7043,7 @@ var Kinetic = {};
      * @methodOf Kinetic.RegularPolygon.prototype
      * @param {int} sides
      */
-    
+
     /**
      * get radius
      * @name getRadius
@@ -7065,7 +7065,7 @@ var Kinetic = {};
      * @augments Kinetic.Shape
      * @param {Object} config
      * @param {String} config.data SVG data string
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -7101,9 +7101,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]
@@ -7688,7 +7688,7 @@ var Kinetic = {};
      * @param {Number} [config.fontSize] default is 12
      * @param {String} [config.fontStyle] can be normal, bold, or italic.  Default is normal
      * @param {String} config.text
-     * 
+     *
      *
      * @param {String} [config.fill] fill color
      *
@@ -7724,9 +7724,9 @@ var Kinetic = {};
      * @param {Number} [config.shadowOpacity] shadow opacity.  Can be any real number
      *  between 0 and 1
      * @param {Array} [config.dashArray]
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @param {Number} [config.x]
      * @param {Number} [config.y]
      * @param {Number} [config.width]

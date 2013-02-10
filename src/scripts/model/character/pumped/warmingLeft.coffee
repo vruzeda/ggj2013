@@ -1,5 +1,5 @@
 define [
-    "model/character/regular/basePulse"
+    "model/character/pumped/basePulse"
 ], (BasePulse) ->
 
     class WarmingLeft extends BasePulse
