@@ -57,5 +57,14 @@ define [], ->
             aceleration: 10
             maxSpeed: 200
 
+            ARM:
+                width: 701
+                height: 871
+                xDisplacement: -141
+                yDisplacement: -650
+
+                HAND:
+                    x: 538
+
 
     return CONSTANTS

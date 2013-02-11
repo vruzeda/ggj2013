@@ -10,6 +10,7 @@ dependencies =
         standing:        "model/character/nerfed/standing"
         warmingLeft:     "model/character/nerfed/warmingLeft"
         warmingRight:    "model/character/nerfed/warmingRight"
+        captured:        "model/character/nerfed/captured"
 
     regular:
         falling:         "model/character/regular/falling"
@@ -20,6 +21,7 @@ dependencies =
         standing:        "model/character/regular/standing"
         warmingLeft:     "model/character/regular/warmingLeft"
         warmingRight:    "model/character/regular/warmingRight"
+        captured:        "model/character/regular/captured"
 
     pumped:
         falling:         "model/character/pumped/falling"
@@ -30,6 +32,7 @@ dependencies =
         standing:        "model/character/pumped/standing"
         warmingLeft:     "model/character/pumped/warmingLeft"
         warmingRight:    "model/character/pumped/warmingRight"
+        captured:        "model/character/pumped/captured"
 
     cardiacArrest:
         captured:        "model/character/captured/cardiacArrest"

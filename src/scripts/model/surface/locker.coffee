@@ -1,9 +1,9 @@
 define [
     "model/constants"
-    "model/decoration/decoration"
-], (Constants, Decoration) ->
+    "model/surface/surface"
+], (Constants, Surface) ->
 
-    class Locker extends Decoration
+    class Locker extends Surface
 
         constructor: ->
             super 330, 720, "locker"
