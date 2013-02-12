@@ -21,7 +21,7 @@ define [
             newPositionY = 20 * Math.sin(10 * @_accumulatedTime) - 20
 
             @setPosition x: newPositionX, y: newPositionY
-            @_speed = Math.max SCIENTIST.maxSpeed, @_speed + SCIENTIST.aceleration * deltaTime
+            @_speed = Math.min SCIENTIST.maxSpeed, @_speed + SCIENTIST.aceleration * deltaTime
 
 
 
