@@ -55,7 +55,7 @@ define [], ->
             y: -300
             speed: 100
             aceleration: 10
-            maxSpeed: 200
+            maxSpeed: 150
 
             ARM:
                 width: 701

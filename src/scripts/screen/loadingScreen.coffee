@@ -34,14 +34,14 @@ define [
                     ceil:       "images/ceil.png"
 
                 CHARACTER_NERFED:
-                    nerfed_crouching:       "images/character/nerfed/crouching.png"
-                    nerfed_movingCrouching: "images/character/nerfed/crouching.png"
+                    nerfed_crouching:       "images/character/nerfed/standing.png"
+                    nerfed_movingCrouching: "images/character/nerfed/walking.png"
                     nerfed_standing:        "images/character/nerfed/standing.png"
                     nerfed_moving:          "images/character/nerfed/walking.png"
                     nerfed_jumping:         "images/character/nerfed/jumping.png"
                     nerfed_movingJumping:   "images/character/nerfed/jumping.png"
-                    nerfed_falling:         "images/character/nerfed/falling.png"
-                    nerfed_movingFalling:   "images/character/nerfed/falling.png"
+                    nerfed_falling:         "images/character/nerfed/jumping.png"
+                    nerfed_movingFalling:   "images/character/nerfed/jumping.png"
                     nerfed_warmingLeft:     "images/character/nerfed/warmingLeft.png"
                     nerfed_warmingRight:    "images/character/nerfed/warmingRight.png"
 
@@ -50,8 +50,8 @@ define [
                     regular_moving:          "images/character/regular/walking.png"
                     regular_jumping:         "images/character/regular/jumping.png"
                     regular_movingJumping:   "images/character/regular/jumping.png"
-                    regular_falling:         "images/character/regular/falling.png"
-                    regular_movingFalling:   "images/character/regular/falling.png"
+                    regular_falling:         "images/character/regular/jumping.png"
+                    regular_movingFalling:   "images/character/regular/jumping.png"
                     regular_warmingLeft:     "images/character/regular/warmingLeft.png"
                     regular_warmingRight:    "images/character/regular/warmingRight.png"
 
@@ -60,8 +60,8 @@ define [
                     pumped_moving:          "images/character/pumped/walking.png"
                     pumped_jumping:         "images/character/pumped/jumping.png"
                     pumped_movingJumping:   "images/character/pumped/jumping.png"
-                    pumped_falling:         "images/character/pumped/falling.png"
-                    pumped_movingFalling:   "images/character/pumped/falling.png"
+                    pumped_falling:         "images/character/pumped/jumping.png"
+                    pumped_movingFalling:   "images/character/pumped/jumping.png"
                     pumped_warmingLeft:     "images/character/pumped/warmingLeft.png"
                     pumped_warmingRight:    "images/character/pumped/warmingRight.png"
 

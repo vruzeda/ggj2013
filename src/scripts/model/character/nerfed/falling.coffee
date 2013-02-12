@@ -8,16 +8,16 @@ define [
             "falling"
 
         _getSpriteWidth: ->
-            686
+            384
 
         _getSpriteHeight: ->
-            643
+            384
 
-        _getNumberOfSpritesheetFrames: ->
-            1
+        _getSpritesheetFrames: ->
+            [7..0]
 
         _getSpritesheetFrameRate: ->
-            1
+            10
 
         isFalling: ->
             true

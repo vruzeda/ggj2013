@@ -13,8 +13,8 @@ define [
         _getSpriteHeight: ->
             384
 
-        _getNumberOfSpritesheetFrames: ->
-            8
+        _getSpritesheetFrames: ->
+            [0..7]
 
         _getSpritesheetFrameRate: ->
             10

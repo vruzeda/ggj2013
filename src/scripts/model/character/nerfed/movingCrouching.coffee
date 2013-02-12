@@ -8,16 +8,16 @@ define [
             "movingCrouching"
 
         _getSpriteWidth: ->
-            343
+            384
 
         _getSpriteHeight: ->
-            195
+            384
 
-        _getNumberOfSpritesheetFrames: ->
-            1
+        _getSpritesheetFrames: ->
+            [0..14]
 
         _getSpritesheetFrameRate: ->
-            1
+            10
 
         isMoving: ->
             true

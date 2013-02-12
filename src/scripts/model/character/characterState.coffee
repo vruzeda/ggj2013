@@ -11,7 +11,7 @@ define [
             spriteHeight = @_getSpriteHeight()
             columns = spritesheet.width / spriteWidth
 
-            frames = for frameIndex in [0...@_getNumberOfSpritesheetFrames()]
+            frames = for frameIndex in @_getSpritesheetFrames()
                 x = Math.floor frameIndex % columns
                 y = Math.floor frameIndex / columns
 
@@ -52,8 +52,8 @@ define [
             throw new Error "Cannot invoke abstract method CharacterState._getSpriteHeight()."
 
         # Abstract
-        _getNumberOfSpritesheetFrames: ->
-            throw new Error "Cannot invoke abstract method CharacterState._getNumberOfSpritesheetFrames()."
+        _getSpritesheetFrames: ->
+            throw new Error "Cannot invoke abstract method CharacterState._getSpritesheetFrames()."
 
         # Abstract
         _getSpritesheetFrameRate: ->
