@@ -31,6 +31,10 @@ define [
                 frameRate: @_getSpritesheetFrameRate()
 
             @_started = false
+            @setup()
+
+        setup: ->
+
 
         _getSpritesheetName: ->
             "#{@_getPulse()}_#{@_getState()}"

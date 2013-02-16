@@ -4,6 +4,11 @@ require.config
     paths:
         jquery:  "lib/src/jquery-1.9.1"
         kinetic: "lib/src/kinetic-v4.3.2"
+        sm2:     "lib/src/soundmanager2"
+
+    shim:
+        sm2:
+            exports: 'soundManager'
 
 require [
     "jquery"

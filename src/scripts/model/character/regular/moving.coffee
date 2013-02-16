@@ -1,8 +1,14 @@
 define [
     "model/character/regular/basePulse"
-], (BasePulse) ->
+    "sm2"
+], (BasePulse, SM2) ->
 
     class Moving extends BasePulse
+
+        setup: ->
+            @_sprite.afterFrame 1, =>
+                SM2.play 'move1'
+                @setup()
 
         _getState: ->
             "moving"

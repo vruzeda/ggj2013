@@ -1,10 +1,11 @@
 define [
     "kinetic"
+    "sm2"
     "framework/screen"
     "framework/imageLoader"
     "screen/gameScreen"
     "screen/optionsScreen"
-], (Kinetic, Screen, ImageLoader, GameScreen, OptionsScreen) ->
+], (Kinetic, SM2, Screen, ImageLoader, GameScreen, OptionsScreen) ->
 
     class MainScreen extends Screen
 

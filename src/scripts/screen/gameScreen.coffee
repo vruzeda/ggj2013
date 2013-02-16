@@ -1,10 +1,11 @@
 define [
     "kinetic"
+    "sm2"
     "framework/screen"
     "model/constants"
     "model/world"
     "renderer/worldRenderer"
-], (Kinetic, Screen, Constants, World, WorldRenderer) ->
+], (Kinetic, SM2, Screen, Constants, World, WorldRenderer) ->
 
     {WORLD} = Constants
 
