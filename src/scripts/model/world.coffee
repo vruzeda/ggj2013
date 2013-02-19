@@ -241,6 +241,9 @@ define [
         getCharacter: ->
             @_character
 
+        getScientist: ->
+            @_scientist
+
         getSurfaces: ->
             @_surfaces
 

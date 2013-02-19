@@ -84,7 +84,6 @@ define [
                 image: ImageLoader.getImage "lindomar"
                 x: 910
                 y: 42
-
             lindomar.setX(((world.getCharacter().getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * 100 / progressBar.getHeight()) + lindomar.getX())
             hud.add lindomar
 
@@ -92,7 +91,7 @@ define [
                 image: ImageLoader.getImage "copper"
                 x: 910
                 y: 42
-            copper.setX(((world.getFrontDecorations()[0].getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * 100 / progressBar.getHeight()) + copper.getX())
+            copper.setX(((world.getScientist().getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * 100 / progressBar.getHeight()) + copper.getX())
             hud.add copper
 
             hud.add new Kinetic.Text
