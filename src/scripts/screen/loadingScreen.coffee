@@ -80,7 +80,10 @@ define [
             HUD:
                 cardiogram1: "images/hud/cardiogram1.png"
                 cardiogram2: "images/hud/cardiogram2.png"
-                hudDisplay:  "images/hud/display.png"
+                hudDisplay:  "images/hud/display.png",
+                progressBar: "images/hud/progressBar.png",
+                lindomar:    "images/hud/lindomar.png",
+                copper:      "images/hud/copper.png"
 
         SOUND_MANIFEST =
             BGM:
@@ -114,7 +117,7 @@ define [
         _loadSounds: (latch) ->
             _createSounds = =>
                 totalCount = 0
-                loadedCount = 0 
+                loadedCount = 0
                 for category, sounds of SOUND_MANIFEST
                     for id, url of sounds
                         totalCount++
@@ -130,7 +133,7 @@ define [
                 url: './swf/'
                 flashVersion: 9
                 onready: _createSounds
-                        
+
         _loadImages: (latch) ->
             ImageLoader.addToList IMAGE_MANIFEST
 

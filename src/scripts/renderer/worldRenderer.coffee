@@ -73,6 +73,28 @@ define [
                 y: 22
                 opacity: 1 - hudOpacity
             hud.add hudDisplay
+
+            progressBar = new Kinetic.Image
+                image: ImageLoader.getImage "progressBar"
+                x: 900
+                y: 22
+            hud.add progressBar
+
+            lindomar = new Kinetic.Image
+                image: ImageLoader.getImage "lindomar"
+                x: 910
+                y: 22
+
+            lindomar.setX(((world.getCharacter().getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * 100 / progressBar.getHeight()) + lindomar.getX())
+            hud.add lindomar
+
+            copper = new Kinetic.Image
+                image: ImageLoader.getImage "copper"
+                x: 910
+                y: 22
+            copper.setX(((world.getFrontDecorations()[0].getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * 100 / progressBar.getHeight()) + copper.getX())
+            hud.add copper
+
             hud.add new Kinetic.Text
                 text: Math.round character.getHeartBeat()
                 x: -7
@@ -84,6 +106,5 @@ define [
             @_layer.add hud
 
             @_layer.draw()
-
 
     return WorldRenderer
