@@ -6,7 +6,6 @@ define ->
             @_progress = 0
 
         step: () ->
-            debugger
             if (++@_progress) == @steps
                 @callback()
 

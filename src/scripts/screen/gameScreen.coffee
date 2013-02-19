@@ -60,7 +60,10 @@ define [
                     @_character.stop()
             else
                 @_onMovementLeft = true
-                @_character.move "left"
+                if @_onMovementRight
+                    @_character.stop()
+                else
+                    @_character.move "left"
 
         onMoveRight: (event) =>
             if event.type == 'keyup'
@@ -69,7 +72,11 @@ define [
                     @_character.stop()
             else
                 @_onMovementRight = true
-                @_character.move "right"
+                if @_onMovementLeft
+                    @_character.stop()
+                else
+                    @_character.move "right"
+
 
         onCrouch: (event) =>
             if event.type == 'keyup'
@@ -79,7 +86,7 @@ define [
 
         onJump: (event) =>
             if event.type == 'keyup'
-                @_character.stop()
+                # @_character.stop()
             else
                 @_character.jump()
 
