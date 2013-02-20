@@ -1,11 +1,19 @@
 define [
+    "kinetic"
+    "framework/imageLoader"
     "model/physics/physicalEntity"
-], (PhysicalEntity) ->
+], (Kinetic, ImageLoader, PhysicalEntity) ->
 
     class Decoration extends PhysicalEntity
 
-        constructor: (width, height, imageName) ->
-            super width, height, imageName
+        constructor: (width, height, @_imageName) ->
+            super width, height
+
+        _createNode: ->
+            new Kinetic.Image
+                image: ImageLoader.getImage @_imageName
+                width: @getWidth()
+                height: @getHeight()
 
 
     return Decoration

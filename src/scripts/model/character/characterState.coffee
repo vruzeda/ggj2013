@@ -20,15 +20,17 @@ define [
                 width:  spriteWidth
                 height: spriteHeight
 
-            @_sprite = new Kinetic.Sprite
+            frameRate = @_getSpritesheetFrameRate()
+
+            @_characterNode = character.getNode()
+            @_characterNode.setAttrs
                 image: spritesheet
+                animation: "animation"
+                animations: animation: frames
+                frameRate: frameRate
                 scale:
                     x: character.getWidth()  / spriteWidth
                     y: character.getHeight() / spriteHeight
-                animation: "animation"
-                animations:
-                    animation: frames
-                frameRate: @_getSpritesheetFrameRate()
 
             @_started = false
             @setup()
@@ -65,16 +67,13 @@ define [
 
         start: ->
             unless @_started
-                @_sprite.start()
+                @_characterNode.start()
                 @_started = true
 
         stop: ->
             if @_started
-                @_sprite.stop()
+                @_characterNode.stop()
                 @_started = false
-
-        getSprite: ->
-            @_sprite
 
         ##################
         # State checkers #

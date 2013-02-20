@@ -8,102 +8,114 @@ define [
 
     class WorldRenderer
 
-        constructor: (@_layer) ->
+        constructor: (@_layer, @_world) ->
+            # TODO Parallax
+            @_background = @_createBackground()
+            @_hud = @_createHUD()
 
-        render: (world) ->
+        _createBackground: ->
+            new Kinetic.Image
+                image: ImageLoader.getImage "background"
+
+        _createHUD: ->
+            @_hudComponents = {}
+            @_hudComponents.cardiogram1 = new Kinetic.Image
+                image: ImageLoader.getImage "cardiogram1"
+                x: 120
+                y: 22
+
+            # @_hudComponents.cardiogram2 = new Kinetic.Image
+            #     image: ImageLoader.getImage "cardiogram2"
+            #     x: 120
+            #     y: 22
+
+            @_hudComponents.display = new Kinetic.Image
+                image: ImageLoader.getImage "hudDisplay"
+
+            @_hudComponents.heartBeat = new Kinetic.Text
+                x: -7
+                y: 30
+                width: @_hudComponents.display.getWidth()
+                fontSize: 72
+                fill: "white"
+                align: "center"
+
+            @_hudComponents.progressBar = new Kinetic.Image
+                image: ImageLoader.getImage "progressBar"
+                x: 890
+                y: 22
+
+            @_hudComponents.character = new Kinetic.Image
+                image: ImageLoader.getImage "lindomar"
+                y: 42
+
+            @_hudComponents.scientist = new Kinetic.Image
+                image: ImageLoader.getImage "copper"
+                y: 42
+
+            hud = new Kinetic.Group
+            for hudComponentName, hudComponent of @_hudComponents
+                hud.add hudComponent
+            hud
+
+        _updateHUD: ->
+            window = @_world.getDecorations()[1]
+            windowPosition = window.getPosition()
+
+            character = @_world.getCharacter()
+            characterPosition = character.getPosition()
+
+            scientist = @_world.getScientist()
+            scientistPosition = scientist.getPosition()
+
+            hud = @_hudComponents
+            hud.character.setX hud.progressBar.getX() + hud.progressBar.getWidth() * characterPosition.x / windowPosition.x
+            hud.scientist.setX hud.progressBar.getX() + hud.progressBar.getWidth() * scientistPosition.x / windowPosition.x
+            hud.heartBeat.setText Math.round character.getHeartBeat()
+
+        render: ->
             @_layer.removeChildren()
 
             # TODO Parallax
-            @_layer.add new Kinetic.Image
-                image: ImageLoader.getImage "background"
+            @_layer.add @_background
 
-            character = world.getCharacter()
+            character = @_world.getCharacter()
             characterPosition = character.getPosition()
 
             deltaX = ((GAME_RESOLUTION.width - character.getWidth()) / 2) - characterPosition.x
             if deltaX > 300 then deltaX = 300
             if deltaX < -WORLD.endOfGame then deltaX = -WORLD.endOfGame
 
-            for decoration in world.getDecorations()
+            for decoration in @_world.getDecorations()
                 decorationPosition = decoration.getPosition()
-                @_layer.add new Kinetic.Image
-                    image: decoration.getImage()
-                    x: decorationPosition.x + deltaX
-                    y: decorationPosition.y
-                    width: decoration.getWidth()
-                    height: decoration.getHeight()
 
-            for surface in world.getSurfaces()
+                decorationNode = decoration.getNode()
+                decorationNode.setPosition x: decorationPosition.x + deltaX, y: decorationPosition.y
+                @_layer.add decorationNode
+
+            for surface in @_world.getSurfaces()
                 surfacePosition = surface.getPosition()
-                @_layer.add new Kinetic.Image
-                    image: surface.getImage()
-                    x: surfacePosition.x + deltaX
-                    y: surfacePosition.y
-                    width: surface.getWidth()
-                    height: surface.getHeight()
 
-            characterSprite = character.getSprite()
+                surfaceNode = surface.getNode()
+                surfaceNode.setPosition x: surfacePosition.x + deltaX, y: surfacePosition.y
+                @_layer.add surfaceNode
+
+            characterSprite = character.getNode()
             characterSprite.setPosition x: characterPosition.x + deltaX, y: characterPosition.y
             @_layer.add characterSprite
             character.start()
 
-            for frontDecoration in world.getFrontDecorations()
+            for frontDecoration in @_world.getFrontDecorations()
                 frontDecorationPosition = frontDecoration.getPosition()
-                @_layer.add new Kinetic.Image
-                    image: frontDecoration.getImage()
-                    x: frontDecorationPosition.x + deltaX
-                    y: frontDecorationPosition.y
-                    width: frontDecoration.getWidth()
-                    height: frontDecoration.getHeight()
 
-            hudDisplay = new Kinetic.Image
-                image: ImageLoader.getImage "hudDisplay"
-            hudOpacity = Math.random()
-            hudOpacity = 0 if character.isHeartStopped()
+                frontDecorationNode = frontDecoration.getNode()
+                frontDecorationNode.setPosition x: frontDecorationPosition.x + deltaX, y: frontDecorationPosition.y
+                @_layer.add frontDecorationNode
 
-            hud = new Kinetic.Group
-            hud.add new Kinetic.Image
-                image: ImageLoader.getImage "cardiogram1"
-                x: 120
-                y: 22
-                opacity: hudOpacity
-            hud.add new Kinetic.Image
-                image: ImageLoader.getImage "cardiogram2"
-                x: 120
-                y: 22
-                opacity: 1 - hudOpacity
-            hud.add hudDisplay
-
-            progressBar = new Kinetic.Image
-                image: ImageLoader.getImage "progressBar"
-                x: 890
-                y: 22
-            hud.add progressBar
-
-            lindomar = new Kinetic.Image
-                image: ImageLoader.getImage "lindomar"
-                x: 890
-                y: 42
-            lindomar.setX(((world.getCharacter().getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * progressBar.getWidth() / 100) + lindomar.getX())
-            hud.add lindomar
-
-            copper = new Kinetic.Image
-                image: ImageLoader.getImage "copper"
-                x: 890
-                y: 42
-            copper.setX(((world.getScientist().getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * progressBar.getWidth() / 100) + copper.getX())
-            hud.add copper
-
-            hud.add new Kinetic.Text
-                text: Math.round character.getHeartBeat()
-                x: -7
-                y: 30
-                width: hudDisplay.getWidth()
-                fontSize: 72
-                fill: "white"
-                align: "center"
-            @_layer.add hud
+            @_updateHUD()
+            @_layer.add @_hud
 
             @_layer.draw()
+
 
     return WorldRenderer

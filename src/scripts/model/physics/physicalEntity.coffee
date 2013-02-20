@@ -4,10 +4,10 @@ define [
 
     class PhysicalEntity
 
-        constructor: (@_width, @_height, imageName) ->
+        constructor: (@_width, @_height) ->
             @_position = x: 0, y: 0
             @_speed = x: 0, y: 0
-            @_image = ImageLoader.getImage imageName if imageName?
+            @_node = @_createNode()
 
         getWidth: ->
             @_width
@@ -38,8 +38,12 @@ define [
         setSpeed: (speed) ->
             @_speed = x: speed.x, y: speed.y
 
-        getImage: ->
-            @_image
+        # Abstract
+        _createNode: ->
+            throw new Error "Cannot invoke abstract method PhysicalEntity._createNode()."
+
+        getNode: ->
+            @_node
 
         collidesRightWith: (that, deltaX) ->
             thisTR = @_topRight()

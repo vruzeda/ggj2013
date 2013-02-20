@@ -13,9 +13,9 @@ define [
 
         _constructLayout: ->
             @_world = new World WORLD.gravity, WORLD.width, WORLD.height
-            @_character = @_world.getCharacter()
+            @_worldRenderer = new WorldRenderer @_layer, @_world
 
-            @_worldRenderer = new WorldRenderer @_layer
+            @_character = @_world.getCharacter()
 
             @_acumulatedTime = 0
 

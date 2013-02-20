@@ -1,8 +1,9 @@
 define [
+    "kinetic"
     "model/constants"
     "model/physics/physicalEntity"
     "model/character/characterStates"
-], (Constants, PhysicalEntity, CharacterStates) ->
+], (Kinetic, Constants, PhysicalEntity, CharacterStates) ->
 
     {CHARACTER} = Constants
 
@@ -66,8 +67,8 @@ define [
             else if @_heartRate <= CHARACTER.regularHeartBeat
                 @_updateCharacterState pulse: "regular"
 
-        getSprite: ->
-            @_characterState.getSprite()
+        _createNode: ->
+            new Kinetic.Sprite()
 
         start: ->
             @_characterState.start()
