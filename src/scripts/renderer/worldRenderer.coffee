@@ -76,20 +76,20 @@ define [
 
             progressBar = new Kinetic.Image
                 image: ImageLoader.getImage "progressBar"
-                x: 820
+                x: 890
                 y: 22
             hud.add progressBar
 
             lindomar = new Kinetic.Image
                 image: ImageLoader.getImage "lindomar"
-                x: 820
+                x: 890
                 y: 42
             lindomar.setX(((world.getCharacter().getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * progressBar.getWidth() / 100) + lindomar.getX())
             hud.add lindomar
 
             copper = new Kinetic.Image
                 image: ImageLoader.getImage "copper"
-                x: 820
+                x: 890
                 y: 42
             copper.setX(((world.getScientist().getPosition().x * 100 / world.getDecorations()[1].getPosition().x) * progressBar.getWidth() / 100) + copper.getX())
             hud.add copper
