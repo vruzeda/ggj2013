@@ -2,8 +2,8 @@ define [], ->
 
     CONSTANTS =
         GAME_RESOLUTION:
-            width:  0 # It will be set at game start (main).
-            height: 0 # It will be set at game start (main).
+            width:  1280
+            height: 720
 
         WORLD:
             gravity: 1000

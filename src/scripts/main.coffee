@@ -17,8 +17,8 @@ require [
 ], ($, HeartGame, Constants) ->
 
     {GAME_RESOLUTION} = Constants
-    GAME_RESOLUTION.width  = $("#container").width()
-    GAME_RESOLUTION.height = $("#container").height()
+    $("#container").width  GAME_RESOLUTION.width
+    $("#container").height GAME_RESOLUTION.height
 
     $("#container").focus()
     new HeartGame "container", GAME_RESOLUTION.width, GAME_RESOLUTION.height
