@@ -5,7 +5,7 @@ define [
     "model/decoration/decorations"
 ], (Constants, Character, Surfaces, Decorations) ->
 
-    {CHARACTER, TABLE, CEIL, SCIENTIST, GAME, WORLD, GAME_RESOLUTION} = Constants
+    {CHARACTER, TABLE, CEIL, SCIENTIST, WORLD} = Constants
 
     class World
 
