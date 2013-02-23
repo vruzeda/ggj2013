@@ -168,6 +168,8 @@ define [
         update: (deltaTime) ->
             return if @_character.isCaptured()
 
+            @_character.updateMovement()
+
             deltaTimeInSeconds = deltaTime / 1000
 
             speed = @_character.getSpeed()

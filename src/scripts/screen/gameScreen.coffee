@@ -55,28 +55,15 @@ define [
 
         onMoveLeft: (event) =>
             if event.type == 'keyup'
-                @_onMovementLeft = false
-                if not @_onMovementRight
-                    @_character.stop()
+                @_character.dontMoveLeft()
             else
-                @_onMovementLeft = true
-                if @_onMovementRight
-                    @_character.stop()
-                else
-                    @_character.move "left"
+                @_character.moveLeft()
 
         onMoveRight: (event) =>
             if event.type == 'keyup'
-                @_onMovementRight = false
-                if not @_onMovementLeft
-                    @_character.stop()
+                @_character.dontMoveRight()
             else
-                @_onMovementRight = true
-                if @_onMovementLeft
-                    @_character.stop()
-                else
-                    @_character.move "right"
-
+                @_character.moveRight()
 
         onCrouch: (event) =>
             if event.type == 'keyup'

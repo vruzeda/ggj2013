@@ -73,6 +73,26 @@ define [
         start: ->
             @_characterState.start()
 
+        updateMovement: ->
+            speed = @getSpeed()
+
+            speed.x = 0
+
+            if @_movingLeft and @_movingRight
+                @stop()
+            else
+                if @_movingLeft
+                    @move "left"
+                    speed.x -= CHARACTER["#{@_pulse}MoveSpeed"]
+
+                if @_movingRight
+                    @move "right"
+                    speed.x += CHARACTER["#{@_pulse}MoveSpeed"]
+
+                @stop() if speed.x == 0
+
+            @setSpeed speed
+
         update: (deltaTime) ->
             return if @isCaptured()
 
@@ -86,6 +106,18 @@ define [
             if speed.y > 0 then @falling()
             else if speed.y == 0 then @fall()
 
+        moveLeft: ->
+            @_movingLeft = true
+
+        dontMoveLeft: ->
+            @_movingLeft = false
+
+        moveRight: ->
+            @_movingRight = true
+
+        dontMoveRight: ->
+            @_movingRight = false
+
         move: (direction) ->
             return if @isCaptured()
 
@@ -97,11 +129,6 @@ define [
                 else return
 
             @direction = direction
-            speedX = CHARACTER["#{@_pulse}MoveSpeed"]
-            speedX = -CHARACTER["#{@_pulse}MoveSpeed"] if direction is "left"
-
-            speed = @getSpeed()
-            @setSpeed x: speedX, y: speed.y
 
         stop: ->
             return if @isCaptured()
@@ -112,9 +139,6 @@ define [
                 when "movingFalling"   then @_updateCharacterState state: "falling"
                 when "movingCrouching" then @_updateCharacterState state: "crouching"
                 else return
-
-            speed = @getSpeed()
-            @setSpeed x: 0, y: speed.y
 
         crouch: ->
             return if @isCaptured()
