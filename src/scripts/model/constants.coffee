@@ -49,8 +49,8 @@ define [], ->
             y: -90
 
         SCIENTIST:
-            width: 1304
-            height: 1909
+            width:  954
+            height: 1205
             x: -600
             y: -300
             speed: 100
@@ -58,8 +58,8 @@ define [], ->
             maxSpeed: 150
 
             ARM:
-                width: 701
-                height: 871
+                width:  771
+                height: 814
                 xDisplacement: -141
                 yDisplacement: -650
 
