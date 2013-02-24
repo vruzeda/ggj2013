@@ -33,6 +33,7 @@ dependencies =
         warmingLeft:     "model/character/pumped/warmingLeft"
         warmingRight:    "model/character/pumped/warmingRight"
         captured:        "model/character/pumped/captured"
+        free:            "model/character/free/free" # Just pumped the Lindomar can be free
 
     cardiacArrest:
         captured:        "model/character/captured/cardiacArrest"

@@ -166,7 +166,7 @@ define [
             @_decorations.push microscope
 
         update: (deltaTime) ->
-            return if @_character.isCaptured()
+            return if @_character.isCaptured() or @_character.isFree()
 
             @_character.updateMovement()
 
@@ -222,7 +222,7 @@ define [
             scientistPosition = @_scientistArm.getPosition()
 
             if characterPosition.x >= WORLD.gameWin
-                @_character.capture() # TODO Implement something for victory!
+                @_character.free() # Victory!
             if characterPosition.x <= scientistPosition.x + SCIENTIST.ARM.HAND.x
                 @_character.capture()
 

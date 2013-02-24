@@ -100,6 +100,9 @@ define [
         isCaptured: ->
             false
 
+        isFree: ->
+            false
+
         ##################
         # Pulse checkers #
         ##################

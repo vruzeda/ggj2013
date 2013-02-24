@@ -14,6 +14,10 @@ define [
                 startGameButton: "images/startGameButton.png"
                 mainBackground:  "images/startBackground.png"
 
+            END_SCREEN:
+                gameOver: "images/game-over.png"
+                victory:  "images/victory.png"
+
             GAME_SCREEN:
                 background: "images/background.png"
                 table:      "images/table.png"
@@ -139,7 +143,7 @@ define [
 
             setTimeout =>
                 ImageLoader.loadImages
-                    list: ["MAIN_SCREEN", "GAME_SCREEN", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "CHARACTER_CAPTURED", "OBJECTS", "SCIENTIST", "HUD"]
+                    list: ["MAIN_SCREEN", "END_SCREEN", "GAME_SCREEN", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "CHARACTER_CAPTURED", "OBJECTS", "SCIENTIST", "HUD"]
 
                     progressCallback: (total, complete, success) =>
                         @text.setText "Loading (#{Math.round complete / total * 100}%)"

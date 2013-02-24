@@ -94,7 +94,7 @@ define [
             @setSpeed speed
 
         update: (deltaTime) ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if @isStanding()
                 @_decreaseHeartBeat deltaTime
@@ -119,7 +119,7 @@ define [
             @_movingRight = false
 
         move: (direction) ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             switch @_state
                 when "standing"  then @_updateCharacterState state: "moving"
@@ -131,7 +131,7 @@ define [
             @direction = direction
 
         stop: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             switch @_state
                 when "moving"          then @_updateCharacterState state: "standing"
@@ -141,7 +141,7 @@ define [
                 else return
 
         crouch: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if @isHeartNerfed() and not @isInMidAir() and not @isCrouching()
                 @setHeight @getHeight() / 2
@@ -152,7 +152,7 @@ define [
                     @_updateCharacterState state: "crouching"
 
         raise: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if @isCrouching()
                 @setHeight @getHeight() * 2
@@ -163,7 +163,7 @@ define [
                     @_updateCharacterState state: "standing"
 
         jump: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if not @isInMidAir() and not @isCrouching()
                 if @isMoving()
@@ -175,7 +175,7 @@ define [
                 @setSpeed x: speed.x, y: -CHARACTER["#{@_pulse}JumpSpeed"]
 
         falling: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if not @isFalling()
                 if @isMoving()
@@ -184,7 +184,7 @@ define [
                     @_updateCharacterState state: "falling"
 
         fall: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if @isFalling()
                 switch @_state
@@ -196,7 +196,7 @@ define [
                 @setSpeed x: speed.x, y: 0
 
         warmLeft: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if @isStanding()
                 @_updateCharacterState state: "warmingLeft"
@@ -209,7 +209,7 @@ define [
                 @unwarm()
 
         warmRight: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             if @isStanding()
                 @_updateCharacterState state: "warmingRight"
@@ -222,7 +222,7 @@ define [
                 @unwarm()
 
         unwarm: ->
-            return if @isCaptured()
+            return if @isCaptured() or @isFree()
 
             @_resetHeartBeat()
             @_updateCharacterState state: "standing" if @isWarming()
@@ -231,6 +231,11 @@ define [
             return if @isCaptured()
 
             @_updateCharacterState state: "captured"
+
+        free: ->
+            return if @isFree()
+
+            @_updateCharacterState state: "free"
 
         ##################
         # State checkers #
@@ -259,6 +264,9 @@ define [
 
         isCaptured: ->
             @_characterState.isCaptured()
+
+        isFree: ->
+            @_characterState.isFree()
 
         ##################
         # Pulse checkers #
