@@ -41,6 +41,9 @@ dependencies =
     heartAttack:
         captured:        "model/character/captured/heartAttack"
 
+    free:
+        free:            "model/character/free/free"
+
 
 requires = []
 for pulse, states of dependencies

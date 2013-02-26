@@ -24,16 +24,16 @@ define [
                 ceil:       "images/ceil.png"
 
             CHARACTER_NERFED:
-                nerfed_crouching:       "images/character/nerfed/standing.png"
-                nerfed_movingCrouching: "images/character/nerfed/walking.png"
-                nerfed_standing:        "images/character/nerfed/standing.png"
-                nerfed_moving:          "images/character/nerfed/walking.png"
-                nerfed_jumping:         "images/character/nerfed/jumping.png"
-                nerfed_movingJumping:   "images/character/nerfed/jumping.png"
-                nerfed_falling:         "images/character/nerfed/jumping.png"
-                nerfed_movingFalling:   "images/character/nerfed/jumping.png"
-                nerfed_warmingLeft:     "images/character/nerfed/warmingLeft.png"
-                nerfed_warmingRight:    "images/character/nerfed/warmingRight.png"
+                nerfed_crouching:        "images/character/nerfed/standing.png"
+                nerfed_movingCrouching:  "images/character/nerfed/walking.png"
+                nerfed_standing:         "images/character/nerfed/standing.png"
+                nerfed_moving:           "images/character/nerfed/walking.png"
+                nerfed_jumping:          "images/character/nerfed/jumping.png"
+                nerfed_movingJumping:    "images/character/nerfed/jumping.png"
+                nerfed_falling:          "images/character/nerfed/jumping.png"
+                nerfed_movingFalling:    "images/character/nerfed/jumping.png"
+                nerfed_warmingLeft:      "images/character/nerfed/warmingLeft.png"
+                nerfed_warmingRight:     "images/character/nerfed/warmingRight.png"
 
             CHARACTER_REGULAR:
                 regular_standing:        "images/character/regular/standing.png"
@@ -46,18 +46,21 @@ define [
                 regular_warmingRight:    "images/character/regular/warmingRight.png"
 
             CHARACTER_PUMPED:
-                pumped_standing:        "images/character/pumped/standing.png"
-                pumped_moving:          "images/character/pumped/walking.png"
-                pumped_jumping:         "images/character/pumped/jumping.png"
-                pumped_movingJumping:   "images/character/pumped/jumping.png"
-                pumped_falling:         "images/character/pumped/jumping.png"
-                pumped_movingFalling:   "images/character/pumped/jumping.png"
-                pumped_warmingLeft:     "images/character/pumped/warmingLeft.png"
-                pumped_warmingRight:    "images/character/pumped/warmingRight.png"
+                pumped_standing:         "images/character/pumped/standing.png"
+                pumped_moving:           "images/character/pumped/walking.png"
+                pumped_jumping:          "images/character/pumped/jumping.png"
+                pumped_movingJumping:    "images/character/pumped/jumping.png"
+                pumped_falling:          "images/character/pumped/jumping.png"
+                pumped_movingFalling:    "images/character/pumped/jumping.png"
+                pumped_warmingLeft:      "images/character/pumped/warmingLeft.png"
+                pumped_warmingRight:     "images/character/pumped/warmingRight.png"
 
             CHARACTER_CAPTURED:
-                cardiacArrest_captured: "images/character/captured/cardiacArrest.png"
-                heartAttack_captured:   "images/character/captured/heartAttack.png"
+                cardiacArrest_captured:  "images/character/captured/cardiacArrest.png"
+                heartAttack_captured:    "images/character/captured/heartAttack.png"
+
+            CHARACTER_FREE:
+                free_free:               "images/character/free/free.png"
 
             OBJECTS:
                 becker:             "images/objects/becker.png"
@@ -118,8 +121,20 @@ define [
             @_loadImages latch
             @_loadSounds latch
 
+        _loadImages: (latch) ->
+            ImageLoader.addToList IMAGE_MANIFEST
+            ImageLoader.loadImages
+                list: ["MAIN_SCREEN", "END_SCREEN", "GAME_SCREEN", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "CHARACTER_CAPTURED", "CHARACTER_FREE", "OBJECTS", "SCIENTIST", "HUD"]
+
+                progressCallback: (total, complete, success) =>
+                    @text.setText "Loading (#{Math.round complete / total * 100}%)"
+                    @redraw()
+
+                completeCallback: =>
+                    latch.step()
+
         _loadSounds: (latch) ->
-            _createSounds = =>
+            createSounds = =>
                 totalCount = 0
                 loadedCount = 0
                 for category, sounds of SOUND_MANIFEST
@@ -131,27 +146,15 @@ define [
                             autoPlay: false
                             autoLoad: true
                             onload: =>
-                                latch.step() if (++loadedCount) == totalCount
+                                loadedCount++
+
+                                if loadedCount == totalCount
+                                    latch.step()
 
             SM2.setup
                 url: './swf/'
                 flashVersion: 9
-                onready: _createSounds
-
-        _loadImages: (latch) ->
-            ImageLoader.addToList IMAGE_MANIFEST
-
-            setTimeout =>
-                ImageLoader.loadImages
-                    list: ["MAIN_SCREEN", "END_SCREEN", "GAME_SCREEN", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "CHARACTER_CAPTURED", "OBJECTS", "SCIENTIST", "HUD"]
-
-                    progressCallback: (total, complete, success) =>
-                        @text.setText "Loading (#{Math.round complete / total * 100}%)"
-                        @redraw()
-
-                    completeCallback: =>
-                        latch.step()
-            , 500
+                onready: createSounds
 
         _loadComplete: =>
             @_game.switchScreen @, new MainScreen @_game

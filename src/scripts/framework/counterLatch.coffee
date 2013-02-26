@@ -1,12 +1,15 @@
-define ->
+define [], ->
 
     class CounterLatch
 
-        constructor: (@steps, @callback) ->
+        constructor: (@_steps, @_callback) ->
             @_progress = 0
 
-        step: () ->
-            if (++@_progress) == @steps
-                @callback()
+        step: ->
+            @_progress++
+
+            if @_progress == @_steps
+                @_callback()
+
 
     return CounterLatch

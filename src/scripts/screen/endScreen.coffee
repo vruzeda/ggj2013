@@ -3,34 +3,25 @@ define [
     "sm2"
     "framework/screen"
     "framework/imageLoader"
-    "screen/gameScreen"
-    "screen/optionsScreen"
-], (Kinetic, SM2, Screen, ImageLoader, GameScreen, OptionsScreen) ->
+], (Kinetic, SM2, Screen, ImageLoader) ->
 
     class EndScreen extends Screen
 
         _constructLayout: ->
-            # Background
             @_layer.add new Kinetic.Image
                 image: ImageLoader.getImage "victory"
 
-            # Start Game button
-            # @_layer.add new Kinetic.Image
-            #     image: ImageLoader.getImage "startGameButton"
-            #     x: 240
-            #     y: 430
-
         _constructInputEvents: (inputController) ->
-            inputController.addCharListener "ENTER", @onStartGame
-            inputController.addCharListener "H",     @onStartGame
+            inputController.addCharListener "ENTER", @goToMainScreen
+            inputController.addCharListener "H",     @goToMainScreen
 
         _destroyInputEvents: (inputController) ->
-            inputController.removeCharListener "ENTER", @onStartGame
-            inputController.removeCharListener "H",     @onStartGame
+            inputController.removeCharListener "ENTER", @goToMainScreen
+            inputController.removeCharListener "H",     @goToMainScreen
 
-        onStartGame: =>
-            GameScreen = require "screen/gameScreen"
-            @_game.switchScreen @, new GameScreen @_game
+        goToMainScreen: =>
+            MainScreen = require "screen/mainScreen"
+            @_game.switchScreen @, new MainScreen @_game
 
 
     return EndScreen

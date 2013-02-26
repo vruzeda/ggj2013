@@ -25,12 +25,15 @@ define [
                 @_acumulatedTime += parameters.timeDiff
                 if @_acumulatedTime > 30
                     @_world.update 30
+
                     if @_character.isCaptured()
                         @_updater.stop()
                         @_game.switchScreen @, new GameOverScreen @_game
+
                     if @_character.isFree()
                         @_updater.stop()
                         @_game.switchScreen @, new EndScreen @_game
+
                     @_worldRenderer.render @_world
                     @_acumulatedTime -= 30
             @_updater.start()

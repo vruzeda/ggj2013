@@ -4,8 +4,7 @@ define [
     "framework/screen"
     "framework/imageLoader"
     "screen/gameScreen"
-    "screen/optionsScreen"
-], (Kinetic, SM2, Screen, ImageLoader, GameScreen, OptionsScreen) ->
+], (Kinetic, SM2, Screen, ImageLoader, GameScreen) ->
 
     class MainScreen extends Screen
 
@@ -21,8 +20,11 @@ define [
                 y: 430
 
         _constructInputEvents: (inputController) ->
-            inputController.addCharListener "ENTER", @onStartGame
-            inputController.addCharListener "H",     @onStartGame
+            constructInputEvents = =>
+                inputController.addCharListener "ENTER", @onStartGame
+                inputController.addCharListener "H",     @onStartGame
+
+            setTimeout constructInputEvents, 200
 
         _destroyInputEvents: (inputController) ->
             inputController.removeCharListener "ENTER", @onStartGame

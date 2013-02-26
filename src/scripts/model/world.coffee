@@ -222,7 +222,7 @@ define [
             scientistPosition = @_scientistArm.getPosition()
 
             if characterPosition.x >= WORLD.gameWin
-                @_character.free() # Victory!
+                @_character.free()
             if characterPosition.x <= scientistPosition.x + SCIENTIST.ARM.HAND.x
                 @_character.capture()
 

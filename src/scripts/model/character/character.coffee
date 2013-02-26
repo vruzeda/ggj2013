@@ -235,7 +235,7 @@ define [
         free: ->
             return if @isFree()
 
-            @_updateCharacterState state: "free"
+            @_updateCharacterState pulse: "free", state: "free"
 
         ##################
         # State checkers #
