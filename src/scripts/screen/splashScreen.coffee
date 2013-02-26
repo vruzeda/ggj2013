@@ -15,7 +15,9 @@ define [
 
             ImageLoader.addToList
                 LOADING_SCREEN:
-                    flubber: "images/flubber.png"
+                    loading: "images/loading.png"
+                    syringe: "images/loading-syringe.png"
+                    plumber: "images/loading-plumber.png"
 
             ImageLoader.loadImages
                 list: ["LOADING_SCREEN"]

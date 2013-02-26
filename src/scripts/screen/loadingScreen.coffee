@@ -92,30 +92,39 @@ define [
                 lindomar:    "images/hud/lindomar.png",
                 copper:      "images/hud/copper.png"
 
+            SIZE: 70
+
         SOUND_MANIFEST =
             BGM:
-                titleScreen:    'sounds/bgm/titleScreen.mp3'
+                titleScreen: "sounds/bgm/titleScreen.mp3"
             SFX:
-                jump1:          'sounds/sfx/jump1.mp3'
-                jump2:          'sounds/sfx/jump2.mp3'
-                move1:          'sounds/sfx/move1.mp3'
-                move2:          'sounds/sfx/move2.mp3'
-                move3:          'sounds/sfx/move3.mp3'
+                jump1:       "sounds/sfx/jump1.mp3"
+                jump2:       "sounds/sfx/jump2.mp3"
+                move1:       "sounds/sfx/move1.mp3"
+                move2:       "sounds/sfx/move2.mp3"
+                move3:       "sounds/sfx/move3.mp3"
+
+            SIZE: 30
+
+        PLUMBER_INITIAL_X = 120
+        PLUMBER_FINAL_X   = 410
 
         _constructLayout: ->
             @_layer.add new Kinetic.Image
-                image: ImageLoader.getImage "flubber"
+                image: ImageLoader.getImage "loading"
 
-            @_layer.add @text = new Kinetic.Text
-                text: 'Loading...'
-                width:  @getWidth()
-                align: "center"
-                fontSize: 36,
-                fontStyle: "bold",
-                fill: "black",
-                stroke: "white",
-                strokeWidth: 1,
-            @text.setY (@getHeight() - @text.getTextHeight()) / 2
+            @_layer.add @_plumber = new Kinetic.Image
+                image: ImageLoader.getImage "plumber"
+                x: PLUMBER_INITIAL_X
+                y: 453
+
+            @_layer.add new Kinetic.Image
+                image: ImageLoader.getImage "syringe"
+                x: 422
+                y: 431
+
+            @_loadedImageData = 0
+            @_loadedSoundData = 0
 
             latch = new CounterLatch 2, @_loadComplete
             @_loadImages latch
@@ -127,8 +136,8 @@ define [
                 list: ["MAIN_SCREEN", "END_SCREEN", "GAME_SCREEN", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "CHARACTER_CAPTURED", "CHARACTER_FREE", "OBJECTS", "SCIENTIST", "HUD"]
 
                 progressCallback: (total, complete, success) =>
-                    @text.setText "Loading (#{Math.round complete / total * 100}%)"
-                    @redraw()
+                    @_loadedImageData = IMAGE_MANIFEST.SIZE * complete / total
+                    @_updateProgressBar()
 
                 completeCallback: =>
                     latch.step()
@@ -137,7 +146,8 @@ define [
             createSounds = =>
                 totalCount = 0
                 loadedCount = 0
-                for category, sounds of SOUND_MANIFEST
+                for category in ["BGM", "SFX"]
+                    sounds = SOUND_MANIFEST[category]
                     for id, url of sounds
                         totalCount++
                         SM2.createSound
@@ -148,13 +158,21 @@ define [
                             onload: =>
                                 loadedCount++
 
+                                @_loadedSoundData = SOUND_MANIFEST.SIZE * loadedCount / totalCount
+                                @_updateProgressBar()
+
                                 if loadedCount == totalCount
                                     latch.step()
 
             SM2.setup
-                url: './swf/'
+                url: "./swf/"
                 flashVersion: 9
                 onready: createSounds
+
+        _updateProgressBar: ->
+            loadedProportion = (@_loadedImageData + @_loadedSoundData) / (IMAGE_MANIFEST.SIZE + SOUND_MANIFEST.SIZE)
+            @_plumber.setX PLUMBER_INITIAL_X + (PLUMBER_FINAL_X - PLUMBER_INITIAL_X) * loadedProportion
+            @redraw()
 
         _loadComplete: =>
             @_game.switchScreen @, new MainScreen @_game
