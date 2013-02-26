@@ -11,8 +11,9 @@ define [
 
         IMAGE_MANIFEST =
             MAIN_SCREEN:
-                startGameButton: "images/startGameButton.png"
                 mainBackground:  "images/startBackground.png"
+                startGameButton: "images/startGameButton.png"
+                creditsButton:   "images/creditsButton.png"
 
             END_SCREEN:
                 gameOver: "images/game-over.png"
@@ -22,6 +23,9 @@ define [
                 background: "images/background.png"
                 table:      "images/table.png"
                 ceil:       "images/ceil.png"
+
+            CREDITS:
+                credits: "images/credits.png"
 
             CHARACTER_NERFED:
                 nerfed_crouching:        "images/character/nerfed/standing.png"
@@ -133,7 +137,7 @@ define [
         _loadImages: (latch) ->
             ImageLoader.addToList IMAGE_MANIFEST
             ImageLoader.loadImages
-                list: ["MAIN_SCREEN", "END_SCREEN", "GAME_SCREEN", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "CHARACTER_CAPTURED", "CHARACTER_FREE", "OBJECTS", "SCIENTIST", "HUD"]
+                list: ["MAIN_SCREEN", "END_SCREEN", "GAME_SCREEN", "CREDITS", "CHARACTER_NERFED", "CHARACTER_REGULAR", "CHARACTER_PUMPED", "CHARACTER_CAPTURED", "CHARACTER_FREE", "OBJECTS", "SCIENTIST", "HUD"]
 
                 progressCallback: (total, complete, success) =>
                     @_loadedImageData = IMAGE_MANIFEST.SIZE * complete / total
