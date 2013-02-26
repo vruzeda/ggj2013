@@ -103,7 +103,6 @@ define [
             characterSprite = character.getNode()
             characterSprite.setPosition x: characterPosition.x + deltaX, y: characterPosition.y
             @_layer.add characterSprite
-            character.start()
 
             for frontDecoration in @_world.getFrontDecorations()
                 frontDecorationPosition = frontDecoration.getPosition()
@@ -116,6 +115,12 @@ define [
             @_layer.add @_hud
 
             @_layer.draw()
+
+        startCharacter: ->
+            @_world.getCharacter().start()
+
+        stopCharacter: ->
+            @_world.getCharacter().stop()
 
 
     return WorldRenderer

@@ -1,14 +1,8 @@
 define [
-    "sm2"
     "model/character/nerfed/basePulse"
-], (SM2, BasePulse) ->
+], (BasePulse) ->
 
     class Moving extends BasePulse
-
-        setup: ->
-            @_characterNode.afterFrame 1, =>
-                SM2.play 'move3'
-                @setup()
 
         _getState: ->
             "moving"
@@ -24,6 +18,9 @@ define [
 
         _getSpritesheetFrameRate: ->
             10
+
+        _getSoundEffectName: ->
+            "move3"
 
         isMoving: ->
             true

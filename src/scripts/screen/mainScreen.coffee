@@ -60,6 +60,9 @@ define [
             inputController.removeCharListener "UP",   @_activateStartGameButton
             inputController.removeCharListener "DOWN", @_activateCreditsButton
 
+        _getBackgroundMusicName: ->
+            "titleScreen"
+
         _handleActiveButtonPressed: =>
             @_activeButton.handler()
 

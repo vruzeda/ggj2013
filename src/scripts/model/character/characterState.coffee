@@ -1,7 +1,8 @@
 define [
     "kinetic"
+    "sm2"
     "framework/imageLoader"
-], (Kinetic, ImageLoader) ->
+], (Kinetic, SM2, ImageLoader) ->
 
     class CharacterState
 
@@ -32,11 +33,9 @@ define [
                     x: character.getWidth()  / spriteWidth
                     y: character.getHeight() / spriteHeight
 
-            @_started = false
-            @setup()
-
-        setup: ->
-
+            # TODO Unnecessary validation:
+            soundEffectName = @_getSoundEffectName()
+            @_soundEffect = SM2.createSound id: soundEffectName if soundEffectName?
 
         _getSpritesheetName: ->
             "#{@_getPulse()}_#{@_getState()}"
@@ -65,15 +64,34 @@ define [
         _getSpritesheetFrameRate: ->
             throw new Error "Cannot invoke abstract method CharacterState._getSpritesheetFrameRate()."
 
+        # Abstract
+        _getSoundEffectName: ->
+            # TODO throw new Error "Cannot invoke abstract method CharacterState._getSoundEffectName()."
+
         start: ->
             unless @_started
                 @_characterNode.start()
                 @_started = true
 
+                @_playSoundEffect()
+
         stop: ->
             if @_started
                 @_characterNode.stop()
                 @_started = false
+
+                @_stopSoundEffect()
+
+        _playSoundEffect: ->
+            return unless @_soundEffect?
+
+            @_soundEffect.play onfinish: =>
+                @_playSoundEffect()
+
+        _stopSoundEffect: ->
+            return unless @_soundEffect?
+
+            @_soundEffect.stop()
 
         ##################
         # State checkers #

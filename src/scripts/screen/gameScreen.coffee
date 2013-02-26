@@ -27,14 +27,18 @@ define [
                     @_world.update 30
 
                     if @_character.isCaptured()
+                        @_worldRenderer.stopCharacter()
                         @_updater.stop()
                         @_game.switchScreen @, new GameOverScreen @_game
 
                     if @_character.isFree()
+                        @_worldRenderer.stopCharacter()
                         @_updater.stop()
                         @_game.switchScreen @, new EndScreen @_game
 
                     @_worldRenderer.render @_world
+                    @_worldRenderer.startCharacter()
+
                     @_acumulatedTime -= 30
             @_updater.start()
 
