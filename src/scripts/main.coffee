@@ -11,14 +11,9 @@ require.config
             exports: 'soundManager'
 
 require [
-    "jquery"
     "heartGame"
     "model/constants"
-], ($, HeartGame, Constants) ->
+], (HeartGame, Constants) ->
 
     {GAME_RESOLUTION} = Constants
-    $("#container").width  GAME_RESOLUTION.width
-    $("#container").height GAME_RESOLUTION.height
-
-    $("#container").focus()
     new HeartGame "container", GAME_RESOLUTION.width, GAME_RESOLUTION.height

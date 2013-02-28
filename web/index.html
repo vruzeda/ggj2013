@@ -4,17 +4,34 @@
         <script data-main="scripts/main" src="scripts/lib/src/require.js"></script>
 
         <style>
-            body {
+            * {
+                margin:  0;
+                padding: 0;
+                border:  0;
+                vertical-align: baseline;
+            }
+
+            html {
                 background-color: black;
             }
 
-            #container {
-                margin: auto;
+            body {
+                min-width:  0;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            #externalContainer {
+                position: absolute;
+                top:  50%;
+                left: 50%;
             }
         </style>
     </head>
 
     <body>
-        <div id="container" tabindex="1" />
+        <div id="externalContainer">
+            <div id="container" tabindex="1" />
+        </div>
     </body>
 </htlm>
